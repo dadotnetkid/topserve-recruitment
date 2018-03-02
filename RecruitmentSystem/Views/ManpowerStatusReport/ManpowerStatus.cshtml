@@ -1,0 +1,193 @@
+﻿@using RecruitmentSystem.Recruitment.Data;
+@model RecruitmentSystem.Models.ManpowerStatusReportViewModel 
+
+@{
+    ViewBag.Title = "Manpower Status Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Scripts.Render("~/bundles/datetimepicker");
+    @Styles.Render("~/Content/datetimepicker");
+    @Scripts.Render("~/bundles/jqueryval");
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manpower Status Report</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+
+            <li class="active">Manpower Status Report</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well custom-panel">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.SearchBy,Dropdown_list_data.SearchByList(), new {@class="form-control input-sm" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="row monthly hidden">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                            @Html.DropDownListFor(m => m.Monthly, Dropdown_list_data.Monthly(), "", new { @class = "form-control input-sm" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group ">
+                                         @Html.DropDownListFor(m => m.YearlyDate, Dropdown_list_data.Yearly(), "", new { @class = "form-control input-sm"})
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row yearly hidden">
+                                    <div class="col-lg-12 col-md-12">
+                                        <div class="form-group ">
+                                            @Html.DropDownListFor(m => m.Yearly, Dropdown_list_data.Yearly(), "", new { @class = "form-control input-sm" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row daily hidden">
+                                    <div class="col-lg-6 col-md-6 ">
+                                        <div class="form-group input-group ">
+                                            @Html.TextBoxFor(m => m.DateFrom, new { @class = "form-control input-sm" })
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar-o"></span>
+                                            </span>
+                                        </div>
+                                        <script>
+                                            $('#DateFrom').datetimepicker({
+                                                format: 'MM/DD/YYYY'
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="form-group input-group ">
+                                            @Html.TextBoxFor(m => m.DateTo, new { @class = "form-control input-sm" })
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar-o"></span>
+                                            </span>
+                                        </div>
+                                        <script>
+                                            $('#DateTo').datetimepicker({
+                                                format: 'MM/DD/YYYY'
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m=>m.Classification,Dropdown_list_data.ClassificationList(),"All Class",new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.AccountManager, Dropdown_list_data.AccountManagerList(), "All AM", new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.BusinessUnit, Dropdown_list_data.BusinessUnitList(), "All Business Unit", new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.Industry, Dropdown_list_data.IndustryList(), "All Industry", new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.Client, Dropdown_list_data.CompanyList(), "All Client", new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                  @Html.DropDownListFor(m => m.Branch, Dropdown_list_data.branchlist(), "All Branch", new { @class = "form-control input-sm" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <select class="form-control input-sm" name="orderby" id="orderby" required>
+                                        <option value="asc">Ascending</option>
+                                        <option value="desc">Descending</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="pull-right">
+                        <div class="btn-group">
+                            <button class="btn btn-default btn-default-red" type="button" onclick="searchTablewithvalidation('form', '@Url.Action("_manpowerstatus")', 'tbody',22,'@Url.Content("~/Images/loading.gif")')">Generate</button>
+                            <button class="btn btn-default btn-default-red pull-right" type="button" onclick="downloadmanpowerstatusreport('@Url.Action("ExportManpowerStatusReport", "ExportReport")','form')">Download</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="empty-space-12"></p>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+                    <table class="table table-hover table-striped table-small-font">
+                        <thead>
+                            <tr>
+                                <th>MRF ID</th>
+                                <th>Date</th>
+                                <th>Client Requested</th>
+                                <th>Client Department/Store Location</th>
+                                <th>Industry</th>
+                                <th>Skill</th>
+                                <th>Position</th>
+                                <th>Classification</th>
+                                <th>AM</th>
+                                <th>Coordinator</th>
+                                <th>Required Number</th>
+                                <th>Aging</th>
+                                <th>Recruiter</th>
+                                <th>Cancelled</th>
+                                <th>Closed</th>
+                                <th>Pending</th>
+                                <th>Invited</th>
+                                <th>For Requirement</th>
+                                <th>Shortlist</th>
+                                <th>Variance</th>
+                                <th>Pass On</th>
+                                <th>Status</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @Html.Action("_manpowerstatus")
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>

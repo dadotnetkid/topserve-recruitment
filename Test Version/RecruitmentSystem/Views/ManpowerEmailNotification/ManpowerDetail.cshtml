@@ -1,0 +1,198 @@
+﻿@model RecruitmentSystem.Recruitment.Data.sp_manpower_detailResult
+@using RecruitmentSystem.Recruitment.Class
+@{
+    Layout = null;
+    var i = Model;
+}
+<h3>Manpower Request -  @i.mrfid</h3>
+
+<table>
+    <tr>
+        <td>Date Requested</td>
+        <td>@i.DateRequested</td>
+    </tr>
+    <tr>
+        <td>Date Deployment</td>
+        <td>@i.DateofDeployment</td>
+    </tr>
+    <tr>
+        <td>Date Approved</td>
+        <td>@i.am_date_approved</td>
+    </tr>
+    <tr>
+        <td>Aging Days</td>
+        <td>@i.agingdays</td>
+    </tr>
+    <tr>
+        <td>Position</td>
+        <td>@i.position_name</td>
+    </tr>
+    <tr>
+        <td>Age Requirement</td>
+        <td>@i.AgeRequirement</td>
+    </tr>
+    <tr>
+        <td>Pass On</td>
+        <td>@i.passon</td>
+    </tr>
+    <tr>
+        <td>Number of Required</td>
+        <td>@i.RequiredNumber</td>
+    </tr>
+    <tr>
+        <td>Number of Cancelled Requirement</td>
+        <td>@i.cancel_number_requirement</td>
+    </tr>
+    <tr>
+        <td>Accepted Applicant</td>
+        <td>@i.accepted</td>
+    </tr>
+    <tr>
+        <td>Pending Requirement</td>
+        <td>@(i.RequiredNumber - (i.cancel_number_requirement + i.accepted))</td>
+    </tr>
+    <tr>
+        <td>Educational Attainment</td>
+        <td>@i.EducationalAttainment</td>
+    </tr>
+    <tr>
+        <td>Course</td>
+        <td>@i.course_name</td>
+    </tr>
+    <tr>
+        <td>Gender</td>
+        <td>@i.Gender</td>
+    </tr>
+    <tr>
+        <td>Skills</td>
+        <td>@i.skill_name</td>
+    </tr>
+    <tr>
+        <td>Certification</td>
+        <td>@i.certificate_name</td>
+    </tr>
+    <tr>
+        <td>Cost Center</td>
+        <td>@i.CostCenter</td>
+    </tr>
+
+    <tr>
+        <td>Department</td>
+        <td>@i.Department</td>
+    </tr>
+    <tr>
+        <td>Job Description</td>
+        <td>@i.JobDescription</td>
+    </tr>
+    <tr>
+        <td>Salary Information</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Salary Details</td>
+        <td>@i.SalaryDetails</td>
+    </tr>
+    <tr>
+        <td>Basic Pay</td>
+        <td>@i.BasicPay</td>
+    </tr>
+    <tr>
+        <td>COLA</td>
+        <td>@i.Cola</td>
+    </tr>
+    <tr>
+        <td>Skilled</td>
+        <td>@i.Skilled</td>
+    </tr>
+    <tr>
+        <td>Meal</td>
+        <td>@i.Meal</td>
+    </tr>
+    <tr>
+        <td>Transportation</td>
+        <td>@i.Transportation</td>
+    </tr>
+    <tr>
+        <td>Communication</td>
+        <td>@i.Communication</td>
+    </tr>
+    <tr>
+        <td>Motorcycle</td>
+        <td>@i.Motorcycle</td>
+    </tr>
+    <tr>
+        <td>Clothing</td>
+        <td>@i.Clothing</td>
+    </tr>
+    <tr>
+        <td>Medical</td>
+        <td>@i.Medical</td>
+    </tr>
+    <tr>
+        <td>Payout Date</td>
+        <td>@i.PayoutDate</td>
+    </tr>
+    <tr>
+        <td>Who to Look For</td>
+        <td>@i.WhotoLookfor</td>
+    </tr>
+    <tr>
+        <td>Establishment</td>
+        <td>@i.Establishment</td>
+    </tr>
+    <tr>
+        <td>Office address to report</td>
+        <td>@i.OfficeAddresstoReport</td>
+    </tr>
+    <tr>
+        <td>Location of Deployment</td>
+        <td>@i.location_name</td>
+    </tr>
+    <tr>
+        <td>Business Unit</td>
+        <td>@i.BusinessUnit</td>
+    </tr>
+    <tr>
+        <td>Classification</td>
+        <td>@i.Classification</td>
+    </tr>
+    <tr>
+        <td>Project Name</td>
+        <td>@i.ProjectName</td>
+    </tr>
+    <tr>
+        <td>Company Requested</td>
+        <td>@i.company_name</td>
+    </tr>
+    <tr>
+        <td>Requestor</td>
+        <td>@i.Requestor</td>
+    </tr>
+    <tr>
+        <td>Requestor contactnumber</td>
+        <td>@i.RequestorContactNumber</td>
+    </tr>
+    <tr>
+        <td>Requestor e-mailaddress</td>
+        <td>@i.RequestorEmailAddress</td>
+    </tr>
+    <tr>
+        <td>Coordinator</td>
+        <td>@i.coordinator_name</td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td>@i.status</td>
+    </tr>
+</table>
+@if (Users.GetRoleByEmail(ViewBag.email)=="Account Manager")
+{
+    <a href="@("http://"+Request.Url.Host+":"+Request.Url.Port +Url.Action("ApprovedManpower", "Manpoweremailnotification", new { mrfid = i.mrfid, emailaddress = ViewBag.email }))">Approve</a>
+    <br />
+    <br />
+    <br />
+    <hr />
+    <br />
+}
+
+<a href="@("http://" + Request.Url.Host + ":" + Request.Url.Port + Url.Action("Dashboard", "RecruitmentProcess", new { mrfid = i.mrfid, emailaddress = ViewBag.email }))">Manpower Request  - @i.mrfid</a>

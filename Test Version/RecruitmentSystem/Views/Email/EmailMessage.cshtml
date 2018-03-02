@@ -1,0 +1,58 @@
+﻿@model RecruitmentSystem.Recruitment.Data.sp_email_message_detailResult
+@{
+    ViewBag.Title = "Email Message";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manage E-mail Message</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li> <a href="@Url.Action("dashboard", "home")">Dashboard</a></li>
+            <li class="active">Manage E-mail Message</li>
+        </ol>
+    </div>
+</div>
+@if (ViewBag.updated != null)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-success">Successfully Updated</div>
+        </div>
+    </div>
+}
+<form method="post" action="@Url.Action("emailmessage")">
+    <div class="well custom-panel">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="vertical-align"><strong>Invitation Template Message</strong></p>
+                @Html.TextAreaFor(m => m.invited, new { @class = "form-control text-area-none-resizable", rows = 5, placeholder = "E-mail message for invited" })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="vertical-align"><strong>Shortlist Template Message</strong></p>
+                @Html.TextAreaFor(m => m.shortlist, new { @class = "form-control text-area-none-resizable", rows = 5, placeholder = "E-mail message for shortlist" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="vertical-align"><strong>For Requirement Template Message</strong></p>
+                @Html.TextAreaFor(m => m.forrequirement, new { @class = "form-control text-area-none-resizable", rows = 5, placeholder = "Email Message for requirement" })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="vertical-align"><strong>Accepted Template Message</strong></p>
+                @Html.TextAreaFor(m => m.accepted, new { @class = "form-control text-area-none-resizable", rows = 5, placeholder = "Email Message accepted" })
+            </div>
+        </div>
+        <div class="row">
+            <p class="empty-space-12"></p>
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <button class="btn btn-default btn-default-red btn-block" type="button" onclick="FormSubmit('form')">Save</button>
+            </div>
+        </div>
+    </div>
+
+</form>

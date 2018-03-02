@@ -1,0 +1,87 @@
+﻿@model RecruitmentSystem.Recruitment.Data.sp_user_detailsResult
+@using RecruitmentSystem.Recruitment.Class
+@{
+    ViewBag.Title = "User Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var i = Model;
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h3>User Detail</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>  <a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+            <li><a href="@Url.Action("userlist")">Manage Accounts</a> </li>
+            <li class="active"> User Detail</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-default-red">
+            <div class=" panel-heading">
+                <h3 class="panel-title">User List</h3>
+              
+            </div>
+            <div class="panel-body small-font">
+                <div class="row">
+                    <div class="col-lg-2"><strong class="float-right">Role</strong></div>
+                    <div class="col-lg-9 responsive float-right-c">@i.role_name</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"><strong class="float-right">First Name</strong></div>
+                    <div class="col-lg-9 responsive float-right-c">@i.fname</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"><strong class="float-right">Middle Initial</strong></div>
+                    <div class="col-lg-9 responsive float-right-c">@i.mname</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"><strong class="float-right">Last Name</strong></div>
+                    <div class="col-lg-9 responsive float-right-c">@i.lname</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"><strong class="float-right">Gender</strong></div>
+                    <div class="col-lg-9 responsive float-right-c">@i.gender</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"><strong class="float-right">Email</strong></div>
+                    <div class="col-lg-9 responsive float-right-c">@i.email</div>
+                </div>
+                @if (i.contactnumber != null)
+            {
+                    <div class="row">
+                        <div class="col-lg-2"><strong class="float-right">Contact Number</strong></div>
+                        <div class="col-lg-9 responsive float-right-c">@i.contactnumber</div>
+                    </div>
+            }
+                @if (i.account_manager_1 != null)
+            {
+                    <div class="row">
+                        <div class="col-lg-2"><strong class="float-right">Account Manager</strong></div>
+                        <div class="col-lg-9 responsive float-right-c">@Users.Fullname(i.account_manager_1)</div>
+                    </div>
+            }
+                @if (i.account_manager_2 != null)
+            {
+                    <div class="row">
+                        <div class="col-lg-2"><strong class="float-right">Account Supervisor</strong></div>
+                        <div class="col-lg-9 responsive float-right-c">@Users.Fullname(i.account_manager_2)</div>
+                    </div>
+            }
+
+                <div class="row">
+                    <div class="col-lg-2"><strong class="float-right">Branch</strong></div>
+                    <div class="col-lg-9 responsive float-right-c">@i.branch_name</div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-9"><button class="btn btn-default btn-default-red" onclick="redirecturl('@Url.Action("updateuser", "user", new { @userid=Model.user_id})')">Edit</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

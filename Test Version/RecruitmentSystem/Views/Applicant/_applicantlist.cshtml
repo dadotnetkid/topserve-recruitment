@@ -1,0 +1,38 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_applicant_listResult>
+
+@{
+    Layout = null;
+}
+@*<tr hidden class="hidden">
+    <td><div class="pagination" data-col="8" data-image-loading="@Url.Content("~/images/loading.gif")" data-page="@ViewBag.page" data-pagesize="@ViewBag.pagesize" data-container="tbody" data-url="@Url.Action("_applicantlist")"></div></td>
+</tr>*@
+@if (Model.Count() <= 0)
+{
+    <tr>
+        <td colspan="7" align="center">Import Applicant</td>
+    </tr>
+}
+else
+{
+    foreach (var i in Model)
+    {
+        <tr>
+            <td onclick="redirecturltab ('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@(i.surname + ", "  + i.firstname + " " + i.middleinitial)</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.emailaddress</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.contactnumber</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.requiredposition</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.educationattainment</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.gender</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.age</td>
+        </tr>
+    }
+}
+
+@*<script src="~/Scripts/jquery-pagination.js"></script>*@
+@*<script>
+
+    var p = '@ViewBag.page';
+    $(document).ready(function () {
+       
+    });
+</script>*@

@@ -1,0 +1,115 @@
+﻿@using RecruitmentSystem.Recruitment.Data;
+@using RecruitmentSystem.Recruitment.Class;
+@model RecruitmentSystem.Models.ImportUpdateManpowerViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manpower Request</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li> <a href="@Url.Action("dashboard","home")">Dashboard</a> </li>
+            <li class="li-active">Import Manpower Request</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="@Model.errorHandlers._Class">@Model.errorHandlers.Message</div>
+    </div>
+</div>
+
+
+<div class="well custom-panel">
+    <div class="row">
+        <form action="@Url.Action("index")" method="get">
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    @if (Users.IsInRole("Admin"))
+                    {
+                        <div class="input-group-btn pull-right">
+                            <div class="btn-group">
+                                <a class="btn dropdown-toggle custom-button" data-toggle="dropdown" href="#"> <span class="fa fa-ellipsis-v fa-lg" title="Toggle dropdown menu"></span> </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+
+                                    <li><a class="" data-toggle="modal" data-target=".modal"><span class="fa fa-upload fa-fw"> </span> Import MRF</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th>MRF ID</th>
+                        <th>Date Requested</th>
+                        <th>Company Name</th>
+                        <th>Branch</th>
+                        <th>Position Name</th>
+                        <th>Classification</th>
+                        <th>Employment Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    @foreach (var i in Model.importUpdateManpowerViewModel)
+                    {
+                        <tr>
+                            <td>@i.mrfid</td>
+                            <td>@i.DateRequested</td>
+                            <td>@i.CompanyName</td>
+                            <td>@i.Branch</td>
+                            <td>@i.PositionName</td>
+                            <td>@i.Classification</td>
+                            <td>@i.EmploymentStatus</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-container">
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Import MRF</h4>
+                </div>
+                <form method="post" enctype="multipart/form-data" id="import-form" action="@Url.Action("index")">
+                    <div class="modal-body">
+
+                        <input type="file" name="file" id="file-browse" onchange="onchangeimportfilebrowse(this, '#text-file')" class=" file-hidden" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                        <input type="text" class="form-control" onclick="clickfilebrowse('#file-browse')" id="text-file" onkeypress="jQuery:return false" />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btn-default-red" onclick="FormSubmit('#import-form','yes')">Import</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    DisableonSubmit(document);
+
+</script>

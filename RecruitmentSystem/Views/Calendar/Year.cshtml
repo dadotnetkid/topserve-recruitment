@@ -1,0 +1,52 @@
+﻿@model  RecruitmentSystem.Models.CalendarViewModel
+@{
+    ViewBag.Title = "Year";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>Manage Calendar</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li>Dashboard</li>
+                    <li class="li-active"> Manage Calendar</li>
+                </ol>
+            </div>
+        </div>
+        <div class="well custom-panel">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <strong class="vertical-align">Manage Calendar</strong>
+                    <div class="input-group pull-right">
+                        <div class="btn-group open">
+                            <a class="btn dropdown-toggle custom-button" data-toggle="dropdown" href="#" aria-expanded="true"> <span class="fa fa-ellipsis-v fa-lg" title="Toggle dropdown menu"></span> </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#"><i class="fa fa-plus fa-fw" aria-hidden="true"></i> Create</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="empty-space-12"></p>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-hover">
+
+                        <tbody>
+                            <tr>
+                                <td width="60%">2017</td>
+                                <td width="40%">8/22/2017</td>
+                            </tr>
+                            <tr>
+                                <td width="60%">2018</td>
+                                <td width="40%">01/01/2018</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

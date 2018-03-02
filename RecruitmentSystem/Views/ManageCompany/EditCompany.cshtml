@@ -1,0 +1,109 @@
+﻿@model RecruitmentSystem.Models.CompanyViewModel
+@using RecruitmentSystem.Recruitment.Data;
+@{
+    ViewBag.Title = "Edit Client";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Edit Client</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>  <a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+            <li>  <a href="@Url.Action("dashboard", "managecompany")">Manage Client</a></li>
+            <li class="active">Edit Client</li>
+        </ol>
+    </div>
+</div>
+<div class="alert alert-danger " hidden>
+    All field is required
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <form method="post" action="@Url.Action("EditCompany", new { companyid=Model.CompanyId})">
+            <div class="well custom-panel">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Industry</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p> </p>
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.industry, Dropdown_list_data.IndustryList(), "Select Industry", new { @class = "form-control input-sm", placeholder = "Office Address" })
+                                </div>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Client Name</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.TextBoxFor(m => m.company_name, new { @class = "form-control input-sm", placeholder = "Client Name" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Brand</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.TextBoxFor(m => m.brand, new { @class = "form-control input-sm", placeholder = "Brand" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Branch</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.TextBoxFor(m => m.branch, new { @class = "form-control input-sm", placeholder = "Branch" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-3">
+                                <label class="custom-label">Office Address</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-9">
+                                <p class="empty-space-6 "></p>
+                                <p>
+                                    @Html.TextAreaFor(m => m.officeaddress, new { @class = "form-control text-area-none-resizable input-sm", placeholder = "Office Address", rows = "5" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+                        <button class="btn btn-default btn-default-red btn-block" type="button" onclick="FormSubmitwithalert('form')">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    DisableonSubmit(document);
+</script>

@@ -1,0 +1,273 @@
+﻿@using RecruitmentSystem.Recruitment.Data
+@using RecruitmentSystem.Recruitment.Class
+@model RecruitmentSystem.Models.ManpowerStatusSummaryViewModel
+@{
+    ViewBag.Title = "Manpower Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    @Scripts.Render("~/bundles/datetimepicker");
+    @Styles.Render("~/Content/datetimepicker");
+}
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Manpower Summary Report</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+
+            <li class="active">Manpower Summary Report</li>
+        </ol>
+    </div>
+</div>
+<div class="well custom-panel">
+
+    <div class="row">
+        <form method="post" action="@Url.Action("manpowersummary")">
+            <div class="col-xs-12 col-sm-12 col-lg-6">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.datefrom, new { @class = "form-control input-sm", placeholder = "From" })
+                                    <div class="input-group-addon">
+                                        <span class="fa fa-calendar-o"></span>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datefrom').datetimepicker({
+                                            format: 'MM/DD/YYYY'
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.dateto, new { @class = "form-control input-sm", placeholder = "To" })
+                                    <div class="input-group-addon">
+                                        <span class="fa fa-calendar-o"></span>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#dateto').datetimepicker({
+                                            format: 'MM/DD/YYYY'
+                                        });
+                                    });
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-lg-3">
+                <div class="form-group">
+                    @Html.DropDownList("accountmanager", Dropdown_list_data.AccountManagerList(), "All AMs", new { @class = "form-control input-sm" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-lg-3">
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.BranchId, Dropdown_list_data.branchlist(), "All Branch", new { @class = "form-control input-sm" })
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-default-red" type="button" onclick="FormSubmit('form','no')">Generate</button>
+                        <button class="btn btn-default btn-default-red" type="button">Download</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <p class="empty-space-12"></p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="12.5%">Account Manager</th>
+                        <th width="12.5%">New</th>
+                        <th width="12.5%">Replacement</th>
+                        <th width="12.5%">On Call</th>
+                        <th width="12.5%">Total Requirements</th>
+                        <th width="12.5%">Cancelled</th>
+                        <th width="12.5%">Hired</th>
+                        <th width="12.5%">Pending</th>
+                        <th width="12.5%">On Process</th>
+                        <th width="12.5%">Variance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var i in Model.ManpowerStatusSummary())
+                    {
+                        <tr>
+                            <td>@i.account_manager</td>
+                            <td>@i.New</td>
+                            <td>@i.Replacement</td>
+                            <td>@i.OnCall</td>
+                            <td>@i.TotalRequirement</td>
+                            <td>@i.CancelledRequirement</td>
+                            <td>@i.Closed</td>
+                            <td>@i.Pending</td>
+                            <td>@i.OnProcess</td>
+                            <td>@i.Variance</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="11.11%">Account Manager</th>
+                        <th width="11.11%">New</th>
+                        <th width="11.11%">% N/TR</th>
+                        <th width="11.11%">On Call</th>
+                        <th width="11.11%">% OC/TR</th>
+                        <th width="11.11%">Replacement</th>
+                        <th width="11.11%">% R/TR</th>
+                        <th width="11.11%">Total Requirements</th>
+                        <th width="11.11%">% TR/TR</th>
+                    </tr>
+                </thead>
+                <tbody id="t2">
+                    @foreach (var i in Model.ManpowerStatusSummaryNewPerTotalRequirement())
+                    {
+                        <tr>
+                            <td>@i.account_manager</td>
+                            <td>@i.New</td>
+                            <td>@Tools.ToDecimal(i.percent_new_total_requirement, "0") %</td>
+                            <td>@i.OnCall</td>
+                            <td>@Tools.ToDecimal(i.percent_oncall_total_requirement, "0") %</td>
+                            <td>@i.Replacement</td>
+                            <td>@Tools.ToDecimal(i.percent_replacement_total_requirement, "0") %</td>
+                            <td>@i.TotalRequirement</td>
+                            <td>@Tools.ToDecimal(i.percent_total_requirement, "0") %</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="11.11%">Account Manager</th>
+                        <th width="11.11%">Hired</th>
+                        <th width="11.11%">% H/TR</th>
+                        <th width="11.11%">Pending</th>
+                        <th width="11.11%">% P/TR</th>
+                        <th width="11.11%">On Process</th>
+                        <th width="11.11%">% OP/TR</th>
+                        <th width="11.11%">Hired + On Process</th>
+                        <th width="11.11%">% H+OP/TR</th>
+                    </tr>
+                </thead>
+                <tbody id="t2">
+                    @foreach (var i in Model.ManpowerStatusSummaryClosedPerTotalRequirement())
+                    {
+                        <tr>
+                            <td>@i.account_manager</td>
+                            <td>@i.Closed</td>
+                            <td>@Tools.ToDecimal(i.percent_Closed_total_requirement, "0") %</td>
+                            <td>@i.Pending</td>
+                            <td>@Tools.ToDecimal(i.percent_Pending_total_requirement, "0") %</td>
+                            <td>@i.OnProcess</td>
+                            <td>@Tools.ToDecimal(i.percent_OnProcess_total_requirement, "0") %</td>
+                            <td>@Tools.ToDecimal(i.PlacementAndOnProcess, "0")</td>
+                            <td>@Tools.ToDecimal(i.percent_PlacementAndOnProcess_total_requirement, "0") %</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="11.11%">Account Manager</th>
+                        <th width="11.11%">New + Replacement</th>
+                        <th width="11.11%">% N+R/TR</th>
+                        <th width="11.11%">Hired</th>
+                        <th width="11.11%">% H/TR</th>
+                        <th width="11.11%">On Process</th>
+                        <th width="11.11%">% OP/N+R</th>
+                        <th width="11.11%">Hired + On Process</th>
+                        <th width="11.11%">% H+OP/N+R</th>
+                    </tr>
+                </thead>
+                <tbody id="t2">
+                    @foreach (var i in Model.ManpowerStatusSummaryNewReplacementCancelledPerTotalRequirement())
+                    {
+                        <tr>
+                            <td>@i.account_manager</td>
+                            <td>@i.NewandReplacementCancelled</td>
+                            <td>@Tools.ToDecimal(i.percent_NewandReplacementCancelled_total_requirement, "0") %</td>
+                            <td>@Tools.ToDecimal(i.NewClosed)</td>
+                            <td>@Tools.ToDecimal(i.percent_newclosedd_total_requirement, "0") %</td>
+                            <td>@i.OnProcess</td>
+                            <td>@Tools.ToDecimal(i.percent_onprocess_new_replacement, "0")</td>
+                            <td>@i.placementandonprocess</td>
+                            <td>@Tools.ToDecimal(i.percent_placement_onprocess_replacement, "0") %</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="14.30%">Account Manager</th>
+                        <th width="14.30%">On Call</th>
+                        <th width="14.30%">% OC/TR</th>
+                        <th width="14.30%">Hired</th>
+                        <th width="14.30%">% H/OC</th>
+                        <th width="14.30%">Variance</th>
+                        <th width="14.30%">% V/OC</th>
+                    </tr>
+                </thead>
+                <tbody id="t2">
+                    @foreach (var i in Model.ManpowerStatusSummaryOncallPerTotalRequirement())
+                    {
+                        <tr>
+                            <td>@i.account_manager</td>
+                            <td>@i.OncallRequirement</td>
+                            <td>@Tools.ToDecimal(i.percent_oncall_total_requirement, "0") %</td>
+                            <td>@i.OncallClosed</td>
+                            <td>@Tools.ToDecimal(i.percent_oncall_closed, "0") %</td>
+                            <td>@i.Variance</td>
+                            <td>@Tools.ToDecimal(i.percent_variance_oncall, "0") %</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

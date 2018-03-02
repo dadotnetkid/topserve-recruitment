@@ -1,0 +1,24 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_user_listResult>
+@{
+
+    Layout = null;
+    var page = ViewBag.page;
+    var pagesize = ViewBag.pagesize;
+}
+@*<tr class="hidden">
+    <td>
+        <div class="pagination" data-image-loading="@Url.Content("~/images/loading.gif")" data-page="@page" data-pagesize="@pagesize" data-container="tbody" data-url="@Url.Action("_userlist")"></div>
+    </td>
+</tr>*@
+@foreach (var i in Model)
+{
+    <tr class="cursor-pointer" onclick="redirecturl('@Url.Action("updateuser", "user", new { @userid=i.user_id})')">
+        <td>@i.fullname</td>
+        <td>@i.Email</td>
+        <td>@i.UserName</td>
+        <td>@i.role_name</td>
+        <td>@i.created_by</td>
+        <td>@i.date_created</td>
+    </tr>
+}
+@*<script src="~/Scripts/jquery-pagination.js"></script>*@

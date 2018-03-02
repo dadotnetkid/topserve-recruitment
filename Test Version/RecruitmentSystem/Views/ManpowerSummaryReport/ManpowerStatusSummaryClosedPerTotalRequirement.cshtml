@@ -1,0 +1,19 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_manpower_status_summary_closed_per_total_requirementResult>
+           @using RecruitmentSystem.Recruitment.Class;
+@{
+    Layout = null;
+}
+@foreach(var i in Model)
+{
+    <tr>
+        <td>@i.account_manager</td>
+        <td>@i.Closed</td>
+        <td>@Tools.ToDecimal(i.percent_Closed_total_requirement,"0") %</td>
+        <td>@i.Pending</td>
+        <td>@Tools.ToDecimal( i.percent_Pending_total_requirement,"0") %</td>
+        <td>@i.OnProcess</td>
+        <td>@Tools.ToDecimal( i.percent_OnProcess_total_requirement,"0") %</td>
+        <td>@Tools.ToDecimal(i.PlacementAndOnProcess,"0")</td>
+        <td>@Tools.ToDecimal( i.percent_PlacementAndOnProcess_total_requirement,"0") %</td>
+    </tr>
+}

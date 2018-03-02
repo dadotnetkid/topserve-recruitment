@@ -1,0 +1,59 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_manpower_listResult>
+@using RecruitmentSystem.Recruitment.Class
+@{
+
+    Layout = null;
+}
+
+<table class="table table-bordered table-striped table-hover mini-dashboard">
+    <thead>
+        <tr>
+            <th width="16.11%">MRF ID</th>
+            <th width="11.11%">Client Requested</th>
+            <th width="11.11%">Requestor</th>
+            <th width="11.11%">Position</th>
+            <th width="11.11%">Classification</th>
+            <th width="9%">Pending</th>
+            <th width="11.11%">Number of Requested</th>
+            <th width="9%">Aging</th>
+            <th width="11.11%">Status</th>
+        </tr>
+    </thead>
+    <tbody class="manpower-dashboard">
+        @if (Model.Count() > 0)
+        {
+            foreach (var i in Model)
+            {
+                <tr onclick="redirecturl('@Url.Action("dashboard", "RecruitmentProcess", new {mrfid=i.mrfid})')">
+                    <td>@i.mrfid</td>
+                    <td>@i.company_name </td>
+                    <td>@i.Requestor</td>
+                    <td>@i.position_name</td>
+                    <td>@Manpower.Classification(i.Classification)</td>
+                    <td>@((i.pending <= 0) ? 0 : i.pending)</td>
+                    <td>@i.RequiredNumber</td>
+                    <td>@i.agingdays</td>
+                   @if (i.pending == 0 && i.date_completed == null)
+                    {
+                    <td>For Completion</td>
+                    }
+                    else if (i.pending == 0 && i.date_completed == null)
+                    {
+                    <td>Completed</td>
+                    }
+                    else
+                    {
+                    <td>@i.status</td>
+                    }
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="9" align="center">No Result</td>
+            </tr>
+        }
+    </tbody>
+</table>

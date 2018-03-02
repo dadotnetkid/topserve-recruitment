@@ -1,0 +1,18 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_manpower_status_summaryResult>
+@{
+    Layout = null;
+}
+@foreach(var i in Model)
+{
+    <tr>
+        <td>@i.account_manager</td>
+        <td>@i.New</td>
+        <td>@i.Replacement</td>
+        <td>@i.OnCall</td>
+        <td>@i.TotalRequirement</td>
+        <td>@i.CancelledRequirement</td>
+        <td>@i.Closed</td>
+        <td>@i.Pending</td>
+        <td>@i.OnProcess</td>
+    </tr>
+}

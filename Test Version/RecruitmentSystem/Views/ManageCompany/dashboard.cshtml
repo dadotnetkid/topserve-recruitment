@@ -1,0 +1,117 @@
+﻿@model RecruitmentSystem.Models.CompanyViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Manage Client";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manage Client</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>  <a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+            <li class="li-active">Manage Client</li>
+        </ol>
+    </div>
+</div>
+@if (ViewBag.company != "")
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-success">
+                Successfully added @ViewBag.company
+            </div>
+        </div>
+    </div>
+}
+@if (Model.ErrorHandler.Message != "")
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="@Model.ErrorHandler._Class">
+                @Model.ErrorHandler.Message
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <form action="@Url.Action("_dashboard")" method="get" id="search-form">
+            <div class="well custom-panel">
+                <div class="row">
+                    <div class="form">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <p class="empty-space-0"></p>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="search" onkeyup="FormSearchValidation('#search-form','tbody',5)" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick="FormSearchValidation('#search-form', 'tbody', 5)"> <span class="fa fa-search"></span> </button>
+                                        <div class="btn-group">
+                                            <a class="btn dropdown-toggle custom-button" data-toggle="dropdown" href="#"> <span class="fa fa-ellipsis-v fa-lg" title="Toggle dropdown menu"></span> </a>
+                                            <ul class="dropdown-menu dropdown-menu-right">
+                                                <li><a href="#" onclick="redirecturl('@Url.Action("createcompany")')"><i class="fa fa-plus fa-fw" aria-hidden="true"></i> Create Client</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#" data-toggle="modal" data-target="#modal-import-company" class="" title="Import Client List"><i class="fa fa-upload fa-fw"></i> Import Client</a></li>
+                                            </ul>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+                        <table class="table table-hover table-striped table-small-font">
+                            <thead>
+                                <tr>
+                                    <th>Client Name</th>
+                                    <th>Branch</th>
+                                    <th>Brand</th>
+                                    <th>Office Address</th>
+                                    <th>Date Created</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-import-company" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" enctype="multipart/form-data" action="@Url.Action("importCompany","managecompany")" id="upload-company-form">
+                <div class="modal-header modal-header-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Import Client</h4>
+                </div>
+
+                <div class="modal-body">
+                    <input type="file" class="hidden" id="import-file" name="file" onchange="onchangeimportfilebrowse(this,'#company')" />
+                    <input type="text" id="company" required="" class="form-control" name="company" placeholder="Import Client" onclick="clickfilebrowse('#import-file')" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="FormSubmit('#upload-company-form')" class="btn btn-danger">Import</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<script>
+    $(document).ready(function () {
+        FormSearchValidation('#search-form', 'tbody', 5)
+    });
+</script>

@@ -1,0 +1,585 @@
+﻿@model RecruitmentSystem.Models.UpdateManpowerViewModel
+@using RecruitmentSystem.Recruitment.Data
+@{
+    Layout = null;
+    var i = Model;
+}
+<form id="update-mapower-form" action="@Url.Action("updatemanpowerrequestdetail", new { mrfid=i.mrfid})" method="post">
+    <div class="well custom-panel">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong> Requirement / Qualification</strong>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Date Requested *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                            <span class="pull-left">
+                            </span>
+                        </p>
+                        <div class="input-group">
+                            @Html.TextBoxFor(m => m.DateRequested, new { @class = "form-control input-sm", placeholder = "Date", @text = "" })
+                            <span class="input-group-addon"> <span class="fa fa-calendar"></span> </span>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#DateRequested').datetimepicker();
+                            });
+                        </script>
+
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Date Deployment *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                            <span class="pull-left">
+                            </span>
+                        </p>
+                        <div class="input-group ">
+                            @Html.TextBoxFor(m => m.DateDeployment, new { @class = "form-control input-sm", placeholder = "Date", @value = "" })
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#DateofDeployment').datetimepicker();
+                            });
+                        </script>
+
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Position *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.position, Dropdown_list_data.PositionList(), "Select Position", new { @class = "form-control input-sm", placeholder = "" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Number of Required *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.numberofrequired, new { @class = "form-control input-sm", placeholder = "Number of Required" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Education *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.educationattainment, Dropdown_list_data.EducationalAttainmentList(), "Select Educational Attainment", new { @class = "form-control input-sm", placeholder = "" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Course</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            <span class="pull-left">
+                            </span>
+                        </p>
+                        <input type="hidden" id="Course" name="Course" />
+                        <div class="input-group">
+                            <input class="form-control read-only" placeholder="Course" id="course_" name="course_" />
+                            <div class="input-group-btn">
+                                <button type="button" title="Browse Course" class="btn btn-default" data-toggle="modal" data-target="#modal-course-list"><span class="fa fa-search"></span></button>
+                            </div>
+                        </div>
+
+
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Gender *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.gender, Dropdown_list_data.GenderList(), "Select Gender", new { @class = "form-control input-sm", placeholder = "" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Age Requirement *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.agerequirement, new { @class = "form-control input-sm", placeholder = "Age Requirement" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <label class="custom-label">Required Skills *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.skilltype, Dropdown_list_data.SkillTypeList(), "Select Skill Type", new { @class = "form-control input-sm", placeholder = "", onclick = "SelectSkillType(this)" })
+                        </div>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.skills, Dropdown_list_data.SkillList(), "Select Skills", new { @class = "form-control input-sm", placeholder = "", @disabled = "" })
+                        </div>
+                        <p></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.certification, Dropdown_list_data.CertificateList(), "Select Certification", new { @class = "form-control input-sm", placeholder = "", @disabled = "" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Cost Center</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.costcenter, new { @class = "form-control input-sm", placeholder = "Cost Center" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Department</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.department, new { @class = "form-control input-sm", placeholder = "Department" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-3">
+                        <label class="custom-label">Job Description *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-9">
+                        <p class="empty-space-6"></p>
+                        <p>
+                            @Html.TextAreaFor(m => m.jobdescription, new { @class = "form-control  text-area-none-resizable", placeholder = "Job Description", rows = "5" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="empty-space-12"></p>
+        <i class="fa fa-list-alt" aria-hidden="true"></i><strong> Salary Information</strong>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Salary Details *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.salarydetails, Dropdown_list_data.SalaryDetailList(), "Select Salary Details", new { @class = "form-control input-sm text-area-none-resizable", placeholder = "Job Description", rows = "5" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Basic Pay *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.basicpay, new { @class = "form-control input-sm number-only decimal", placeholder = "Basic Pay" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Cola</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.cola, new { @class = "form-control input-sm number-only decimal", placeholder = "Cola" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Skilled</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.skilled, new { @class = "form-control input-sm number-only decimal", placeholder = "Skilled" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Transportation</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.transportation, new { @class = "form-control input-sm number-only decimal", placeholder = "Transportation" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Gas</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.gas, new { @class = "form-control input-sm number-only decimal", placeholder = "Gas" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Communication</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.communication, new { @class = "form-control input-sm number-only decimal", placeholder = "Communication" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Motorcycle</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.motorcycle, new { @class = "form-control input-sm number-only decimal", placeholder = "Motorcycle" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Clothing</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.clothing, new { @class = "form-control input-sm number-only decimal", placeholder = "Clothing" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Medical</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.medical, new { @class = "form-control input-sm number-only decimal", placeholder = "Medical" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                        <label class="custom-label">Payout Date *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.payoutdate, Dropdown_list_data.PayoutDateList(), "Select Payout Date", new { @class = "form-control input-sm", placeholder = "Job Description" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="empty-space-12"></p>
+        <i class="fa fa-info-circle" aria-hidden="true"></i><strong> Information of Requisitioner</strong>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Who to Look For *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.whotolookfor, new { @class = "form-control input-sm", placeholder = "Who to Look For/Name of interviewer" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Establishment *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.establishment, new { @class = "form-control input-sm", placeholder = "Establishment" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-3">
+                        <label class="custom-label">Office Address *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-9">
+                        <p class="empty-space-6"></p>
+                        <p>
+                            @Html.TextAreaFor(m => m.officeaddresstoreport, new { @class = "form-control input-sm text-area-none-resizable", placeholder = "Office address to report", rows = 4 })
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Location of Deployment *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.location, Dropdown_list_data.LocationList(), "Select Location", new { @class = "form-control input-sm", placeholder = "Office address to report" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Business Unit *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.businessunit, Dropdown_list_data.BusinessUnitList(), "Select Business Unit", new { @class = "form-control input-sm", placeholder = "Office address to report" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Classification *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.classification, Dropdown_list_data.ClassificationList(), "Select Classification", new { @class = "form-control input-sm", placeholder = "Office address to report", @onclick = "SelectClassification(this)" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Employment Status *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.employmentstatus, Dropdown_list_data.EmploymentStatus(), "Select Employment Status", new { @class = "form-control input-sm", placeholder = "Office address to report" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Client Requested *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.companyrequested, Dropdown_list_data.CompanyList(), "Select Client", new { @class = "form-control input-sm", placeholder = "Office address to report" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Requestor *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.requestor, new { @class = "form-control input-sm", placeholder = "Requestor" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Requestor Contact Number *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.requestorcontactnumber, new { @class = "form-control input-sm", placeholder = "Requestor Contact Number" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Requestor E-mail Address</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.requestoremailaddress, new { @class = "form-control input-sm", placeholder = "Requestor Email Address" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <p class="empty-space-6"></p>
+        <div class="row">
+            <div class="col-lg-2 col-sm-2 col-xs-12">
+                <button class="btn btn-default btn-default-red btn-block" type="button" onclick="FormSubmit('#update-mapower-form')">Save</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal fade " id="modal-course-list">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Course List</h4>
+            </div>
+            <div class="modal-body">
+                <form id="search-modal-form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search" onkeyup="searchtablewithloading('#search-modal-form','@Url.Action("courselist")','#course-container','2','@Url.Content("~/images/loading.gif")')" />
+                                <span class="input-group-addon"> <span class="fa fa-search"></span> </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-condensed table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Course Name</th>
+                                </tr>
+                            </thead>
+                            <tbody id="course-container">
+                                @Html.Action("courselist")
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                <button type="button" class="btn  btn-default btn-default-red" onclick="selectCourse('#course_','#Course')" data-dismiss="modal">Select</button>
+            </div>
+        </div>
+    </div>
+</div>

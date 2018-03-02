@@ -1,0 +1,48 @@
+﻿@model RecruitmentSystem.Models.ManpowerStatusReportViewModel
+@using RecruitmentSystem.Recruitment.Class;
+@{
+    Layout = null;
+}
+@if (Model.ManpowerStatusReport().Count() > 0)
+{
+    foreach (var i in Model.ManpowerStatusReport())
+    {
+        <tr>
+            <td title="@i.mrfid">@i.mrfid</td>
+            <td title="@i.DateRequested">@i.DateRequested</td>
+            <td title="@i.company_name">@i.company_name</td>
+            <td title="@i.Establishment ">@i.Establishment</td>
+            <td title="@i.industry_name">@i.industry_name</td>
+            <td title="@i.SkillType">@i.SkillType</td>
+            <td title="@i.position_name">@i.position_name</td>
+            <td title="@i.Classification"> @Manpower.ConvertClassification(i.Classification)</td>
+            <td title="@i.account_manager_1">@i.account_manager_1</td>
+            <td title="@i.Coodinator_name">@i.Coodinator_name</td>
+            <td title="@i.RequiredNumber">@i.RequiredNumber</td>
+            <td title="@i.agingdays">@i.agingdays</td>
+            <td title="@i.Recruiter_Name">@i.Recruiter_Name</td>
+            <td title="@i.cancelled_requirement">@i.cancelled_requirement</td>
+            <td title="@i.closed">@i.closed</td>
+            <td title="@i.Pending">@i.Pending</td>
+            <td title="@i.Invited">@i.Invited</td>
+            <td title="@i.for_requirement">@i.for_requirement</td>
+            <td title="@i.variance">@i.variance</td>
+            <td title="@i.Shortlist">@i.Shortlist</td>
+            <td title="@i.Passon">@i.Passon</td>
+            <td title="@i.status">@i.status</td>
+            <td title="@i.Remarks">@i.Remarks</td>
+        </tr>
+    }
+}
+else
+{
+    <tr>
+
+        <td colspan="22" align="center">No Result Found</td>
+    </tr>
+}
+@*<tr>
+    <td>
+        Total number of search @Model.Count()
+    </td>
+</tr>*@

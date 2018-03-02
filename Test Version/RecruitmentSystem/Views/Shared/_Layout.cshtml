@@ -1,0 +1,223 @@
+﻿@using RecruitmentSystem.Recruitment.Class
+@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Recruitment System</title>
+    <link rel="shortcut icon" href="~/Images/TS logo.png" />
+    <script>
+        var Loading = '@Url.Content("~/images/loading.gif")';
+    </script>
+    <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/sb-admin")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @*<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/custom")
+    @Scripts.Render("~/bundles/jquery-confirm")
+
+    @Scripts.Render("~/bundles/datetimepicker")
+    @Styles.Render("~/Content/datetimepicker")
+    @*<link href="~/Content/roboto.css" rel="stylesheet" />*@
+    @*<script src="~/Scripts/jquery-pagination.js"></script>*@
+</head>
+@{
+    var role = Users.Role(User.Identity.GetUserId());
+}
+<body>
+
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("dashboard", "home")">Topserve Recruitment</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown notification-panel">
+                        @Html.Action("NoficationNavBar", "Notification")
+                        <li class="message-preview" onclick="redirecturl('@Url.Action("NotificationSummary", "Notification")')">
+                            <a>
+
+                                <b>See All Notifications</b>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @Users.Fullname(User.Identity.GetUserId())<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        @*<li>
+                                <a href="@Url.Action("editaccount", "user", new { @userid=@User.Identity.GetUserId()})"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            </li>
+
+                            <li class="divider"></li>*@
+                        <li>
+                            <a href="@Url.Action("logout","user")"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="@ViewBag.HomeActive">
+                        <a href="@Url.Action("dashboard", "home")"><i class="fa fa-fw fa-th-large"></i> Dashboard</a>
+                    </li>
+                    <li class="@ViewBag.ManpowerRequestActive">
+                        @*@if (User.IsInRole("Admin"))
+                            {
+                                <a href="javascript:;" data-toggle="collapse" data-target="#archieve"><i class="fa fa-fw fa-upload"></i> Manpower Request<i class="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="archieve" class="collapse">
+                                    <li>
+                                        <a href="@Url.Action("dashboard", "manpower")"><i class="fa fa-fw fa-user"></i> Manpower Request</a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("ImportManpowerRequestAchieveIndex", "ImportManpowerRequestArchieve")"><i class="fa fa-fw fa-user"></i> Import Manpower Request</a>
+                                    </li>
+                                </ul>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("dashboard", "manpower")"><i class="fa fa-fw fa-user"></i> Manpower Request</a>
+                            }*@
+                        <a href="@Url.Action("dashboard", "manpower")"><i class="fa fa-fw fa-user"></i> Manpower Request</a>
+                    </li>
+                    @if (role != "Account Manager" && role != "Coordinator" && role != "OIC Recruiter")
+                    {
+                        <li class="@ViewBag.ManpowerReserveActive">
+                            <a href="@Url.Action("ReserveDashboard", "manpowerreserve")"><i class="fa fa-fw  fa-archive "></i> Reserve Manpower</a>
+                        </li>
+                    }
+
+                    @*@if (role == "Admin" || role == "IT Personnel")
+                        {*@
+                    @if (role != "Coordinator" && role != "Account Manager")
+                    {
+                        <li class="@ViewBag.ApplicantsActive">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#import"><i class="fa fa-fw fa-upload"></i> Applicants<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="import" class="collapse">
+
+                                <li>
+                                    <a href="@Url.Action("importapplicant","applicant")">Import Applicant</a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("applicantlist","applicant")">Applicant List</a>
+                                </li>
+
+                                @* } *@
+
+                            </ul>
+                        </li>
+                    }
+
+                    @if (role != "OIC Recruiter" && role != "Account Manager" && role != "Coordinator" && role != "Recruiter")
+                    {
+                        <li class="@ViewBag.ReportsActive">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#Report"><i class="fa fa-fw fa-bar-chart-o"></i> Report <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="Report" class="collapse">
+                                <li>
+                                    <a href="@Url.Action("ManpowerStatus", "ManpowerStatusReport")">Manpower Status</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ManpowerSummary", "ManpowerSummaryReport")">Manpower Summary</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ApplicantSurveySummary", "ApplicantSurveySummaryReport")">Applicant Survey</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("index", "TurnAroundTimeReport")">TAT Report</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("index", "AgingReport")">Aging Report</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="@ViewBag.downloadtemplate">
+                        <a href="@Url.Action("index","downloadtemplate")"><i class="fa fa-download"></i> Download Template</a>
+                    </li>
+                    <li class="@ViewBag.EmailBlast">
+                        <a href="@Url.Action("index", "emailblast")"><i class="fa fa-fw  fa-mail-reply-all "></i> E-mail Blast</a>
+                    </li>
+                    @if (role == "Admin")
+                    {
+                        <li class="@ViewBag.SettingActive">
+                            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-gear"></i> Settings  <i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="demo" class="collapse">
+                                <li>
+                                    <a href="@Url.Action("userlist","user")">Manage Account</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("index","calendar")">Manage Calendar</a>
+                                </li>
+                                @*@if (role == "Admin")
+                                    {*@
+                                <li>
+                                    <a href="@Url.Action("EmailSetting", "email")">Manage Email Setting</a>
+                                </li>
+
+                                <li>
+                                    <a href="@Url.Action("manageform", "manageform")">Manage Form</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("dashboard", "ManageCompany")">Manage Client</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ManageSms", "sms")">Manage SMS Messages</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("emailmessage", "email")">Manage Email Messages</a>
+                                </li>
+                            
+                                <li>
+                                    <a href="@Url.Action("index", "database")">Database Archive</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("ImportManpowerRequestAchieveIndex", "ImportManpowerRequestArchieve")"> Import Manpower Request</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "ImportUpdateManpower")">Import Update Manpower</a>
+                                </li>
+                                @* } *@
+
+                            </ul>
+                        </li>
+                    }
+
+
+
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                
+                @RenderBody()
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+    </div>
+
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

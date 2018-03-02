@@ -1,0 +1,17 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_manpower_status_summary_Oncall_per_total_requirementResult>
+           @using RecruitmentSystem.Recruitment.Class;
+@{
+    Layout = null;
+}
+@foreach(var i in Model)
+{
+    <tr>
+        <td>@i.account_manager</td>
+        <td>@i.OncallRequirement</td>
+        <td>@Tools.ToDecimal(i.percent_oncall_total_requirement,"0") %</td>
+        <td>@i.OncallClosed</td>
+        <td>@Tools.ToDecimal(i.percent_oncall_closed,"0") %</td>
+        <td>@i.Variance</td>
+        <td>@Tools.ToDecimal(i.percent_variance_oncall,"0") %</td>
+    </tr>
+}

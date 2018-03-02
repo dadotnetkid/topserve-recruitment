@@ -1,0 +1,70 @@
+﻿@model RecruitmentSystem.Models.CalendarViewModel
+@using RecruitmentSystem.Recruitment.Data;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>Manage Calendar</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li>Dashboard</li>
+                    <li class="li-active"> Manage Calendar</li>
+                </ol>
+            </div>
+        </div>
+        <div class="well custom-panel">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <form action="@Url.Action("index")" method="post" id="form-year">
+                        <div class="pull-left">
+                            @Html.DropDownListFor(m => m.Year, Dropdown_list_data.HolidayYear(), "Select Year", new { @class = "form-control input-sm", onchange = "FormSubmit('#form-year','no','no')" })
+                        </div>
+                    </form>
+                    <div class="input-group pull-right">
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle custom-button" data-toggle="dropdown" href="#"> <span class="fa fa-ellipsis-v fa-lg" title="Toggle dropdown menu"></span> </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#" onclick="ShowModal(this,'md','Add Holiday')" data-url="@Url.Action("createholiday")"><i class="fa fa-plus fa-fw" aria-hidden="true"></i> Create</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="empty-space-12"></p>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Holiday</th>
+                                <th>Date</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model.HolidayList())
+                            {
+                                <tr>
+                                    <td>@i.HolidayName</td>
+                                    <td>@Convert.ToDateTime(i.Holiday).ToString("MMMM dd yyyy")</td>
+                                    <td align="center">
+                                        <form action="@Url.Action("addeditdeleteholiday", new { method="delete",holidayid=i.HolidayId})" method="post" id="form-delete-holiday-@i.HolidayId">
+                                            <a data-url="@Url.Action("editholiday", new { holidayid=i.HolidayId})" onclick="ShowModal(this,'md','Edit Holiday')">Edit</a> |
+                                            <a href="#" onclick="FormSubmit('#form-delete-holiday-@i.HolidayId','yes','no')">Delete</a>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

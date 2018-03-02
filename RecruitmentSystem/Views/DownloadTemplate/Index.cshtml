@@ -1,0 +1,98 @@
+﻿@using RecruitmentSystem.Recruitment.Class;
+@{
+    ViewBag.Title = "Download Template";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Download Template</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+            <li class="active">Download Template</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well custom-panel">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive scrollable">
+                    <table class="table table-hover table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Who can use</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @if (Users.IsInRole("Admin,Recruitment Supervisor,OIC Recruiter,Recruiter"))
+                            {
+                                <tr>
+                                    <td>Import Applicant Template</td>
+                                    <td>This template is used to import new applicant details on the Recruitment System.</td>
+                                    <td>Admin, Recruitment Supervisor, OIC Recruiter, Recruiters</td>
+                                    <td><a href="@Url.Action("download", "downloadtemplate", new { title="Import Applicant Template"})"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                            }
+                            @if (Users.IsInRole("Coordinator", "Admin"))
+                            {
+                                <tr>
+                                    <td>Import MRF</td>
+                                    <td>This template is used to import new MRF on the Recruitment System</td>
+                                    <td>Coordinator</td>
+                                    <td><a href="@Url.Action("download", "downloadtemplate", new { title = "Import MRF" })"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                            }
+                            @if (Users.IsInRole("Recruiter","Admin"))
+                            {
+                                <tr>
+                                    <td>Import Pass-on</td>
+                                    <td>This template is used to import new Pass-on Applicants on the Recruitment System.</td>
+                                    <td>Recruiters</td>
+                                    <td><a href="@Url.Action("download", "downloadtemplate", new { title = "Import Pass-on" })"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                            }
+                            @if (Users.IsInRole("Admin"))
+                            {
+                                <tr>
+                                    <td>Import Client</td>
+                                    <td>This template is used to import new client details on the Recruitment System.</td>
+                                    <td>Admin</td>
+                                    <td><a href="@Url.Action("download", "downloadtemplate", new { title = "Import Client" })"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Import Skills</td>
+                                    <td>This template is used to import new skills on the Recruitment System.</td>
+                                    <td>Admin</td>
+                                    <td><a href="@Url.Action("download", "downloadtemplate", new { title = "Import Skills" })"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Import Certificates</td>
+                                    <td>This template is used to import new type of certificates on the Recruitment System.</td>
+                                    <td>Admin</td>
+                                    <td><a href="@Url.Action("download", "downloadtemplate", new { title = "Import Certificates" })"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Import Positions</td>
+                                    <td>This template is used to import new position details on the Recruitment System.</td>
+                                    <td>Admin</td>
+                                    <td><a href="@Url.Action("download", "downloadtemplate", new { title = "Import Positions" })"><i class="fa fa-download"></i></a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>

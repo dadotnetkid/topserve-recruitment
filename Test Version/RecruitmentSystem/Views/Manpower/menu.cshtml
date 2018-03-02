@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "menu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int page = (int)ViewBag.page;
+
+    int pagesize = 40;
+    int loop=(page / 10)==pagesize/10? pagesize: (((page / 10) + 1) * 10);
+    
+
+}
+<ul class="pagination">
+    <li ><a>...</a></li>
+    @for (var i = ((page / 10) * 10) + 1; i <= loop; i++)
+    {
+        <li class="@(i == page ? "active" : "")"><a href="@Url.Action("menu", new { page = i })">@(i)</a></li>
+    }
+    
+    @if ( loop<=pagesize )
+    {
+        <li class="@(loop==page?"active":"")"><a href="@Url.Action("menu", new { page = loop })">@loop</a></li>
+    }
+
+
+    @*
+        @for (var p = 1; p <= pagesize; p++)
+        {
+            for(var ps=0+p;ps<10;ps++)
+            {
+
+            }
+        }
+
+                        <li class="@(i==page?"active":"")"><a href="@Url.Action("menu", new { page=i})">@(i)</a></li>
+            <a href="@Url.Action("menu",new{page=page+1})">Next</a>
+            </li>
+    *@
+</ul>

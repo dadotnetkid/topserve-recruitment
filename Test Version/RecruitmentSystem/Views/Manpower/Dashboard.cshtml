@@ -1,0 +1,140 @@
+﻿@using RecruitmentSystem.Recruitment.Class
+@using Microsoft.AspNet.Identity
+@model RecruitmentSystem.Models.ManpowerDashboardViewModel
+@using RecruitmentSystem.Recruitment.Data;
+
+@{
+    ViewBag.Title = "Manpower Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var role = Users.Role(User.Identity.GetUserId());
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manpower Request</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li> <a href="@Url.Action("dashboard","home")">Dashboard</a> </li>
+            <li class="li-active"> Manpower Request</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="@Model.ErrorHandlers._Class">@Model.ErrorHandlers.Message</div>
+    </div>
+</div>
+
+@if (ViewBag.createmanpower != "")
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-success">@ViewBag.createmanpower</div>
+        </div>
+    </div>
+}
+<div class="well custom-panel">
+    <div class="row">
+        <form action="@Url.Action("_dashboard", new { classification=Model.Classification})" method="get">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.BusinessUnit, Dropdown_list_data.BusinessUnitList(), "Business Unit", new { @class = "form-control", onchange = "FormSearchValidation('form','tbody','9')" })
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <select class="form-control" id="Classification" name="Classification" onchange="FormSearchValidation('form','tbody','9')">
+                        <option value="">Classification</option>
+                        <option value="New">New</option>
+                        <option value="On Call">On Call</option>
+                        <option value="Replacement">Replacement</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.Status, Dropdown_list_data.Status(), "Status", new { @class = "form-control", onchange = "FormSearchValidation('form','tbody','9')" })
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                    <div class="input-group @(Users.IsInRole("Coordinator", "Admin")?"input-group":"") ">
+                        <input type="text" class="form-control" name="search" id="search" placeholder="Search by MRF ID">
+
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="FormSearchValidation('form','tbody','9')">
+                                <span class="fa fa-search"></span>
+                            </button>
+                            @if (Users.IsInRole("Coordinator", "Admin"))
+                            {
+                                <div class="btn-group">
+                                    <a class="btn dropdown-toggle custom-button" data-toggle="dropdown" href="#"> <span class="fa fa-ellipsis-v fa-lg" title="Toggle dropdown menu"></span> </a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li> <a class="" onclick="redirecturl('@Url.Action("CreateManpowerRequest")')"><span class="fa fa-plus fa-fw"> </span> Create MRF</a></li>
+                                        <li class="divider"></li>
+                                        <li><a class="" data-toggle="modal" data-target=".modal"><span class="fa fa-upload fa-fw"> </span> Import MRF</a></li>
+                                    </ul>
+                                </div>
+                            }
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th>MRF ID</th>
+                        <th>Classification</th>
+                        <th>Job Position</th>
+                        <th>Client</th>
+                        <th>Requestor</th>
+                        <th>Date Requested</th>
+                        <th>Aging</th>
+                        <th>Coordinator</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-container">
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Import MRF</h4>
+                </div>
+                <form method="post" enctype="multipart/form-data" id="import-form" action="@Url.Action("ImportManpowerRequest", "ImportManpowerRequest")">
+                    <div class="modal-body">
+
+                        <input type="file" name="file" id="file-browse" onchange="onchangeimportfilebrowse(this, '#text-file')" class=" file-hidden" accept="application/vnd.ms-excel" />
+                        <input type="text" class="form-control" onclick="clickfilebrowse('#file-browse')" id="text-file" onkeypress="jQuery:return false" />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btn-default-red" onclick="FormSubmit('#import-form','yes')">Import</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    DisableonSubmit(document);
+    $(document).ready(function () { FormSearchValidation('form', 'tbody', '9') })
+</script>

@@ -1,0 +1,52 @@
+﻿@model RecruitmentSystem.Models.ManpowerViewModel
+@using RecruitmentSystem.Recruitment.Data
+@{
+    Layout = null;
+}
+
+<div class="row">
+    <form action="@Url.Action("_ReAssignRecruiterList")" method="get" id="form-search-recruiter">
+        <div class="col-sm-6">
+            @Html.DropDownListFor(m => m.Branch, Dropdown_list_data.branchlist(), new { @class = "form-control" })
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group">
+                @Html.TextBoxFor(m => m.Search, new { @class = "form-control" })
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" onclick="FormSearchValidation('#form-search-recruiter','tbody#search','4')"><span class="fa fa-search"></span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+        <table class="table table-hover table-striped table-small-font">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Recruiter</th>
+                    <th>Branch</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody id="search"></tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <form id="reassignrecruiter" method="post" action="@Url.Action("ReAssignRecruiter","manpower", new { mrfid=Model.mrfid})">
+            @Html.HiddenFor(m => m.RecruiterId)
+            <button class="btn btn-default-red pull-right margin-top-10" type="button" onclick="FormSubmit('#reassignrecruiter','yes')">
+                Update
+            </button>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        FormSearchValidation('#form-search-recruiter', 'tbody#search', '4')
+
+    });
+</script>

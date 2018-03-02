@@ -1,0 +1,155 @@
+﻿@model RecruitmentSystem.Models.loginviewmodel
+@{
+    Layout = null;
+
+}
+<script>
+    var Loading = "";
+</script>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="shortcut icon" href="~/Images/TS logo.png" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Login - Recruitment System</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/custom")
+</head>
+<body>
+
+
+    <div class="container login-container">
+        @* For Login Error *@
+        <div class="row">
+            <div class="col-xs-1 col-sm-2 col-md-4 col-lg-4">
+                <p class="empty-space"></p>
+            </div>
+            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-4">
+
+
+                @if (ViewBag.login == false)
+                {
+                    <div class="row ">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div class="alert alert-danger">The email and password you’ve entered doesn’t match any account </div>
+                        </div>
+                    </div>
+                }
+                @if (ViewBag.forgotpassword != null)
+                {
+                    <div class="row ">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div class="alert alert-danger">Unable to reset your password</div>
+                        </div>
+                    </div>
+                }
+                @if (ViewBag.applicantregistered != null)
+                {
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <div class="alert alert-success">Registration complete!</div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+            <div class="col-xs-1 col-sm-2 col-md-4 col-lg-4">
+                <p class="empty-space"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1 col-sm-2 col-md-4 col-lg-4">
+                <p class="empty-space"></p>
+            </div>
+            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-4">
+                <div class="well custom-panel">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-3 col-md-3 col-lg-1">
+                            <p class="empty-space"></p>
+                        </div>
+                        <div class="col-xs-8 col-sm-6 col-md-6 col-lg-10">
+                            <p class="empty-space"></p>
+                            <img class="img-responsive login-img-responsive" src="~/Images/TS logo.png">
+                            <p class="empty-space"></p>
+                        </div>
+                        <div class="col-xs-2 col-sm-3 col-md-2 col-lg-1">
+                            <p class="empty-space-12"></p>
+                        </div>
+                    </div>
+
+                    @using (Html.BeginForm("login", "user", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @id = "form-login" }))
+                    {
+
+
+
+                        @Html.ValidationSummary(false)
+                        <div class="row row-margin-bottom">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                @Html.TextBoxFor(m => m.username, new { @class = "form-control", placeholder = "Username", value = "" })
+                                @*<input class="form-control" placeholder="Username" id="username" name="username" required="" />*@
+                            </div>
+                        </div>
+                        <div class="row row-margin-bottom ">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                @*<input type="password" class="form-control password" placeholder="Password" id="password" name="password" required=""  />*@
+                                @Html.TextBoxFor(m => m.password, new { @class = "form-control password", placeholder = "Password" })
+                                <a data-container=".modal-content" data-url="" onclick="showmodal('@Url.Action("forgotemail")','.modal-content')" class="forgot-password" data-toggle="modal" data-target=".modal">Forgot</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <button type="button" onclick="formlogin('#form-login')" class="btn btn-default btn-default-red form-control">Login</button>
+                            </div>
+                        </div>
+                    }
+                    <div class="row">
+                        <p class="empty-space-12"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-2 col-md-4 col-lg-4">
+                <p class="empty-space"></p>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-1 col-sm-2 col-md-4 col-lg-4">
+                <p class="empty-space"></p>
+            </div>
+            <div class="col-xs-10 col-sm-8 col-md-4 col-lg-4">
+                <div class="well custom-panel-no-red">
+
+                    <p class="text-center">Are you an applicant? <a class="text-align-center" href="@Url.Action("applicantregistration","applicant")"> Apply Now</a></p>
+                </div>
+            </div>
+            <div class="col-xs-1 col-sm-2 col-md-4 col-lg-4">
+                <p class="empty-space"></p>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>
+<div class="modal fade" id="mdl-forgot-password" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    cleartxt(document);
+
+</script>

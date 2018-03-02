@@ -1,0 +1,400 @@
+﻿@model RecruitmentSystem.Models.ApplicantDetailViewModel
+@{
+    ViewBag.Title = "Applicant Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var i = Model.ApplicantDetail() ;
+}
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>Applicant Detail</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+                    <li class="li-active"> @i.ApplicantID</li>
+                </ol>
+            </div>
+        </div>
+        <div class="well custom-panel">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <strong class="vertical-align">@i.ApplicantFullname</strong>
+
+                    <div class="input-group pull-right">
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle custom-button" data-toggle="dropdown" href="#" aria-expanded="true">
+                                <span class="fa fa-ellipsis-v fa-lg" title="Toggle dropdown menu"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#" onclick="redirecturl('@Url.Action("updatedetail", "applicant", new { mrfid=i.mrfid,applicantid=i.ApplicantID})')"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i> Edit Profile</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><i class="fa fa-trash fa-fw delete-applicant" aria-hidden="true" data-url="@Url.Action("deleteapplicant", "applicant", new {applicant_id=i.ApplicantID })"></i> Delete Applicant</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="empty-space-12"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="nav nav-tabs nav-tabs-custom nab-tabs-black" role="tablist">
+                        <li role="presentation" class="active"><a href="#applicantdetail" aria-controls="applicantdetail" role="tab" data-toggle="tab">Applicant Detail</a></li>
+                        <li data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("ApplicantHistory", "applicant", new { applicant=i.ApplicantID})','#applicanthistory',this)"><a href="#applicanthistory" aria-controls="applicanthistory" role="tab" data-toggle="tab">Applicant History</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="applicantdetail">
+                            <p class="section-title"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i><strong> Basic Information</strong></p>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-12">
+                                            <p class="detail-margin"><strong class="pull-left">Complete Address</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-12">
+                                            <p class="detail-margin"><span class="pull-left">@i.address</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Position</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.position</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Birthdate</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.birthday</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Gender</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.gender</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Religion</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.religion</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Mobile Phone</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.contactnumber</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">E-mail</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.emailaddress</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Job Fair</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">-</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Referred By</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.referredby</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-12">
+                                            <p class="detail-margin"><strong class="pull-left">How did you know about Topserve</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-12">
+                                            <p class="detail-margin"><span class="pull-left">-</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <p class="empty-space-12"></p>
+                            <p class="section-title"><i class="fa fa-graduation-cap fa-fw" aria-hidden="true"></i><strong> Education</strong></p>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Educational Attainment</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.EducationAttainment</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">School Name</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.school</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Course</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.course</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Certification</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Skills</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.Skill</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <p class="empty-space-12"></p>
+                            <p class="section-title"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i><strong> Requirements</strong></p>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.resume)</strong>&nbsp;&nbsp;Resume</p>
+
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.nbi)</strong>&nbsp;&nbsp;NBI</p>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.birthcertificate)</strong>&nbsp;&nbsp;Birth Certificate</p>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.diploma)</strong>&nbsp;&nbsp;Diploma/TOR</p>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.marriage)</strong>&nbsp;&nbsp;Marriage Certificate</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.dependantsbirthcertificate)</strong>&nbsp;&nbsp;Dependents Birth Certificate</p>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.certificateofemployment)</strong>&nbsp;&nbsp;Certificate of Employment</p>
+                                </div>
+                            </div>
+
+                            <p class="empty-space-12"></p>
+                            <p class="section-title"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i><strong> Government ID</strong></p>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">SSS Number</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.sss</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Phil-Health Number</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.philhealth</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">TIN Number</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.tin</span></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><strong class="pull-left">Pag-ibig Number</strong></p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                                            <p class="detail-margin"><span class="pull-left">@i.pagibig</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="empty-space-12"></p>
+                            <p class="section-title"><i class="fa fa-stethoscope fa-fw" aria-hidden="true"></i><strong> Medical Requirement</strong></p>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.drugtest)</strong>&nbsp;&nbsp;Drug Test</p>
+
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.basic3)</strong>&nbsp;&nbsp;Basic 3</p>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.basic5)</strong>&nbsp;&nbsp;Basic 5</p>
+
+
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                                    <p class="detail-margin"><strong class="pull-left">@Html.DisplayFor(m => m.basic7)</strong>&nbsp;&nbsp;Basic 7</p>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="applicanthistory">
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-lg-4">
+                                            <p class="detail-margin"><strong class="pull-left">Date</strong></p>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-lg-8">
+                                            <p class="detail-margin"><strong class="pull-left">Action</strong></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+
+

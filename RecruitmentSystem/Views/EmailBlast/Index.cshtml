@@ -1,0 +1,68 @@
+﻿@model RecruitmentSystem.Models.EmailBlastViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>E-mail Blast</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li>Dashboard</li>
+                    <li class="li-active"> E-mail Blast</li>
+                </ol>
+            </div>
+        </div>
+        <div class="well custom-panel">
+            <form class="" id="frm-email-blast" action="@Url.Action("index")" method="post">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-2">
+                                <p class="detail-margin"><strong class="pull-left custom-margin">Subject</strong></p>
+                            </div>
+                            <div class="form">
+                                <div class="col-xs-12 col-sm-12 col-lg-10">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-2">
+                                <p class="detail-margin"><strong class="pull-left custom-margin">Message</strong></p>
+                            </div>
+                            <div class="form">
+                                <div class="col-xs-12 col-sm-12 col-lg-10">
+                                    <div class="form-group text-area-none-resizable">
+                                        @Html.TextAreaFor(m => m.Message, new { @class = "form-control text-area-none-resizable", rows = "8" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-lg-2 col-sm-12 col-xs-12">
+                            <p class="empty-space-0"></p>
+                        </div>
+                        <div class="col-lg-10 col-sm-12 col-xs-12">
+                            <button class=" btn btn-default btn-default-red " type="button" onclick="FormSubmit('form')">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

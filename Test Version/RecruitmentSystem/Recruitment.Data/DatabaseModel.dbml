@@ -1,0 +1,1889 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TalentAcquisition" Class="DatabaseModelDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=202.57.61.178;Initial Catalog=TalentAcquisition;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="TalentAcquisitionConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.sp_department_list" Method="sp_department_list">
+    <Parameter Name="departmentname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_department_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="department_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="department_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_account_manager_list" Method="sp_account_manager_list">
+    <ElementType Name="sp_account_manager_listResult">
+      <Column Name="account_manager" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_get_user_role" Method="fn_get_user_role" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_industry_list" Method="sp_industry_list">
+    <Parameter Name="industry_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_industry_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="industry_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="industry_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_sms_detail" Method="sp_sms_detail">
+    <ElementType Name="sp_sms_detailResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="shortlist" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="accepted" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="forrequirement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_update_sms_setting" Method="sp_update_sms_setting">
+    <Parameter Name="invited" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="shortlist" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="accepted" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="forrequirement" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_certificates_list" Method="sp_certificates_list">
+    <Parameter Name="certificate_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_certificates_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="certificate_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certificate_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_skills_list" Method="sp_skills_list">
+    <Parameter Name="skill_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_skills_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="skill_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skill_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_positions_list" Method="sp_positions_list">
+    <Parameter Name="position_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_positions_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="position_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_add_certificates" Method="sp_add_certificates">
+    <Parameter Name="certificate_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_skill" Method="sp_add_skill">
+    <Parameter Name="skills" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_position" Method="sp_add_position">
+    <Parameter Name="position_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_location_list" Method="sp_location_list">
+    <Parameter Name="location_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_location_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="location_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_branch_list" Method="sp_branch_list">
+    <Parameter Name="branch_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_branch_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="branch_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="branch_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="branch_code" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_course_list" Method="sp_course_list">
+    <Parameter Name="course_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_course_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="course_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_get_account_manager_id" Method="sp_get_account_manager_id">
+    <Parameter Name="user_id" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_get_account_manager_idResult">
+      <Column Name="account_manager_1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="account_manager_2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_get_user_name" Method="fn_get_user_name" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_generate_mrf_id" Method="fn_generate_mrf_id" IsComposable="true">
+    <Parameter Name="user_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="business_unit" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_admin_list" Method="sp_admin_list">
+    <ElementType Name="sp_admin_listResult">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_company_list" Method="sp_company_list">
+    <Parameter Name="company_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="is_active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="sp_company_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="company_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="company_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="branch" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="brand" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="officeaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_add_companies" Method="sp_add_companies">
+    <Parameter Name="company_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="branch" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="brand" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="officeaddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="industry" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_user_details" Method="sp_user_details">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_user_detailsResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="fname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="mname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="lname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="officeaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="company_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="account_manager_1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="account_manager_2" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="industry_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created_by" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="branch_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="branch_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="role_name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_update_user" Method="sp_update_user">
+    <Parameter Name="user_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="mname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="account_manager_1" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="account_manager_2" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="branch_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_notification" Method="sp_add_notification">
+    <Parameter Name="notify_by" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="notify_to" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="notification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_approved_manpower_accountmanager" Method="sp_approved_manpower_accountmanager">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="recruitment_supervisor_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_approved_manpower_oic_recruiter" Method="sp_approved_manpower_oic_recruiter">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_get_mrf_user_involved" Method="sp_get_mrf_user_involved">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_get_mrf_user_involvedResult">
+      <Column Name="coordinator_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_1_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_2_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruitment_supervisor_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oic_recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_school_list" Method="sp_school_list">
+    <ElementType Name="sp_school_listResult">
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_religion_list" Method="sp_religion_list">
+    <ElementType Name="sp_religion_listResult">
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_applicant_contact_details" Method="sp_applicant_contact_details">
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_applicant_contact_detailsResult">
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_applicant_list_search" Method="sp_applicant_list_search">
+    <Parameter Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="school" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="certification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="skills" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="location" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="religion" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="agefrom" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ageto" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_applicant_list_searchResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateinvited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oncall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="reliever" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_time_imported" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_invited_applicant_list" Method="sp_invited_applicant_list">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_invited_applicant_listResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateinvited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oncall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="reliever" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_time_imported" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_confirmed_applicant_list" Method="sp_confirmed_applicant_list">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_confirmed_applicant_listResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateinvited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oncall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="reliever" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_time_imported" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_invite_applicant_applicant_search" Method="sp_invite_applicant_applicant_search">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_confirm_applicant_invited_applicant" Method="sp_confirm_applicant_invited_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_import_confirm_applicant" Method="sp_import_confirm_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicantid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_import_shortlist_applicant" Method="sp_import_shortlist_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_export_invited_applicant" Method="sp_export_invited_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_export_invited_applicantResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_export_confirmed_applicant" Method="sp_export_confirmed_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_export_confirmed_applicantResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_export_shortlist_applicant" Method="sp_export_shortlist_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_export_shortlist_applicantResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_import_applicant_list" Method="sp_import_applicant_list">
+    <Parameter Name="surname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="firstname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="middleinitial" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="location" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="age" Type="System.Int32" DbType="Int" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="religion" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="philhealth" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="schoolname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="certification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="skills" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="jobfair" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="referrals" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="invited" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="dateinvited" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="oncall" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="reliever" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_confirm_applicant" Method="sp_confirm_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicantid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_shorlist_applicant_list" Method="sp_shorlist_applicant_list">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_shorlist_applicant_listResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateinvited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oncall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="reliever" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_time_imported" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_confirm_shorlist_applicant" Method="sp_confirm_shorlist_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicantid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_confirm_accepted_applicant" Method="sp_confirm_accepted_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicantid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_accepted_applicant_list" Method="sp_accepted_applicant_list">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_accepted_applicant_listResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateinvited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oncall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="reliever" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_time_imported" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_import_for_requirement_applicant" Method="sp_import_for_requirement_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_for_requirement_applicant_list" Method="sp_for_requirement_applicant_list">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_for_requirement_applicant_listResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateinvited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oncall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="reliever" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_time_imported" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_export_for_requirement_applicant" Method="sp_export_for_requirement_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_export_for_requirement_applicantResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="nbi" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="birthcertificate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="diploma" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="marriage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="certifcateofemployment" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="medicalexamination" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="basic5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="basic7" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="basic3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="drugtest" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dependents_birth_certificate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="resume" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sss" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibig" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tin" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_applicant_requirement" Method="sp_applicant_requirement">
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="nbi" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="birthcertificate" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="diploma" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="marriage" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="certifcateofemployment" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="medicalexamination" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="basic5" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="basic7" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="basic3" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="drugtest" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="dependents_birth_certificate" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="resume" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="sss" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="philhealth" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="pagibig" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="tin" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_import_accept_applicant" Method="sp_import_accept_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_cancel_manpower" Method="sp_cancel_manpower">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_check_cancel_mrf" Method="fn_check_cancel_mrf" IsComposable="true">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.sp_cancelled_requirement" Method="sp_cancelled_requirement">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="numberrequirement" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_check_rejected_manpower" Method="fn_check_rejected_manpower" IsComposable="true">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.sp_update_manpower_request" Method="sp_update_manpower_request">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="DateofDeployment" Parameter="dateofDeployment" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="RequiredPosition" Parameter="requiredPosition" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequiredNumber" Parameter="requiredNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EducationalAttainment" Parameter="educationalAttainment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="AgeRequirement" Parameter="ageRequirement" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SkillType" Parameter="skillType" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SpecificSkill" Parameter="specificSkill" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Certification" Parameter="certification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="CostCenter" Parameter="costCenter" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Department" Parameter="department" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="JobDescription" Parameter="jobDescription" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SalaryDetails" Parameter="salaryDetails" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="BasicPay" Parameter="basicPay" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Cola" Parameter="cola" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Skilled" Parameter="skilled" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Meal" Parameter="meal" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Transportation" Parameter="transportation" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Gas" Parameter="gas" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Communication" Parameter="communication" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Motorcycle" Parameter="motorcycle" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Clothing" Parameter="clothing" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Medical" Parameter="medical" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="PayoutDate" Parameter="payoutDate" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="WhotoLookfor" Parameter="whotoLookfor" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Establishment" Parameter="establishment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="OfficeAddresstoReport" Parameter="officeAddresstoReport" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="LocationofDeployment" Parameter="locationofDeployment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Classification" Parameter="classification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="ProjectName" Parameter="projectName" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="CompanyRequested" Parameter="companyRequested" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Requestor" Parameter="requestor" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequestorContactNumber" Parameter="requestorContactNumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequestorEmailAddress" Parameter="requestorEmailAddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="status" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_email_setting" Method="sp_email_setting">
+    <Parameter Name="email" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="host" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="port" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ssl" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_email_setting_detail" Method="sp_email_setting_detail">
+    <ElementType Name="sp_email_setting_detailResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="host" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="port" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ssl" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_email_message" Method="sp_email_message">
+    <Parameter Name="invited" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="shortlist" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="forrequirement" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="accepted" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_email_message_detail" Method="sp_email_message_detail">
+    <ElementType Name="sp_email_message_detailResult">
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="shortlist" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="forrequirement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="accepted" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_notification_list" Method="sp_notification_list">
+    <Parameter Name="notifyto" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_notification_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="notify_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="notify_by" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="notify_to" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="notification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="minutes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_survey_educational_report" Method="sp_survey_educational_report">
+    <Parameter Name="months" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="years" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_survey_educational_reportResult">
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[1]" Member="_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[2]" Member="_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[3]" Member="_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[4]" Member="_4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[5]" Member="_5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[6]" Member="_6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[7]" Member="_7" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[8]" Member="_8" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[9]" Member="_9" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[10]" Member="_10" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[11]" Member="_11" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[12]" Member="_12" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[13]" Member="_13" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[14]" Member="_14" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[15]" Member="_15" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[16]" Member="_16" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[17]" Member="_17" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[18]" Member="_18" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[19]" Member="_19" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[20]" Member="_20" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[21]" Member="_21" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[22]" Member="_22" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[23]" Member="_23" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[24]" Member="_24" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[25]" Member="_25" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[26]" Member="_26" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[27]" Member="_27" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[28]" Member="_28" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[29]" Member="_29" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[30]" Member="_30" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[31]" Member="_31" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_survey_how_did_you_know_topserve_report" Method="sp_survey_how_did_you_know_topserve_report">
+    <Parameter Name="months" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="years" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_survey_how_did_you_know_topserve_reportResult">
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[1]" Member="_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[2]" Member="_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[3]" Member="_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[4]" Member="_4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[5]" Member="_5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[6]" Member="_6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[7]" Member="_7" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[8]" Member="_8" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[9]" Member="_9" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[10]" Member="_10" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[11]" Member="_11" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[12]" Member="_12" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[13]" Member="_13" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[14]" Member="_14" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[15]" Member="_15" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[16]" Member="_16" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[17]" Member="_17" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[18]" Member="_18" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[19]" Member="_19" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[20]" Member="_20" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[21]" Member="_21" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[22]" Member="_22" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[23]" Member="_23" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[24]" Member="_24" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[25]" Member="_25" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[26]" Member="_26" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[27]" Member="_27" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[28]" Member="_28" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[29]" Member="_29" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[30]" Member="_30" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[31]" Member="_31" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_survey_job_fair_report" Method="sp_survey_job_fair_report">
+    <Parameter Name="months" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="years" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_survey_job_fair_reportResult">
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[1]" Member="_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[2]" Member="_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[3]" Member="_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[4]" Member="_4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[5]" Member="_5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[6]" Member="_6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[7]" Member="_7" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[8]" Member="_8" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[9]" Member="_9" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[10]" Member="_10" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[11]" Member="_11" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[12]" Member="_12" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[13]" Member="_13" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[14]" Member="_14" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[15]" Member="_15" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[16]" Member="_16" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[17]" Member="_17" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[18]" Member="_18" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[19]" Member="_19" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[20]" Member="_20" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[21]" Member="_21" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[22]" Member="_22" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[23]" Member="_23" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[24]" Member="_24" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[25]" Member="_25" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[26]" Member="_26" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[27]" Member="_27" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[28]" Member="_28" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[29]" Member="_29" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[30]" Member="_30" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[31]" Member="_31" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_survey_invited_by_report" Method="sp_survey_invited_by_report">
+    <Parameter Name="months" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="years" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_survey_invited_by_reportResult">
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[1]" Member="_1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[2]" Member="_2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[3]" Member="_3" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[4]" Member="_4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[5]" Member="_5" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[6]" Member="_6" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[7]" Member="_7" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[8]" Member="_8" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[9]" Member="_9" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[10]" Member="_10" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[11]" Member="_11" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[12]" Member="_12" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[13]" Member="_13" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[14]" Member="_14" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[15]" Member="_15" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[16]" Member="_16" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[17]" Member="_17" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[18]" Member="_18" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[19]" Member="_19" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[20]" Member="_20" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[21]" Member="_21" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[22]" Member="_22" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[23]" Member="_23" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[24]" Member="_24" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[25]" Member="_25" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[26]" Member="_26" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[27]" Member="_27" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[28]" Member="_28" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[29]" Member="_29" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[30]" Member="_30" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[31]" Member="_31" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_count_new_manpower" Method="fn_count_new_manpower" IsComposable="true">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_count_ongoing_manpower" Method="fn_count_ongoing_manpower" IsComposable="true">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_count_completed_manpower" Method="fn_count_completed_manpower" IsComposable="true">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_import_passon_applicant" Method="sp_import_passon_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="surname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="firstname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="middleinitial" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="location" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="age" Type="System.Int32" DbType="Int" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="religion" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="philhealth" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="schoolname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="certification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="skills" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="jobfair" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="referrals" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="invited" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="dateinvited" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="oncall" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="reliever" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_get_user_email_address" Method="fn_get_user_email_address" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_create_manpower_reserve" Method="sp_create_manpower_reserve">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="rafid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="educationalattainment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="course" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="agerequirement" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="skillstype" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="specificskill" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="certification" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_generate_raf_id" Method="fn_generate_raf_id" IsComposable="true">
+    <Parameter Name="user_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_manpower_reserve_list" Method="sp_manpower_reserve_list">
+    <Parameter Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_manpower_reserve_listResult">
+      <Column Name="rafid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationalattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="agerequirement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skillstype" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skill_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certificate_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="specificskill" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_manpower_reserve_detail" Method="sp_manpower_reserve_detail">
+    <Parameter Name="rafid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_manpower_reserve_detailResult">
+      <Column Name="rafid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationalattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="agerequirement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skillstype" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skill_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certificate_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="specificskill" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_recruiter_contact_detail" Method="sp_recruiter_contact_detail">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_recruiter_contact_detailResult">
+      <Column Name="recruiter_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="branch_address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_get_manpower_classification" Method="fn_get_manpower_classification" IsComposable="true">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_print_contract" Method="sp_print_contract">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_print_contractResult">
+      <Column Name="surname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="firstname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="middleinitial" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProjectName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BusinessUnit" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Classification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="company_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="branch" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="brand" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="officeaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_export_accepted_applicant" Method="sp_export_accepted_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_export_accepted_applicantResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="surname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="firstname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="middleinitial" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sss" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibig" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tin" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_get_certificate_id" Method="fn_get_certificate_id" IsComposable="true">
+    <Parameter Name="certificatename" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_get_company_id" Method="fn_get_company_id" IsComposable="true">
+    <Parameter Name="company_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_get_course_id" Method="fn_get_course_id" IsComposable="true">
+    <Parameter Name="specificskill" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_get_location_id" Method="fn_get_location_id" IsComposable="true">
+    <Parameter Name="location" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_get_position_id" Method="fn_get_position_id" IsComposable="true">
+    <Parameter Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_get_skills_id" Method="fn_get_skills_id" IsComposable="true">
+    <Parameter Name="skill_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_get_user_email_address" Method="fn_get_user_email_address1" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_add_audit_trail" Method="sp_add_audit_trail">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="trail" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_manpower_audit_trail_list" Method="sp_manpower_audit_trail_list">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_manpower_audit_trail_listResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="trail" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="createdby" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_reject_manpower_request" Method="sp_reject_manpower_request">
+    <Parameter Name="remark" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_applicant_history" Method="sp_applicant_history">
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_applicant_historyResult">
+      <Column Name="applicant_action" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_add_applicant_history" Method="sp_add_applicant_history">
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicant_action" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_get_industry_id" Method="fn_get_industry_id" IsComposable="true">
+    <Parameter Name="industry_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.fn_count_recruitment_supervisor" Method="fn_count_recruitment_supervisor" IsComposable="true">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_register_user" Method="sp_register_user">
+    <Parameter Name="user_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="mname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="email" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="officeaddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="company_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="position_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="account_manager_1" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="account_manager_2" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="industry_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="branch_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="created_by" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_user_list" Method="sp_user_list">
+    <Parameter Name="fullname" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_user_listResult">
+      <Column Name="user_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="created_by" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="role_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_position_search" Method="sp_position_search">
+    <ElementType Name="sp_position_searchResult">
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_course_list_search" Method="sp_course_list_search">
+    <ElementType Name="sp_course_list_searchResult">
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_skills_list_search" Method="sp_skills_list_search">
+    <ElementType Name="sp_skills_list_searchResult">
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_location_list_search" Method="sp_location_list_search">
+    <ElementType Name="sp_location_list_searchResult">
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_count_completed_manpower_recruiter" Method="fn_count_completed_manpower_recruiter" IsComposable="true">
+    <Parameter Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_count_ongoing_manpower_recruiter" Method="fn_count_ongoing_manpower_recruiter" IsComposable="true">
+    <Parameter Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_complete_manpower" Method="sp_complete_manpower">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_recruiter_list" Method="sp_recruiter_list">
+    <ElementType Name="sp_recruiter_listResult">
+      <Column Name="user_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="branch_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_oic_recruiter_list" Method="sp_oic_recruiter_list">
+    <ElementType Name="sp_oic_recruiter_listResult">
+      <Column Name="user_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oic_recruiter_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="branch_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_check_applicant_duplicate" Method="fn_check_applicant_duplicate" IsComposable="true">
+    <Parameter Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="pagibig" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="philhealth" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="firstname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="middleinitial" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="surname" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_archieved_list" Method="sp_archieved_list">
+    <ElementType Name="sp_archieved_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="mrftempid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateRequested" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="DateofDeployment" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="RequiredPosition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequiredNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cancel_number_requirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EducationalAttainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="AgeRequirement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SkillType" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SpecificSkill" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CostCenter" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="JobDescription" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SalaryDetails" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BasicPay" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Cola" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Skilled" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Meal" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Transportation" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Gas" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Communication" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Motorcycle" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Clothing" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Medical" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PayoutDate" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="WhotoLookfor" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Establishment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="OfficeAddresstoReport" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="LocationofDeployment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BusinessUnit" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Classification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProjectName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CompanyRequested" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Requestor" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequestorContactNumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequestorEmailAddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="coordinator_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_1_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_2_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_approved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="am_date_approved" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="recruitment_supervisor_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruitment_supervisor_approved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="oic_recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oic_recruiter_approved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_rejected" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cancel_mrf" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_completed" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_applicant_list" Method="sp_applicant_list">
+    <Parameter Name="search" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_applicant_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="surname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="firstname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="middleinitial" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateinvited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oncall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="reliever" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_time_imported" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_import_applicant_archieve" Method="sp_import_applicant_archieve">
+    <Parameter Name="tempid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="dummyid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="accepted" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_import_mrf_request_archieve" Method="sp_import_mrf_request_archieve">
+    <Parameter Name="user_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="TempMRFID" Parameter="tempMRFID" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="DateRequested" Parameter="dateRequested" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="DateofDeployment" Parameter="dateofDeployment" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="RequiredPosition" Parameter="requiredPosition" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequiredNumber" Parameter="requiredNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EducationalAttainment" Parameter="educationalAttainment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="AgeRequirement" Parameter="ageRequirement" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SkillType" Parameter="skillType" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SpecificSkill" Parameter="specificSkill" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Certification" Parameter="certification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="CostCenter" Parameter="costCenter" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Department" Parameter="department" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="JobDescription" Parameter="jobDescription" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SalaryDetails" Parameter="salaryDetails" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="BasicPay" Parameter="basicPay" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Cola" Parameter="cola" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Skilled" Parameter="skilled" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Meal" Parameter="meal" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Transportation" Parameter="transportation" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Gas" Parameter="gas" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Communication" Parameter="communication" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Motorcycle" Parameter="motorcycle" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Clothing" Parameter="clothing" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Medical" Parameter="medical" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="PayoutDate" Parameter="payoutDate" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="WhotoLookfor" Parameter="whotoLookfor" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Establishment" Parameter="establishment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="OfficeAddresstoReport" Parameter="officeAddresstoReport" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="LocationofDeployment" Parameter="locationofDeployment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="BusinessUnit" Parameter="businessUnit" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Classification" Parameter="classification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="CompanyRequested" Parameter="companyRequested" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Requestor" Parameter="requestor" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequestorContactNumber" Parameter="requestorContactNumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequestorEmailAddress" Parameter="requestorEmailAddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RecruiterEmail" Parameter="recruiterEmail" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="oicrecruiter" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="datecompleted" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="status" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="am_1" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="cancel" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_send_email_blast" Method="sp_send_email_blast">
+    <ElementType Name="sp_send_email_blastResult">
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_variance_applicant_list" Method="sp_variance_applicant_list">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_variance_applicant_listResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="sssnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibignumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tinnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="skills" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativesworkingintopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="relativeworkingindirectcompetitionoftopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="invited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="dateinvited" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oncall" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="reliever" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_time_imported" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_confirm_variance_applicant" Method="sp_confirm_variance_applicant">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="applicantid" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_manpower_status_summary_Oncall_per_total_requirement" Method="sp_manpower_status_summary_Oncall_per_total_requirement">
+    <Parameter Name="Accountmanager" Parameter="accountmanager" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Branch_id" Parameter="branch_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="datefrom" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="dateto" Type="System.DateTime" DbType="DateTime2" />
+    <ElementType Name="sp_manpower_status_summary_Oncall_per_total_requirementResult">
+      <Column Name="account_manager" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="OncallRequirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_oncall_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="OncallClosed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_oncall_closed" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="Variance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_variance_oncall" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_manpower_status_summary_closed_per_total_requirement" Method="sp_manpower_status_summary_closed_per_total_requirement">
+    <Parameter Name="Accountmanager" Parameter="accountmanager" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Branch_id" Parameter="branch_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="datefrom" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="dateto" Type="System.DateTime" DbType="DateTime2" />
+    <ElementType Name="sp_manpower_status_summary_closed_per_total_requirementResult">
+      <Column Name="account_manager" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Closed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_Closed_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="Pending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_Pending_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="OnProcess" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_OnProcess_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="PlacementAndOnProcess" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_PlacementAndOnProcess_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_manpower_status_summary_new_per_total_requirement" Method="sp_manpower_status_summary_new_per_total_requirement">
+    <Parameter Name="accountmanager" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Branch_id" Parameter="branch_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="datefrom" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="dateto" Type="System.DateTime" DbType="DateTime2" />
+    <ElementType Name="sp_manpower_status_summary_new_per_total_requirementResult">
+      <Column Name="account_manager" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="New" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_new_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="OnCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_oncall_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="Reliever" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_reliever_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="Replacement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_replacement_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="TotalRequirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_manpower_status_summary_newreplacementcancelled_per_total_requirement" Method="sp_manpower_status_summary_newreplacementcancelled_per_total_requirement">
+    <Parameter Name="accountmanager" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Branch_id" Parameter="branch_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="datefrom" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="dateto" Type="System.DateTime" DbType="DateTime2" />
+    <ElementType Name="sp_manpower_status_summary_newreplacementcancelled_per_total_requirementResult">
+      <Column Name="account_manager" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="NewandReplacementCancelled" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_NewandReplacementCancelled_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="NewClosed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_newclosedd_total_requirement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="OnProcess" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_onprocess_new_replacement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="placementandonprocess" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="percent_placement_onprocess_replacement" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_get_supervisor_id" Method="fn_get_supervisor_id" IsComposable="true">
+    <Parameter Name="AccountManagerId" Parameter="accountManagerId" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_get_recruitment_supervisor_list" Method="sp_get_recruitment_supervisor_list">
+    <ElementType Name="sp_get_recruitment_supervisor_listResult">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="RecruitmentSupervisorName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_approved_manpower_recruitment_supervisor" Method="sp_approved_manpower_recruitment_supervisor">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_recruiter_list_by_branch" Method="sp_recruiter_list_by_branch">
+    <Parameter Name="CoordinatorId" Parameter="coordinatorId" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_recruiter_list_by_branchResult">
+      <Column Name="user_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="branch_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.fn_check_supervisor_exist_by_branch" Method="fn_check_supervisor_exist_by_branch" IsComposable="true">
+    <Parameter Name="branch" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_company_detail" Method="sp_company_detail">
+    <Parameter Name="company_id" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_company_detailResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="company_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="company_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="branch" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="brand" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="officeaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="industry" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="is_active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_update_company_detail" Method="sp_update_company_detail">
+    <Parameter Name="company_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="company_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="branch" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="brand" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="industry" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="officeaddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_manpower_detail" Method="sp_manpower_detail">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_manpower_detailResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateRequested" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="DateofDeployment" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="RequiredPosition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequiredNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EducationalAttainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="AgeRequirement" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cancel_number_requirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="accepted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="passon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="skill_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SkillType" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SpecificSkill" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certificate_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="certificate_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="CostCenter" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Department" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="JobDescription" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SalaryDetails" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BasicPay" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Cola" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Skilled" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Meal" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Transportation" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Gas" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Communication" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Motorcycle" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Clothing" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Medical" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PayoutDate" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="WhotoLookfor" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Establishment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="OfficeAddresstoReport" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="BusinessUnit" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Classification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProjectName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="company_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="company_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Requestor" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="coordinator_name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="RequestorContactNumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequestorEmailAddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="coordinator_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_1_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_2_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_approved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="am_date_approved" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="agingdays" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="recruitment_supervisor_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruitment_supervisor_approved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="oic_recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oic_recruiter_approved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_rejected" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="cancel_mrf" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_completed" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="recruiternumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="EmploymentStatus" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_applicant_detail" Method="sp_applicant_detail">
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_applicant_detailResult">
+      <Column Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="applicant_fullname" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="surname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="firstname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="middleinitial" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="location" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="religion" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="nbi" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="birthcertificate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="diploma" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="marriage" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="certifcateofemployment" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="medicalexamination" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="basic5" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="basic7" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="basic3" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="drugtest" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="dependents_birth_certificate" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="resume" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="sss" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="philhealth" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pagibig" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tin" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="referrals" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="course" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="schoolname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="jobfair" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_update_applicant_detail" Method="sp_update_applicant_detail">
+    <Parameter Name="applicant_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="fname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="mname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="lname" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="address" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="requiredposition" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="religion" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="contactnumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="emailaddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="educationattainment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="certification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="skills" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="howdidyouknowtopserve" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="referredby" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_add_edit_delete_holiday" Method="sp_add_edit_delete_holiday">
+    <Parameter Name="method" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="HolidayId" Parameter="holidayId" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="HolidayName" Parameter="holidayName" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Holiday" Parameter="holiday" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="Created_by" Parameter="created_by" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_holiday_list" Method="sp_holiday_list">
+    <Parameter Name="Year" Parameter="year" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sp_holiday_listResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HolidayId" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="HolidayName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Holiday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Date_Created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Created_by" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_holiday_year" Method="sp_holiday_year">
+    <ElementType Name="sp_holiday_yearResult">
+      <Column Name="holiday_year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_holiday_detail" Method="sp_holiday_detail">
+    <Parameter Name="HolidayId" Parameter="holidayId" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_holiday_detailResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="HolidayId" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="HolidayName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Holiday" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Date_Created" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Created_by" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_turn_around_time_report" Method="sp_turn_around_time_report">
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="YearDate" Parameter="yearDate" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MonthDate" Parameter="monthDate" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Recruiter" Parameter="recruiter" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Branch" Parameter="branch" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SkillType" Parameter="skillType" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Status" Parameter="status" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_turn_around_time_reportResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SkillType" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Requestor" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="company_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateRequested" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="am_date_approved" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequiredNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="cancel_number_requirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Classification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TAT" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="branch_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_coordinator_list" Method="sp_coordinator_list">
+    <Parameter Name="userid" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_coordinator_listResult">
+      <Column Name="user_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="fullname" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_user_roles" Method="sp_user_roles">
+    <Parameter Name="UserId" Parameter="userId" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_user_rolesResult">
+      <Column Name="Role" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_manpower_status_summary" Method="sp_manpower_status_summary">
+    <Parameter Name="Accountmanager" Parameter="accountmanager" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Branch_id" Parameter="branch_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="datefrom" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="dateto" Type="System.DateTime" DbType="DateTime2" />
+    <ElementType Name="sp_manpower_status_summaryResult">
+      <Column Name="account_manager" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="New" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OnCall" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Replacement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Reliever" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalRequirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CancelledRequirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Closed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OnProcess" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Variance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_aging_report" Method="sp_aging_report">
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="SkillType" Parameter="skillType" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Branch" Parameter="branch" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="AM" Parameter="aM" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Coordinator" Parameter="coordinator" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Recruiter" Parameter="recruiter" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Industry" Parameter="industry" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Company" Parameter="company" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_aging_reportResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateRequested" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="DateofDeployment" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="am_date_approved" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="RequiredPosition" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequiredNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cancel_number_requirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SkillType" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Classification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="aging_days" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="shortlist" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="accepted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="batting_ratio" Type="System.Decimal" DbType="Decimal(29,14)" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_create_mrf_request" Method="sp_create_mrf_request">
+    <Parameter Name="user_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="DateRequested" Parameter="dateRequested" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="DateofDeployment" Parameter="dateofDeployment" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="RequiredPosition" Parameter="requiredPosition" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequiredNumber" Parameter="requiredNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EducationalAttainment" Parameter="educationalAttainment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Course" Parameter="course" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Gender" Parameter="gender" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="AgeRequirement" Parameter="ageRequirement" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SkillType" Parameter="skillType" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SpecificSkill" Parameter="specificSkill" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Certification" Parameter="certification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="CostCenter" Parameter="costCenter" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Department" Parameter="department" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="JobDescription" Parameter="jobDescription" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="SalaryDetails" Parameter="salaryDetails" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="BasicPay" Parameter="basicPay" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Cola" Parameter="cola" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Skilled" Parameter="skilled" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Meal" Parameter="meal" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Transportation" Parameter="transportation" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Gas" Parameter="gas" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Communication" Parameter="communication" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Motorcycle" Parameter="motorcycle" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Clothing" Parameter="clothing" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Medical" Parameter="medical" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="PayoutDate" Parameter="payoutDate" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="WhotoLookfor" Parameter="whotoLookfor" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Establishment" Parameter="establishment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="OfficeAddresstoReport" Parameter="officeAddresstoReport" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="LocationofDeployment" Parameter="locationofDeployment" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="BusinessUnit" Parameter="businessUnit" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Classification" Parameter="classification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="EmployementStatus" Parameter="employementStatus" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="ProjectName" Parameter="projectName" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="CompanyRequested" Parameter="companyRequested" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Requestor" Parameter="requestor" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequestorContactNumber" Parameter="requestorContactNumber" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="RequestorEmailAddress" Parameter="requestorEmailAddress" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.fn_get_company_id_import" Method="fn_get_company_id_import" IsComposable="true">
+    <Parameter Name="company_name" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Branch" Parameter="branch" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Brand" Parameter="brand" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.sp_import_update_manpower" Method="sp_import_update_manpower">
+    <Parameter Name="mrfid" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Classification" Parameter="classification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="EmploymentStatus" Parameter="employmentStatus" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_manpower_status_report" Method="sp_manpower_status_report">
+    <Parameter Name="datefrom" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="dateto" Type="System.DateTime" DbType="DateTime2" />
+    <Parameter Name="businessunit" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="industry" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="company_id" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="branch" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="classification" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_manpower_status_reportResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateRequested" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="company_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="branch" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="industry_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="SkillType" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_1_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="account_manager_1" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="am_2_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="account_manager_2" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Classification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="RequiredNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="agingdays" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Recruiter_Name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="cancelled_requirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="closed" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Passon" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Invited" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Shortlist" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="for_requirement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_manpower_list" Method="sp_manpower_list">
+    <Parameter Name="search" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="Classification" Parameter="classification" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="status" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="businessunit" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="filter" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="UserId" Parameter="userId" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Role" Parameter="role" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="sp_manpower_listResult">
+      <Column Name="mrfid" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Classification" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="position_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Requestor" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateRequested" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="agingdays" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="company_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="accepted" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RequiredNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pending" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="status" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="filter" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
+      <Column Name="coordinator" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="coordinator_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_1_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_2_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="am_approved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="recruitment_supervisor_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="oic_recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="recruiter_id" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="date_completed" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Remarks" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="cancel_mrf" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BusinessUnit" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

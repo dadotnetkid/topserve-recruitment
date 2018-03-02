@@ -1,0 +1,27 @@
+﻿@model RecruitmentSystem.Models.CompanyViewModel
+@{
+    Layout = null;
+}
+<tr hidden class="hidden">
+    <td>
+        <div class="pagination" data-url="@Url.Action("_dashboard")" data-page="@ViewBag.page" data-image-loading="@Url.Content("~/images/loading.gif")" data-pagesize="@ViewBag.pagesize" data-container="tbody"></div>
+    </td>
+</tr>
+@if (Model.CompanyList().Count() == 0)
+{
+
+}
+else
+{
+    foreach (var i in Model.CompanyList())
+    {
+        <tr onclick="redirecturl('@Url.Action("editcompany", new { companyid=i.company_id})')">
+            <td>@i.company_name</td>
+            <td>@i.branch</td>
+            <td>@i.brand</td>
+            <td>@i.officeaddress</td>
+            <td>@i.date_created</td>
+        </tr>
+    }
+}   
+<script src="~/Scripts/jquery-pagination.js"></script>

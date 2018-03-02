@@ -1,0 +1,31 @@
+﻿@model RecruitmentSystem.Models.CalendarViewModel
+@{
+    ViewBag.Title = "CreateHoliday";
+    Layout = null;
+}
+
+
+<form method="post" action="@Url.Action("addeditdeleteholiday", new { method="add"})" id="form-create-holiday">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <p class="">Holiday</p>
+            @Html.TextBoxFor(m => m.HolidayName, new { @class = "form-control input-sm", placeholder = "Holiday" })
+        </div>
+    </div>
+    <div class="row padded-top">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <p class="">Date</p>
+            @Html.TextBoxFor(m => m.Holiday, new { @class = "form-control input-sm", placeholder = "Date" })
+            <script>
+                $('#Holiday').datetimepicker();
+            </script>
+        </div>
+    </div>
+    <div class="row padded-top">
+        <div class="col-xs-12 col-md-12 col-lg-12">
+            <button class="btn btn-default-red pull-right" type="button" onclick="FormSubmit('#form-create-holiday','yes')">Add</button>
+            <div class="clearfix"></div>
+
+        </div>
+    </div>
+</form>

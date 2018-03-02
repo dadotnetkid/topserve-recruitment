@@ -1,0 +1,229 @@
+﻿@using RecruitmentSystem.Recruitment.Data;
+@{
+    ViewBag.Title = "Applicant Survey Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Applicant Survey Summary Report</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+
+            <li class="active">Applicant Survey Summary Report</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="well custom-panel">
+
+    <div class="row">
+        <form>
+
+            <div class="col-xs-12 col-sm-12 col-lg-4">
+                <div class="form-group">
+                    @Html.DropDownList("month", Dropdown_list_data.Monthly(), "Select Month", new { @class = "form-control input-sm", required = "" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-lg-4">
+                <div class="form-group">
+                    @Html.DropDownList("year", Dropdown_list_data.Yearly(), "Select Year", new { @class = "form-control input-sm", required = "" })
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-lg-4">
+                <div class="btn-group">
+                    <button class="btn btn-default btn-default-red" type="button" onclick="ApplicantSurveySummaryReport('form', '@Url.Action("EducationalAttainmentReport")', '@Url.Action("HowDidYouKnowTopserveReport")', '@Url.Action("InvitedByReport")', '@Url.Action("JobFairReport")', '#educationattainment', '#howdidyouknowtopserve','#invitedby','#jobfair','@Url.Content("~/images/loading.gif")')">Generate</button>
+                    <button class="btn btn-default btn-default-red" type="button" onclick="ExportApplicantSurvey('form','@Url.Action("ExportApplicantSurveySummary")','#month','#year')">Download</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <p class="empty-space-12"></p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="10%">Education</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
+                        <th>16</th>
+                        <th>17</th>
+                        <th>18</th>
+                        <th>19</th>
+                        <th>20</th>
+                        <th>21</th>
+                        <th>22</th>
+                        <th>23</th>
+                        <th>24</th>
+                        <th>25</th>
+                        <th>26</th>
+                        <th>27</th>
+                        <th>28</th>
+                        <th>29</th>
+                        <th>30</th>
+                        <th>31</th>
+                    </tr>
+                </thead>
+                <tbody id="educationattainment"></tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="10%">Invited By</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
+                        <th>16</th>
+                        <th>17</th>
+                        <th>18</th>
+                        <th>19</th>
+                        <th>20</th>
+                        <th>21</th>
+                        <th>22</th>
+                        <th>23</th>
+                        <th>24</th>
+                        <th>25</th>
+                        <th>26</th>
+                        <th>27</th>
+                        <th>28</th>
+                        <th>29</th>
+                        <th>30</th>
+                        <th>31</th>
+                    </tr>
+                </thead>
+                <tbody id="invitedby"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="10%">How did you know Topserve</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
+                        <th>16</th>
+                        <th>17</th>
+                        <th>18</th>
+                        <th>19</th>
+                        <th>20</th>
+                        <th>21</th>
+                        <th>22</th>
+                        <th>23</th>
+                        <th>24</th>
+                        <th>25</th>
+                        <th>26</th>
+                        <th>27</th>
+                        <th>28</th>
+                        <th>29</th>
+                        <th>30</th>
+                        <th>31</th>
+                    </tr>
+                </thead>
+                <tbody id="howdidyouknowtopserve"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+            <table class="table table-hover table-striped table-small-font">
+                <thead>
+                    <tr>
+                        <th width="10%">Job Fair</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>5</th>
+                        <th>6</th>
+                        <th>7</th>
+                        <th>8</th>
+                        <th>9</th>
+                        <th>10</th>
+                        <th>11</th>
+                        <th>12</th>
+                        <th>13</th>
+                        <th>14</th>
+                        <th>15</th>
+                        <th>16</th>
+                        <th>17</th>
+                        <th>18</th>
+                        <th>19</th>
+                        <th>20</th>
+                        <th>21</th>
+                        <th>22</th>
+                        <th>23</th>
+                        <th>24</th>
+                        <th>25</th>
+                        <th>26</th>
+                        <th>27</th>
+                        <th>28</th>
+                        <th>29</th>
+                        <th>30</th>
+                        <th>31</th>
+                    </tr>
+                </thead>
+                <tbody id="jobfair"></tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+</div>

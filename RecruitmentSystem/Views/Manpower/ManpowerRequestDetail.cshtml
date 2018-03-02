@@ -1,0 +1,711 @@
+﻿@model RecruitmentSystem.Models.ManpowerViewModel
+@using RecruitmentSystem.Recruitment.Data
+@using Microsoft.AspNet.Identity
+@using RecruitmentSystem.Recruitment.Class
+
+@{
+    ViewBag.Title = "Manpower Request Detail";
+    Layout = null;
+    var i = Model.ManpowerDetail();
+    //  var user = User.Identity.GetUserId();
+    //  var role = RecruitmentSystem.Recruitment.Class.Users.Role(user);
+    var pending = (i.RequiredNumber - i.cancel_number_requirement) - (i.accepted);
+}
+<script>
+    PendingApplicant = '@pending';
+    classification = '@i.Classification';
+</script>
+<form class="no-padding-top small-font" id="manpower-detail" method="post" action="@Url.Action("ApproveManpower", "Manpower", new { mrfid=i.mrfid})">
+    <p class="section-title"><i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong> Requirement / Qualification</strong></p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Date Requested</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.DateRequested</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Date Deployment</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.DateofDeployment</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Date Approved</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.am_date_approved</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Aging Days</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.agingdays</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Position</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.position_name</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Number of Required</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.RequiredNumber</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Pass On</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.passon</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Number of Cancelled Requirement</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.cancel_number_requirement</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Accepted Applicant</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.accepted</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Pending Requirement</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@(i.RequiredNumber - (i.cancel_number_requirement + i.accepted))</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Educational Attainment</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.EducationalAttainment</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Course</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.course_name</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Gender</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.Gender</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Age Requirement</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.AgeRequirement</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Skills</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.SkillType @i.skill_name</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Certification</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.certificate_name</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Cost Center</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.CostCenter</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Department</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.Department</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-12">
+                    <p class="detail-margin"><strong class="pull-left">Job Description</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-12">
+                    <p class="detail-margin"><span class="pull-left">@i.JobDescription</span></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <p class="empty-space-12"></p>
+    <p class="section-title"><i class="fa fa-list-alt" aria-hidden="true"></i><strong> Salary Information</strong></p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Salary Details</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.SalaryDetails</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Basic Pay</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.BasicPay).ToString("N2")</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">COLA</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Cola).ToString("N2")</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Skilled</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Skilled).ToString("N2")</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Transportation</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Transportation).ToString("N2")</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Meal</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Meal).ToString("N2")</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Gas</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Gas).ToString("N2")</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Communication</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Communication).ToString("N2")</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Motorcycle</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Motorcycle).ToString("N2")</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Clothing</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Clothing).ToString("N2")</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Medical</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Convert.ToDecimal(i.Medical).ToString("N2")</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Payout Date</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.PayoutDate</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <p class="empty-space-12"></p>
+    <p class="section-title"><i class="fa fa-info-circle" aria-hidden="true"></i><strong> Information of Requisitioner</strong></p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Client Requested</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.company_name</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Client Requestor</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.Requestor</span></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left"> Client Requestor Contact Number</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.RequestorContactNumber</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left"> Client Requestor E-mail</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.RequestorEmailAddress</span></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Contact Person for Endorsement Letter </strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.WhotoLookfor</span></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-12">
+                    <p class="detail-margin"><strong class="pull-left">Office Address</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-12">
+                    <p class="detail-margin"><span class="pull-left">@i.OfficeAddresstoReport</span></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Client Department/Store Location</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.Establishment</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Location of Deployment</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.location_name</span></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Classification</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.Classification</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Business Unit</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.BusinessUnit</span></p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Employment Status</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.EmploymentStatus</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Project Name</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.ProjectName</span></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Coordinator</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.coordinator_name</span></p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Status</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.status</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Recruiter</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@Users.Fullname(i.recruiter_id)</span></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-lg-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><strong class="pull-left">Remarks</strong></p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-lg-6">
+                    <p class="detail-margin"><span class="pull-left">@i.Remarks</span></p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-lg-12">
+            
+            @if (User.IsInRole("Account Manager") && i.am_approved == false && i.am_rejected == false)
+            {
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-12 ">
+                        <p class="empty-space-6"></p>
+                        <p>
+                            @Html.TextAreaFor(m => m.Remarks, new { @class = "form-control input-sm text-area-none-resizable", rows = 5 })
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-12 ">
+                        <p class="empty-space-6"></p>
+                        <p class="detail-margin"><strong class="pull-left">Recruitment Supervisor</strong></p>
+                        <div class="row margin-top-10">
+                            <div class="col-xs-12 col-sm-12 col-lg-12 ">
+                                @Html.DropDownList("recruitment_supervisor_id", Dropdown_list_data.recruitment_supervisor_list(), "Select Recruitment Supervisor", new { @class = "form-control input-sm", required = "" })
+                                <script>
+                                    $(document).ready(function () {
+
+                                        $('#recruitment_supervisor_id').select2({
+                                            minimumInputLength: 3
+                                        })
+                                        var select2Instance = $('#recruitment_supervisor_id').data('select2');
+                                        select2Instance.on('results:message', function (params) {
+                                            this.dropdown._resizeDropdown();
+                                            this.dropdown._positionDropdown();
+                                        });
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-top-10">
+                    <div class="col-lg-2 col-sm-2 col-xs-12">
+                        <button class="btn btn-default btn-default-red btn-block" type="button" onclick="ApproveForm('#manpower-detail','@Url.Action("ApproveManpower", "Manpower", new { mrfid=i.mrfid})')">Approve</button>
+                    </div>
+                    <div class="col-lg-2 col-sm-2 col-xs-12">
+                        <button class="btn btn-default btn-default-red btn-block" type="button" onclick="RejectManpower('#manpower-detail', '@Url.Action("RejectManpower", "manpower", new { mrfid = i.mrfid })')">Reject</button>
+                    </div>
+                </div>
+            }
+          
+        </div>
+    </div>
+    @if (User.IsInRole("Recruitment Supervisor") && (i.recruiter_id == null))
+    {
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-lg-12">
+                <p class="empty-space-6"></p>
+                <p class="detail-margin"><strong class="pull-left">Recruiter</strong></p>
+
+            </div>
+        </div>
+        <div class="row margin-top-10">
+            <div class="col-xs-12 col-sm-12 col-lg-12 " >
+                    @Html.DropDownList("recruiter_id", Model.RecruiterListSearch(), "Select Recruiter", new { @class = "form-control", required = "" })
+                <script>
+                    $(document).ready(function () {
+                        
+                        $('#recruiter_id').select2({
+                            minimumInputLength: 3,
+                            width: 'resolve'
+                        })
+                        var select2Instance = $('#recruiter_id').data('select2');
+                        select2Instance.on('results:message', function (params) {
+                            this.dropdown._resizeDropdown();
+                            this.dropdown._positionDropdown();
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+        <div class="row margin-top-10">
+            <div class="col-lg-2 col-sm-2 col-xs-12">
+                <button class="btn btn-default btn-default-red btn-block" type="button" onclick="ApproveForm('#manpower-detail','@Url.Action("ApproveManpower", "Manpower", new { mrfid=i.mrfid})')">Approve</button>
+            </div>
+        </div>
+    }
+</form>

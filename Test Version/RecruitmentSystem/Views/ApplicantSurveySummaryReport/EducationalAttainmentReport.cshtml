@@ -1,0 +1,73 @@
+﻿@model IEnumerable<RecruitmentSystem.Models.ApplicantSurveySummaryReport>
+@{
+    Layout = null;
+    var _31 = false;
+    if (ViewBag.month == 1 || ViewBag.month == 3 || ViewBag.month == 5 || ViewBag.month == 7 || ViewBag.month == 8 || ViewBag.month == 10 || ViewBag.month == 12)
+    {
+        _31 = true;
+    }
+    
+    var is_leap_year = DateTime.IsLeapYear(ViewBag.year);
+}
+<input type="hidden" value="@is_leap_year.ToString()" class="is_leap_year" />
+<input type="hidden" value="@ViewBag.month" class="month" />
+<input type="hidden" value="@_31.ToString()" class="is_31" />
+@foreach (var i in Model)
+{
+    <tr>
+        <td>@((i.SurveyType=="")?"Undefined":i.SurveyType)</td>
+        <td>@i._01</td>
+        <td>@i._02</td>
+        <td>@i._03</td>
+        <td>@i._04</td>
+        <td>@i._05</td>
+        <td>@i._06</td>
+        <td>@i._07</td>
+        <td>@i._08</td>
+        <td>@i._09</td>
+        <td>@i._10</td>
+        <td>@i._11</td>
+        <td>@i._12</td>
+        <td>@i._13</td>
+        <td>@i._14</td>
+        <td>@i._15</td>
+        <td>@i._16</td>
+        <td>@i._17</td>
+        <td>@i._18</td>
+        <td>@i._19</td>
+        <td>@i._20</td>
+        <td>@i._21</td>
+        <td>@i._22</td>
+        <td>@i._23</td>
+        <td>@i._24</td>
+        <td>@i._25</td>
+        <td>@i._26</td>
+        <td>@i._27</td>
+        <td>@i._28</td>
+        @if (_31)
+        {
+            <td class="29">@i._29</td>
+            <td class="30">@i._30</td>
+            <td class="31">@i._31</td>
+        }
+        else   if (ViewBag.month == 2 && is_leap_year)
+        {
+            <td class="29">@i._29</td>
+        }
+        else if (ViewBag.month != 2 && is_leap_year==false)
+        {
+            <td class="29">@i._29</td>
+            <td class="30">@i._30</td>
+        }
+        else
+        {
+            <td class="29">@i._29</td>
+            <td class="30">@i._30</td>
+        }
+
+        
+
+
+</tr>
+}
+

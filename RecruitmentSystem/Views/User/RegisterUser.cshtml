@@ -1,0 +1,206 @@
+﻿@model RecruitmentSystem.Models.UserViewModel
+@using Microsoft.AspNet.Identity
+@using RecruitmentSystem.Recruitment.Class
+@using RecruitmentSystem.Recruitment.Class;
+
+@{
+    ViewBag.Title = "User Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manage Account</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>  <a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+
+            <li><i></i> <a href="@Url.Action("userlist","user")">Manage Accounts</a></li>
+            <li class="active"><i></i> Create User</li>
+        </ol>
+    </div>
+</div>
+@if (ViewBag.error != null)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger">@ViewBag.error</div>
+        </div>
+    </div>
+}
+@* @if (Users.RecruitmentSupervisor() > 1 && Model.userlevel == "Recruitment Supervisor")
+    {
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="alert alert-danger">The user Recruitment Supervisor already exist</div>
+            </div>
+        </div>
+    }
+*@
+
+<div class="row">
+    <div class="col-lg-12">
+        <form id="register-user" action="@Url.Action("registeruser")" method="post">
+            <div class="well custom-panel">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Role</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p> </p>
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m=>m.userlevel, Model.Rolelist(), "Select Role", new { @class = "form-control", onchange = "optionchange('" + @Url.Action("registeruser") + "',this)" })
+                                </div>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                        <label class="custom-label">Name</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.fname, new { @class = "form-control", placeholder = "First Name" })
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.mname, new { @class = "form-control", placeholder = "Middle Initial" })
+                        </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.lname, new { @class = "form-control", placeholder = "Last Name" })
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">E-mail Address</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.TextBoxFor(m => m.email, new { @class = "form-control", placeholder = "Email Address" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Password</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                </p><div class="input-group">
+                                        @Html.PasswordFor(m => m.password, new { @class = "form-control input-sm", value = Model.password })
+                                    <div class="input-group-addon show-password">show</div>
+                                </div>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Mobile Number</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.TextBoxFor(m => m.contact_number, new { @class = "form-control", placeholder = "Mobile Number" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Gender</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p> </p>
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.gender, Model.genderlist(), "Select Gender", new { @class = "form-control" })
+                                </div>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.userlevel== "Coordinator")
+                {
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-lg-6">
+                                    <label class="custom-label">Account Manager</label>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-lg-6">
+                                    <p> </p>
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(m => m.account_manager_1, Model.account_manager_list(), "Select Account Manager", new { @class = "form-control" })
+                                    </div>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-lg-6">
+                                    <label class="custom-label">Account Supervisor</label>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-lg-6">
+                                    <p> </p>
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(m => m.account_manager_2, Model.account_manager_list(), "Select Account Supervisor", new { @class = "form-control" })
+                                    </div>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Branch</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p> </p>
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.branch, Model.branchlist(), "Select Branch", new { @class = "form-control" })
+                                </div>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-sm-3 col-xs-12">
+                     
+                            <button class="btn btn-default btn-default-red btn-block" type="button" onclick="FormSubmit('#register-user')">Create</button>
+                     
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+
+</div>

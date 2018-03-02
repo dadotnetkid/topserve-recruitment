@@ -1,0 +1,152 @@
+﻿@model RecruitmentSystem.Models.TurnAroundTimeViewModel
+@using RecruitmentSystem.Recruitment.Data;
+@{
+    ViewBag.Title = "Manpower TAT Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>Manpower TAT Report</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("home","dashboard")">Dashboard</a></li>
+                    <li class="li-active"> Manpower TAT Report</li>
+                </ol>
+            </div>
+        </div>
+        <div class="well custom-panel">
+            <form method="post" id="form-tat-report" action="@Url.Action("index")">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SearchBy, Dropdown_list_data.SearchByList(), new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 daily hidden">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.DateFrom, new { placeholder = "Date", @class = "form-control input-sm" })
+                                    <span class="input-group-addon"> <span class="fa fa-calendar"></span> </span>
+                                    <script>
+                                        $('#DateFrom').datetimepicker();
+                                    </script>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(m => m.DateTo, new { placeholder = "Date", @class = "form-control input-sm" })
+                                    <span class="input-group-addon"> <span class="fa fa-calendar"></span> </span>
+                                    <script>
+                                        $('#DateTo').datetimepicker();
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 monthly hidden">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                @Html.DropDownListFor(m => m.MonthDate, Dropdown_list_data.Monthly(), "", new { placeholder = "Date", @class = "form-control input-sm" })
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                @Html.DropDownListFor(m => m.YearDate, Dropdown_list_data.Yearly(), "", new { placeholder = "Date", @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 yearly hidden">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                @Html.DropDownListFor(m => m.YearlyDate, Dropdown_list_data.Yearly(), "", new { placeholder = "Date", @class = "form-control input-sm" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Branch, Dropdown_list_data.branchlist(),"All Branch", new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Recruiter, Dropdown_list_data.RecruiterList(), "All Recruiter", new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SkillType, Dropdown_list_data.SkillTypeList(), "All Skill", new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Status, Dropdown_list_data.TATStatusList(), "All Status", new { @class = "form-control input-sm" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="pull-right">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="btn-group">
+                                <button class="btn btn-default btn-default-red btn-sm" type="button" data-url="@Url.Action("index")" onclick="ChangeUrlFormSubmit(this,'#form-tat-report','no')">Generate</button>
+                                <button class="btn btn-default btn-default-red btn-sm" type="button" data-url="@Url.Action("download")" onclick="ChangeUrlFormSubmit(this,'#form-tat-report','no')">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <p class="empty-space-12"></p>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive scrollable">
+                    <table class="table table-hover table-striped table-small-font">
+                        <thead>
+                            <tr>
+                                <th>MRF</th>
+                                <th>Requested</th>
+                                <th>Approved</th>
+                                <th>Client Name</th>
+                                <th>Position</th>
+                                <th>Required Applicant</th>
+                                <th>Classification</th>
+                                <th>TAT</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in Model.TurnAroundTime())
+                            {
+                                <tr>
+                                    <td>@i.mrfid</td>
+                                    <td>@i.DateRequested</td>
+                                    <td>@i.am_date_approved</td>
+                                    <td>@i.company_name</td>
+                                    <td>@i.position_name</td>
+                                    <td>@(i.RequiredNumber - @i.cancel_number_requirement)</td>
+                                    <td>@i.Classification</td>
+                                    <td>@i.TAT</td>
+                                    <td>@i.status</td>
+                                </tr>
+                            }
+                            @if (Model.TurnAroundTime().Count() <= 0)
+                            {
+                                <tr>
+                                    <td colspan="10" align="center">No Result Found</td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

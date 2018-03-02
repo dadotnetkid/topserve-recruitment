@@ -1,0 +1,60 @@
+﻿@model RecruitmentSystem.Recruitment.Data.sp_sms_detailResult
+@{
+    ViewBag.Title = "ManageSms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manage SMS</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li> <a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+            <li class="active">Manage SMS</li>
+        </ol>
+    </div>
+</div>
+
+<form action="@Url.Action("managesms")" method="post">
+    <div class="well custom-panel">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="vertical-align"><strong>Invitation Template Message</strong></p>
+                @Html.TextAreaFor(m => m.invited, new { @class = "form-control", @rows = "5", @onkeyup = "countsms('#invited','#label-invited')" })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="vertical-align"><strong>Shortlist Template Message</strong></p>
+                @Html.TextAreaFor(m => m.shortlist, new { @class = "form-control", @rows = "5", @onkeyup = "countsms('#shortlist','#label-shortlist')" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="vertical-align"><strong>For Requirement Template Message</strong></p>
+                @Html.TextAreaFor(m => m.forrequirement, new { @class = "form-control", @rows = "5", @onkeyup = "countsms('#forrequirement','#label-forrequirement')" })
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <p class="vertical-align"><strong>Accepted Template Message</strong></p>
+@Html.TextAreaFor(m => m.accepted, new { @class = "form-control", @rows = "5", @onkeyup = "countsms('#accepted','#label-accepted')" })
+            </div>
+        </div>
+        <div class="row">
+            <p class="empty-space-12"></p>
+            <div class="col-xs-12 col-sm-3 col-md-2 col-lg-2">
+                <button class="btn btn-default btn-default-red btn-block" type="button" onclick="FormSubmit('form')">Save</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+        countsms('#invited', '#label-invited')
+        countsms('#shortlist', '#label-shortlist')
+        countsms('#forrequirement', '#label-forrequirement')
+        countsms('#accepted', '#label-accepted')
+    });
+</script>

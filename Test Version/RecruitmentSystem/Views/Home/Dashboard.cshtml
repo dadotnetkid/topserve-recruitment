@@ -1,0 +1,106 @@
+﻿@using RecruitmentSystem.Recruitment.Class
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var roles = Users.Role(User.Identity.GetUserId());
+}
+
+@if (roles != "Account Manager" && roles != "Coordinator")
+{
+    <div class="row">
+        @if (!User.IsInRole("Recruiter"))
+        {
+            <div class="col-lg-4">
+                <div class="well border-top-blue">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa  fa-files-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@ViewBag.New</div>
+                            <div>New Request</div>
+                        </div>
+                       
+                    </div>
+
+                   
+
+                </div>
+            </div>
+        }
+
+        <div class="@RecruitmentSystem.Recruitment.Class.Manpower.DashboardHomePanelClass()">
+            <div class="well border-top-orange">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa  fa-files-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@ViewBag.Ongoing </div>
+                        <div>Ongoing Request</div>
+                    </div>
+               
+                </div>
+               
+
+            </div>
+        </div>
+        <div class="@RecruitmentSystem.Recruitment.Class.Manpower.DashboardHomePanelClass()">
+            <div class="well border-top-green">
+
+                <div class="row">
+
+                    <div class="col-xs-3">
+                        <i class="fa  fa-files-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@ViewBag.Completed</div>
+                        <div>Completed Request</div>
+                    </div>
+                    
+                </div>
+               
+
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well">
+            <p><strong>Notification Panel</strong></p>
+            <div class="panel-body">
+                @*@Html.Action("_notification", "navigation")*@
+                @Html.Action("notificationdashboard", "Notification")
+            </div>
+            <a href="@Url.Action("NotificationSummary","notification")">
+                <p>
+                    <span class="pull-left">View All Notification</span>
+                    <div class="clearfix"></div>
+                </p>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well">
+            <p><strong>Manpower Request Panel</strong></p>
+            <div class="row">
+                <div class="col-lg-12 table-responsive" id="mini-manpower-request-panel">
+                   
+                </div>
+            </div>
+            <a href="@Url.Action("dashboard", "manpower")">
+                <span class="pull-left">View All Transaction</span>
+                <div class="clearfix"></div>
+            </a>
+        </div>
+    </div>
+</div>
+<script>
+    LoadHtml(' @Url.Action("minidashboard", "manpower")', '#mini-manpower-request-panel')
+</script>

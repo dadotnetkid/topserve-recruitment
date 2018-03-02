@@ -1,0 +1,176 @@
+﻿@model RecruitmentSystem.Models.ApplicantListSearchViewModel
+@using RecruitmentSystem.Recruitment.Data
+@{
+    Layout = null;
+    var mrfid = ViewBag.mrfid;
+}
+
+
+<div role="tabpanel" class="tab-pane active" id="ApplicantList">
+    <form class="applicant-search" method="post" action="@Url.Action("_applicantlist")" id="form-applicant" autocomplete="off">
+        <input type="hidden" value="@mrfid" id="mrfid" name="mrfid" />
+        <div class="row">
+            <div class="form">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                            <p class="detail-margin"><strong class="pull-left custom-margin">Position *</strong></p>
+                        </div>
+                        <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <div class="input-group">
+
+                                    <input data-toggle="dropdown" type="text" class="form-control" name="Position" id="Position" data-url="@Url.Action("positionsearch", "dropdownlistdata")" onkeyup="DropdownSearch(this,'#ul-position')" required />
+                                    
+                                     <ul aria-labelledby="#requiredposition" class="dropdown-menu" id="ul-position">
+                                        @Html.Action("positionsearch", "dropdownlistdata")
+                                    </ul>
+                                    <div class="input-group-btn">
+                                        <button class="btn btn-default" type="button"> <span class="fa fa-search"></span> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                            <p class="detail-margin"><strong class="pull-left custom-margin">Education *</strong></p>
+                        </div>
+                        <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.EducationalAttainment, Dropdown_list_data.EducationalAttainmentList(), "Select Education Attainment", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                            <p class="detail-margin"><strong class="pull-left custom-margin">Age *</strong></p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.agerequirementfrom, new { @class = "form-control", placeholder = "Min age" })
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.agerequirementto, new { @class = "form-control", placeholder = "Max age" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                            <p class="detail-margin"><strong class="pull-left custom-margin">Skill</strong></p>
+                        </div>
+                        <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.skills, Dropdown_list_data.skill_search(), "Select Skills", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                            <p class="detail-margin"><strong class="pull-left custom-margin">Certification</strong></p>
+                        </div>
+                        <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.Certification, Dropdown_list_data.certification_search(), "Select Certification", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                            <p class="detail-margin"><strong class="pull-left custom-margin">Gender</strong></p>
+                        </div>
+                        <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.Gender, Dropdown_list_data.GenderList(), "Select Gender", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                            <p class="detail-margin"><strong class="pull-left custom-margin">Location</strong></p>
+                        </div>
+                        <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.Location, Dropdown_list_data.Location_search(), "Select Location", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                            <p class="detail-margin"><strong class="pull-left custom-margin">Religion</strong></p>
+                        </div>
+                        <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.religion, Dropdown_list_data.religionlist(), "Select Religion", new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="pull-right">
+                    <div class="btn-group">
+                        <button class="btn btn-default btn-default-red" type="button" onclick="FormSearchValidation('#form-applicant', '#applicant-list','8')">Search</button>
+                        <button class="btn btn-default btn-default-red" id="mark-all" type="button" onclick="MarkAll(this,'#check-all','#applicant-list>tr>td>input')">Mark All</button>
+                        <button class="btn btn-default btn-default-red" type="button" onclick="applicantlist('#applicant-list>tr>td>input[type=checkbox]', '#mrfid', '@Url.Action("InviteApplicantListSearch")')">Invite</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <p class="empty-space-12"></p>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped table-small-font">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" onclick="MarkAll('#mark-all',this,'#applicant-list>tr>td>input')" id="check-all"></th>
+                            <th>Applicant Name</th>
+                            <th>Education</th>
+                            <th>Course</th>
+                            <th>Skills</th>
+                            <th>Certification</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicant-list">
+                        @Html.Action("_applicantlist")
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

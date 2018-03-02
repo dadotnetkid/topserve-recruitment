@@ -1,0 +1,58 @@
+﻿@using RecruitmentSystem.Recruitment.Class;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Manpower Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var role=Users.Role(User.Identity.GetUserId());
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manpower Reserve</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+            <li><a href="@Url.Action("ReserveDashboard", "ManpowerReserve")">Manpower Reserve</a></li>
+            <li class="active">@ViewBag.mrfid</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-danger" hidden></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-default-red">
+            <div class="panel-heading">
+                <h3 class="panel-title"> @ViewBag.mrfid</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs nab-tabs-black" role="tablist">
+                    <li role="presentation" class="active"><a href="#detail" data-toggle="tab">Detail</a></li>
+                    @if (Users.IsInRole( "Recruiter","Admin"))
+                    {
+                        <li role="presentation" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("applicantlist", "recruitmentprocess", new { mrfid = ViewBag.mrfid })','#applicantlist',this)"><a href="#applicantlist" data-toggle="tab">Applicant List</a></li>
+                        <li role="presentation" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("invitedapplicantlist", "recruitmentprocess", new { mrfid = ViewBag.mrfid })','#invited',this)"><a href="#invited" data-toggle="tab">Invited</a></li>
+                        <li role="presentation" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("ConfirmedApplicantList", "recruitmentprocess", new { mrfid = ViewBag.mrfid })','#Confirm',this)"><a href="#Confirm" data-toggle="tab">Confirm</a></li>
+                        <li role="presentation" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("ShorlistApplicantList", "recruitmentprocess", new { mrfid = ViewBag.mrfid })','#Shortlist',this)"><a href="#Shortlist" data-toggle="tab">Shortlist</a></li>
+                    }
+                    
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="detail">
+                        @Html.Action("ManpowerReserveDetail", "ManpowerReserve", new { mrfid = ViewBag.mrfid })
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="applicantlist"></div>
+                    <div role="tabpanel" class="tab-pane" id="invited"></div>
+                    <div role="tabpanel" class="tab-pane" id="Confirm"></div>
+                    <div role="tabpanel" class="tab-pane" id="Shortlist"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

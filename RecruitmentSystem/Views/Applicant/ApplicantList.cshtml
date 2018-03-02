@@ -1,0 +1,76 @@
+﻿@model PagedList.IPagedList<RecruitmentSystem.Recruitment.Data.sp_applicant_listResult>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Applicant List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Applicant List</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li> <a href="@Url.Action("dashboard","manpower")">Dashboard</a></li>
+            <li class="li-active"> Applicant List</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default panel-default-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="pull-left">
+                            <h3 class="panel-title">Applicant List</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="row row-margin-bottom">
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-6">
+                        <form id="search-form" action="@Url.Action("_applicantlist","applicant")" class="disable-enter">
+                            <div class="input-group">
+                                <input class="form-control search-enter" name="search" placeholder="Search" />
+                                <div class="input-group-btn">
+                                    <button type="button" onclick="FormSearchValidation('#search-form','tbody','7')" class="btn btn-default"><span class="fa fa-search"></span></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 scrollable">
+                        <table class="table table-small-font">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile Number</th>
+                                    <th>Position</th>
+                                    <th>Education</th>
+                                    <th>Gender</th>
+                                    <th>Age</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                @Html.Action("_applicantlist", new { page=ViewBag.page,search=ViewBag.search})
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+              
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+﻿@model RecruitmentSystem.Models.ManpowerReserveViewModel
+@using RecruitmentSystem.Recruitment.Data
+@{
+    ViewBag.Title = "Create Manpower Reserve";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Create Manpower Reserve</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li> <a href="@Url.Action("dashboard","home")">Dashboard</a> </li>
+            <li> <a href="@Url.Action("ReserveDashboard")">Reserve Manpower List</a> </li>
+            <li class="active"> Manpower Request</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-danger " hidden>
+            All Field is required
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well custom-panel">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong> Requirement / Qualification</strong>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <label class="custom-label">Position *</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <p>
+                            </p><div class="form-group">
+                                @Html.DropDownListFor(m => m.RequiredPosition, Dropdown_list_data.PositionList(), "Select Position", new { @class = "form-control" })
+                            </div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <label class="custom-label">Education *</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <p>
+                            </p><div class="form-group">
+                                @Html.DropDownListFor(m => m.EducationalAttainment, Dropdown_list_data.EducationalAttainmentList(), "Select Educational Attainment", new { @class = "form-control" })
+                            </div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <label class="custom-label">Course</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <p class="detail-margin">
+                                <span class="pull-left">
+                                </span>
+                            </p><div class="input-group">
+                                @Html.DropDownListFor(m => m.course, Dropdown_list_data.CourseList(), "Select Course", new { @class = "form-control" })
+                            </div>
+
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <label class="custom-label">Gender *</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <p>
+                            </p><div class="form-group">
+                               @Html.DropDownListFor(m => m.gender, Dropdown_list_data.GenderList(), "Select Gender", new { @class = "form-control" })
+                            </div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <label class="custom-label">Age Requirement *</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-lg-6">
+                            <p class="detail-margin">
+                              @Html.TextBoxFor(m => m.agerequirement, new { @class = "form-control", placeholder = "Age Requirement" })
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+                            <label class="custom-label">Required Skills *</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                            <p>
+                            </p><div class="form-group">
+                              @Html.DropDownListFor(m => m.skilltype, Dropdown_list_data.SkillTypeList(), "Select Skill Type", new { @class = "form-control" })
+                            </div>
+                            <p></p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                            <p>
+                            </p><div class="form-group">
+                                @Html.DropDownListFor(m => m.specificskill, Dropdown_list_data.SkillList(), "Select Skills", new { @class = "form-control" })
+                            </div>
+                            <p></p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
+                            <p>
+                            </p><div class="form-group">
+                               @Html.DropDownListFor(m => m.certification, Dropdown_list_data.CertificateList(), "Select Certification", new { @class = "form-control" })
+                            </div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="empty-space-6"></p>
+            <div class="row">
+                <div class="col-lg-2 col-sm-3 col-xs-12">
+                    <button class="btn btn-default btn-default-red btn-block" type="button" onclick="FormSubmitwithalert('form')">Create</button>
+                </div>
+            </div>
+        </div>
+
+
+        
+    </div>
+</div>

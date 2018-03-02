@@ -1,0 +1,20 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_notification_listResult>
+@using RecruitmentSystem.Recruitment.Class
+@{
+    Layout = null;
+}
+<div class="list-group">
+    @foreach (var i in Model)
+    {
+        if (i.mrfid != "")
+        {
+            <span class="list-group-item cursor-pointer" onclick="redirecturl('@Url.Action("dashboard", "RecruitmentProcess", new { mrfid = i.mrfid })')"><span class="badge">@Tools.getdate(i.minutes)</span> @i.notification</span>
+
+        }
+        else
+        {
+            <span class="list-group-item cursor-pointer"><span class="badge">@Tools.getdate(i.minutes)</span> @i.notification</span>
+
+        }
+    }
+</div>

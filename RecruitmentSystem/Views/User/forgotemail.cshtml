@@ -1,0 +1,34 @@
+﻿
+@model RecruitmentSystem.Models.forgotpasswordViewModel
+@{
+    Layout = null;
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<div class="modal-header modal-header-red">
+    <button class="close modal-close" onclick="modalclose()" data-dismiss="modal"><span>&times;</span></button>
+    <h4 class="modal-title">Forgot Password</h4>
+</div>
+
+@using (Html.BeginForm("forgotemail", "user", FormMethod.Post, new { @id = "frm-forgot-password" }))
+{
+
+
+
+    <div class="modal-body">
+        <div hidden class="alert alert-danger alert-dismissible" role="alert" id="forgot-password-alert">
+            The email you’ve entered doesn’t match any account
+
+        </div>
+        @Html.TextBoxFor(m => m.email, new { @class = "form-control", placeholder = "Email Address", required = "" })
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-default-red" onclick="formforgotpassword('#frm-forgot-password')">Send</button>
+    </div>
+}
+
+
+

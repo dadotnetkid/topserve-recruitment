@@ -1,0 +1,46 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_manpower_reserve_listResult>
+@{
+    Layout = null;
+    
+
+}
+@if (Model.Count() > 0)
+{
+    @*<tr class="hidden" hidden>
+        <td>
+            <div class="hidden pagination" data-image-loading="@Url.Content("~/images/loading.gif")" data-page="@ViewBag.page" data-pagesize="@ViewBag.pagesize" data-container="tbody" data-url="@Url.Action("_ReserveDashboard")"></div>
+        </td>
+    </tr>*@
+    foreach (var i in Model)
+    {
+        <tr onclick="redirecturl('@Url.Action("Dashboard", "ReserveRecruitmentProcess", new { mrfid=i.rafid})')">
+            <td>@i.rafid</td>
+            <td>@i.position_name</td>
+            <td>@i.educationalattainment</td>
+            <td>@i.course_name</td>
+            <td>@i.gender</td>
+            <td>@i.agerequirement</td>
+            <td>@i.skillstype</td>
+            <td>@i.skill_name</td>
+            <td>@i.date_created</td>
+        </tr>
+
+    }
+}
+else
+{
+    <tr>
+        <td colspan="9" align="center">No Manpower Reserve </td>
+    </tr>
+}
+@*<script src="~/Scripts/jquery-pagination.js"></script>*@
+@*<script>
+    var p = '@ViewBag.page';
+    $(document).ready(function () {
+        $('li').removeClass('page-active');
+        $('li').removeClass('active');
+        $('#page-' + (p -1)).addClass('active');
+        $('#page-' + (p -1)).addClass('page-active');
+    });
+
+</script>*@

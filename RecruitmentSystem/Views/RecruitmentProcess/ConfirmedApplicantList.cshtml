@@ -1,0 +1,100 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_confirmed_applicant_listResult>
+@{
+    Layout = null;
+    
+}
+<input type="hidden" id="mrfid" value="@ViewBag.mrfid" />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <div class="btn-group">
+                <button class="btn btn-default btn-default-red" id="mark-all" onclick="MarkAll(this, '#check-all', '#confirm-applicant>tr>td>input')">Mark All</button>
+                <button class="btn btn-default btn-default-red" data-toggle="modal" data-target=".import-modal-confirmed">Import</button>
+                <button type="button" class="btn btn-default btn-default-red" onclick="ExportApplicant('@Url.Action("ExportConfirmedApplicant", "ExportRecruitmentProcess")','@ViewBag.mrfid')">Export</button>
+                <button class="btn btn-default btn-default-red" onclick="applicantlist('#confirm-applicant>tr>td>input', '#mrfid','@Url.Action("ConfirmedApplicant")')">Confirm</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 table-responsive">
+        <table class="table table-condensed table-hover table-small-font">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="check-all" onclick="MarkAll('#mark-all',this,'#confirm-applicant>tr>td>input')" /></th>
+                    <th>Applicant Name</th>
+                    <th>Education Attainment</th>
+                    <th>Skills</th>
+                    <th>Certification</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody id="confirm-applicant">
+                @if (Model.Count() > 0)
+                {
+                    foreach (var i in Model)
+                    {
+                        <tr class="cursor-pointer">
+                            <td><input type="checkbox" value="@i.applicant_id" /> </td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.applicant_fullname</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.educationattainment </td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.skills</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.certification</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.gender</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.age</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.location</td>
+                        </tr>
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" align="center">
+                            No Applicant
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<div class="modal-container">
+    <div class="modal fade import-modal-confirmed" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Import Confirmed Applicant List</h4>
+                </div>
+                <form method="post" enctype="multipart/form-data" id="import-form" action="@Url.Action("ImportConfirmApplicant", "ImportRecruitmentProcess")">
+                    <div class="modal-body">
+
+                        <input type="file" id="file-browse" onchange="onchangeimportfilebrowse(this, '#text-file')" class=" file-hidden" accept="application/vnd.ms-excel" />
+                        <input type="text" class="form-control" onclick="clickfilebrowse('#file-browse')" id="text-file" onkeypress="jQuery:return false" />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btn-default-red" onclick="ImportApplicant('#file-browse', '#import-form')">Import</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    DisableonSubmit(document);
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse('form');
+    });
+</script>

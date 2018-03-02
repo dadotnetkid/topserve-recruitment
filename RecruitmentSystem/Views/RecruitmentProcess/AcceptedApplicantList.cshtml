@@ -1,0 +1,157 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_accepted_applicant_listResult>
+@using RecruitmentSystem.Recruitment.Class
+@{
+    Layout = null;
+    var classification = Manpower.GetManpowerClassification(ViewBag.mrfid);
+}
+<input type="hidden" id="mrfid" value="@ViewBag.mrfid" />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <div class="btn-group">
+                @if (classification != "One Time Placement")
+                {
+
+                    @*<button type="button" class="btn btn-default btn-default-red" onclick="ExportApplicant('@Url.Action("ExportConfirmedApplicant", "ExportRecruitmentProcess")','@ViewBag.mrfid')">Print</button>*@
+                    @*<button class="btn btn-default btn-default-red" onclick="applicantlist('tbody>tr>td>input', '#mrfid', '/recruitmentprocess/ConfirmForRequirementApplicant')">Confirm</button>*@
+                    @*<button class="btn btn-default btn-default-red" onclick="printcontract('@Url.Action("Contract", "report", new { mrfid=ViewBag.mrfid})','tbody>tr>td>input')" type="button">Print Contract</button>*@
+                    <button class="btn btn-default btn-default-red" id="mark-all" onclick="MarkAll(this, '#check-all', '#accepted-applicant>tr>td>input[type=checkbox]')">Mark All</button>
+                    @*<button class="btn btn-default btn-default-red" onclick="applicantlist('#for-requirement-applicant>tr>td>input', '#mrfid', '@Url.Action("ConfirmVarianceApplicant")')">Confirm</button>*@
+                    <button class="btn btn-default btn-default-red" data-target="#modal-download-contract" data-toggle="modal">Download</button>
+                }
+                <button class="btn btn-default btn-default-red" onclick="redirecturl('@Url.Action("ExportAcceptedRequirement", "ExportRecruitmentProcess", new { mrfid=ViewBag.mrfid})')" type="button">Export</button>
+                @*<button class="btn btn-default btn-default-red" onclick="applicantlistprocess('#for-requirement-applicant>tr>td>input','#mrfid',this)" data-url="@Url.Action("ConfirmVarianceApplicant")">Variance</button>*@
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 table-responsive">
+        <table class="table table-condensed table-hover table-small-font">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="check-all" onclick='MarkAll("#mark-all", this, "#accepted-applicant>tr>td>input[type=checkbox]")' /></th>
+                    <th>Applicant Name</th>
+                    <th>Education Attainment</th>
+                    <th>Skills</th>
+                    <th>Certification</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Location</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="accepted-applicant">
+                @if (Model.Count() > 0)
+                {
+                    foreach (var i in Model)
+                    {
+                        <tr>
+                            <td><input type="checkbox" value="@i.applicant_id" /> </td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.applicant_fullname</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.educationattainment </td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.skills</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.certification</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.gender</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.age</td>
+                            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.location</td>
+                            <td><a class="" href="@Url.Action("ConfirmVarianceApplicant", new { mrfid = ViewBag.mrfid, applicant = i.applicant_id, tab = 7 })"><span class="fa fa-ban"></span></a></td>
+                        </tr>
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" align="center">
+                            No Applicant
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<div class="modal-container">
+    <div class="modal fade import-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-red">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Import Applicant List</h4>
+                </div>
+                <form method="post" enctype="multipart/form-data" id="import-form" action="@Url.Action("ImportConfirmApplicant", "ImportRecruitmentProcess")">
+                    <div class="modal-body">
+
+                        <input type="file" id="file-browse" onchange="onchangeimportfilebrowse(this, '#text-file')" class=" file-hidden" accept="application/vnd.ms-excel" />
+                        <input type="text" class="form-control" onclick="clickfilebrowse('#file-browse')" id="text-file" onkeypress="jQuery:return false" />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default btn-default-red" onclick="ImportApplicant('#file-browse', '#import-form')">Import</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade " id="modal-download-contract">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Download Contract</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table table-bordered table-hover no-margin">
+                            <thead>
+                                <tr>
+                                    <th width="5%"></th>
+                                    <th>Contract Type</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td><input name="contract" value="FT" type="radio" /></td>
+                                    <td>Fixed Term</td>
+                                </tr>
+                                <tr>
+                                    <td><input name="contract" value="On Call" type="radio" /></td>
+                                    <td>On Call</td>
+                                </tr>
+                                <tr>
+                                    <td><input name="contract" value="Probationary" type="radio" /></td>
+                                    <td>Probationary</td>
+                                </tr>
+                                <tr>
+                                    <td><input name="contract" value="PB" type="radio" /></td>
+                                    <td>Project Based</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-default btn-default-red" onclick="printContractModal('@Url.Action("contract", "report")', '@ViewBag.mrfid', 'input[name=contract]:checked','input[type=checkbox]')">Download</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    DisableonSubmit(document);
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse('form');
+    });
+</script>

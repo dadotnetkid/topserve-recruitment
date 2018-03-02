@@ -1,0 +1,37 @@
+﻿@model RecruitmentSystem.Models.ManpowerDashboardViewModel
+@using RecruitmentSystem.Recruitment.Data;
+@using RecruitmentSystem.Recruitment.Class
+@{
+    Layout = null;
+    var model = Model.ManpowerRequestList();
+}
+@if (model.Count() > 0)
+{
+    @*<tr class="hidden">
+
+            <td><div type="hidden" data-col="8" class="hidden pagination" data-image-loading="@Url.Content("~/images/loading.gif")" data-page="@ViewBag.page" data-pagesize="@ViewBag.pagesize" data-container="tbody" data-url="@Url.Action("_dashboard")"></div></td>
+        </tr>*@
+    foreach (var i in model)
+    {
+        <tr onclick="redirecturltab('@Url.Action("dashboard", "RecruitmentProcess", new {mrfid=i.mrfid})')">
+            <td>@i.mrfid</td>
+            <td>@Manpower.Classification(i.Classification)</td>
+            <td>@i.position_name</td>
+            <td>@i.company_name </td>
+            <td>@i.Requestor</td>
+            <td>@i.DateRequested</td>
+
+            <td>@i.agingdays</td>
+            <td>@i.coordinator</td>
+            <td>@i.status</td>
+
+        </tr>
+    }
+}
+else
+{
+    <tr>
+        <td colspan="9" align="center">No Result</td>
+    </tr>
+}
+@*<script src="~/Scripts/jquery-pagination.js"></script>*@

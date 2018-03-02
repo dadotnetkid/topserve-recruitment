@@ -1,0 +1,298 @@
+﻿@using Microsoft.AspNet.Identity;
+@using RecruitmentSystem.Recruitment.Class
+@model RecruitmentSystem.Models.RecruitmentManpowerProcessViewModel
+@{
+    ViewBag.Title = "Manpower Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = User.Identity.GetUserId();
+    var role = RecruitmentSystem.Recruitment.Class.Users.Role(user);
+    var rejectedmanpower = Manpower.CheckRejectedManpower(Model.mrfid);
+    var cancelmanpower = Manpower.CheckCancelManpower(Model.mrfid);
+    var classification = Manpower.GetManpowerClassification(Model.mrfid);
+    bool completed = Manpower.CheckManpowerCompleted(Model.mrfid);
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Manpower Request</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li><a href="@Url.Action("dashboard","home")">Dashboard</a></li>
+            <li><a href="@Url.Action("dashboard","manpower")">Manpower Request</a></li>
+            <li class="active">@Model.mrfid</li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="alert alert-danger" hidden></div>
+    </div>
+</div>
+
+@if (Model.SuccessMessage != null)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-success">@Model.SuccessMessage</div>
+        </div>
+    </div>
+}
+@if (Model.ErrorMessage != null)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger">@Model.ErrorMessage</div>
+        </div>
+    </div>
+}
+@if (Model.Approved != null)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-success">@Model.Approved</div>
+        </div>
+    </div>
+}
+@if (cancelmanpower == true)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger">Manpower is Cancelled</div>
+        </div>
+    </div>
+}
+@if (Model.Reject != null)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-danger">Manpower is rejected</div>
+        </div>
+    </div>
+}
+
+<div class="well custom-panel">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <strong class="vertical-align">@Model.mrfid</strong>
+
+            <div class="input-group pull-right">
+                <div class="btn-group">
+                    <a class="btn dropdown-toggle custom-button" data-toggle="dropdown" href="#">
+                        <span class="fa fa-ellipsis-v fa-lg" title="Toggle dropdown menu"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a data-toggle="modal" data-target="#audit-trail" onclick="loadformwithloading('@Url.Action("AuditTrail", "manpower", new { mrfid = Model.mrfid })','.audit-trail','@Url.Content("~/images/loading.gif")')"><span class="fa fa-list fa-fw"> </span> Show Audit Trail</a></li>
+                        @if ((role == "Coordinator" && rejectedmanpower == true))
+                        {
+                            <li data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("updatemanpowerrequestdetail", "manpower", new { @mrfid = Model.mrfid })', '#Details', this)"><a><span class="fa fa-pencil fa-fw"> </span> Edit Manpower</a></li>
+                        }
+                        @if (Users.IsInRole("Admin"))
+                        {
+                            <li data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("updatemanpowerrequestdetail", "manpower", new { @mrfid = Model.mrfid })', '#Details', this)"><a><span class="fa fa-pencil fa-fw"> </span> Edit Manpower</a></li>
+                        }
+                        <li><a href="#" onclick="CancelManpower('@Url.Action("CancelManpower", "manpower", new { mrfid = Model.mrfid })')"><span class="fa fa-times fa-fw"> </span>Cancel MRF</a></li>
+
+                        @if (Users.IsInRole("Account Manager", "Recruitment Supervisor", "Coordinator"))
+                        {
+                            <li><a href="#" data-toggle="modal" data-target="#cancel-requirement"><span class="fa fa-ban fa-fw"> </span> Cancel Required Number</a></li>
+                        }
+                        @if (Users.IsInRole("Admin", "Recruiter") && completed == true)
+                        {
+                            <li><a href="@Url.Action("completemanpower", "manpower", new { mrfid = Model.mrfid })"><span class="fa fa-check fa-fw"> </span> Complete</a></li>
+                        }
+
+                        @if (role == "Recruiter")
+                        {
+                            <li class="divider"></li>
+                            <li><a href="#" data-toggle="modal" data-target="#pass-on"><span class="fa fa-upload fa-fw"> </span> Pass On</a></li>
+                        }
+                        @if (Users.IsInRole("Recruiter", "Admin"))
+                        {
+                            <li class="divider"></li>
+                            <li><a href="@Url.Action("ReturnUrl", "facebook", new { mrfid = Model.mrfid, returnurl = Url.Action("dashboard", new { mrfid = Model.mrfid }) })"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i> Share on Facebook</a></li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <p class="empty-space-12"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul class="nav nav-tabs nav-tabs-custom nab-tabs-black" role="tablist">
+                <li role="presentation" class="@Model.Active(1)"><a href="#Details" aria-controls="Details" role="tab" data-toggle="tab">Details</a></li>
+                @if (Users.IsInRole("Admin", "Recruiter"))
+                {
+                    <li role="presentation" class="@Model.Active(2)" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("applicantlist", "recruitmentprocess", new { mrfid = Model.mrfid })','#ApplicantList',this)"><a href="#ApplicantList" aria-controls="ApplicantList" role="tab" data-toggle="tab">Applicant List</a></li>
+                    <li role="presentation" class="@Model.Active(3)" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("invitedapplicantlist", "recruitmentprocess", new { mrfid = Model.mrfid })','#Invited',this)"><a href="#Invited" aria-controls="Invited" role="tab" data-toggle="tab">Invited</a></li>
+                    <li role="presentation" class="@Model.Active(4)" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("confirmedapplicantlist", "recruitmentprocess", new { mrfid = Model.mrfid })','#Confirmed',this)"><a href="#Confirmed" aria-controls="Confirmed" role="tab" data-toggle="tab">Confirmed</a></li>
+                    <li role="presentation" class="@Model.Active(5)" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("shorlistapplicantlist", "recruitmentprocess", new { mrfid = Model.mrfid })','#Shortlist',this)"><a href="#Shortlist" aria-controls="Shortlist" role="tab" data-toggle="tab">Shortlist</a></li>
+                    if (classification != "One Time Placement")
+                    {
+                        <li role="presentation" class="@Model.Active(6)" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("ForRequirementApplicantList", "recruitmentprocess", new { mrfid = Model.mrfid })','#ForRequirement',this)"><a href="#ForRequirement" aria-controls="For Requirement" role="tab" data-toggle="tab">For Requirement</a></li>
+                    }
+                    <li role="presentation" class="@Model.Active(7)" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("acceptedapplicantlist", "recruitmentprocess", new { mrfid = Model.mrfid })','#Hired',this)"><a href="#Hired" aria-controls="Hired" role="tab" data-toggle="tab">Hired</a></li>
+                    <li role="presentation" class="@Model.Active(8)" data-image="@Url.Content("~/Images/loading.gif")" onclick="LoadNavigationBar('@Url.Action("VarianceApplicantlist", "recruitmentprocess", new { mrfid = Model.mrfid })','#Variance',this)"><a href="#Variance" aria-controls="Variance" role="tab" data-toggle="tab">Variance</a></li>
+
+                }
+                @*@Scripts.Render("~/bundles/jqueryval")*@
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane @Model.Active(1)" id="Details">@Html.Action("manpowerrequestdetail", "manpower", new { mrfid = Model.mrfid })</div>
+                @if (Users.IsInRole("Admin", "Recruiter"))
+                {
+                    <div role="tabpanel" class="tab-pane @Model.Active(2)" id="ApplicantList">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="center-loading-icon">
+                                    <img src="~/Images/loading.gif" height="32" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane @Model.Active(3)" id="Invited">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="center-loading-icon">
+                                    <img src="~/Images/loading.gif" height="32" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane @Model.Active(4)" id="Confirmed">
+                        Confirmed
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="center-loading-icon">
+                                    <img src="~/Images/loading.gif" height="32" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane @Model.Active(5)" id="Shortlist">
+                        <div class="row">
+                            @if (Model.tab == 5)
+                            {
+                                <script>
+                                    $(document).ready(function () {
+                                        LoadHtml('@Url.Action("ShorlistApplicantList", "recruitmentprocess", new { mrfid = Model.mrfid })', '#Shortlist')
+                                    })
+
+                                </script>
+                            }
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane @Model.Active(6)" id="ForRequirement">
+                        For Requirement
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="center-loading-icon">
+                                    <img src="~/Images/loading.gif" height="32" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane @Model.Active(7)" id="Hired">
+                        Hired
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @if(Model.tab==7)
+                                {
+                                <script>
+                                    $(document).ready(function () {
+
+                                        LoadHtml('@Url.Action("acceptedapplicantlist", "recruitmentprocess", new { mrfid = Model.mrfid })','#Hired')
+                                    })
+                                </script>    
+                                }
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane @Model.Active(8)" id="Variance">
+                        Hired
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="center-loading-icon">
+                                    <img src="~/Images/loading.gif" height="32" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="cancel-requirement">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cancel Required Number</h4>
+            </div>
+            <form id="cancel-requirement-modal" action="@Url.Action("CancelRequirement", "manpower", new { mrfid=Model.mrfid})" method="post">
+
+                <div class="modal-body">
+                    <input type="text" required class="form-control number-only" name="numbercancelrequirement" id="numbercancelrequirement" placeholder="Change Required Number" @*required="required"*@ />
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default btn-default-red" type="button" onclick="FormSubmit('#cancel-requirement-modal')">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="pass-on">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Import Pass On</h4>
+            </div>
+            <form enctype="multipart/form-data" id="import-form" action="@Url.Action("ImportPassOnApplicant", "ImportRecruitmentProcess", new {mrfid=Model.mrfid})">
+                <div class="modal-body">
+                    <input type="file" id="file-browse" onchange="onchangeimportfilebrowse(this, '#text-file')" class=" file-hidden" accept="application/vnd.ms-excel" />
+                    <input type="text" class="form-control" onclick="clickfilebrowse('#file-browse')" id="text-file" onkeypress="jQuery:return false" placeholder="Import Pass On" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default btn-default-red" onclick="ImportApplicant('#file-browse', '#import-form')">Import</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="audit-trail">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Audit Trail</h4>
+            </div>
+
+            <div class="modal-body audit-trail">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    CancelledManpower = '@cancelmanpower';
+</script>

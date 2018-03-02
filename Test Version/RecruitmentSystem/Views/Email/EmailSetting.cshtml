@@ -1,0 +1,99 @@
+﻿@model RecruitmentSystem.Recruitment.Data.sp_email_setting_detailResult
+@{
+    ViewBag.Title = "Email Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/Scripts/jquery-custom-checkbox.js"></script>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3>Email Settings</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li> <a href="@Url.Action("dashboard", "home")">Dashboard</a></li>
+            <li class="li-active">Manage E-mail Settings</li>
+        </ol>
+    </div>
+</div>
+@if (ViewBag.updated != null)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-success">Successfully Updated</div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <form action="@Url.Action("emailsetting")" method="post">
+            <div class="well custom-panel">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">E-mail Server</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.TextBoxFor(m => m.email, new { @class = "form-control", placeholder = "Email Server" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Host</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.TextBoxFor(m => m.host, new { @class = "form-control", placeholder = "Email Server" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Password</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.PasswordFor(m => m.password, new { @class = "form-control", placeholder = "Password", value = Model.password })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <label class="custom-label">Port</label>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-lg-6">
+                                <p class="detail-margin">
+                                    @Html.TextBoxFor(m => m.port, new { @class = "form-control", placeholder = "Port" })
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-sm-3 col-xs-12">
+                        <button class="btn btn-default btn-default-red btn-block" onclick="FormSubmit('form')" type="button">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<style>
+
+</style>

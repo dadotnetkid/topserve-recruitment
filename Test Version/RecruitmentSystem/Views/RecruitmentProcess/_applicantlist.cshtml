@@ -1,0 +1,32 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_applicant_list_searchResult>
+@{
+    Layout = null;
+}
+@if (Model.Count() > 0)
+{
+    foreach (var i in Model)
+    {
+        <tr class="cursor-pointer">
+            <td><input type="checkbox" value="@i.applicant_id" /> </td>
+       
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.applicant_fullname</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.educationattainment </td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.course </td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.skills</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.certification</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.gender</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.age</td>
+            <td onclick="redirecturltab('@Url.Action("applicantdetail", "applicant", new {applicantid=i.applicant_id,mrfid=ViewBag.mrfid })')">@i.location</td>
+        </tr>
+    }
+
+}
+else
+{
+<tr>
+    <td colspan="9" align="center">No Applicant</td>
+</tr>
+}
+<script>
+   
+</script>

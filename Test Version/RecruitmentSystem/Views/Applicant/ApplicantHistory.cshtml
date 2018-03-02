@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RecruitmentSystem.Recruitment.Data.sp_applicant_historyResult>
+@{
+    Layout = null;
+    var i = Model;
+}
+
+<div class="row">
+    <div class="col-lg-3">
+        <strong>Date Created</strong>
+
+    </div>
+    <div class="col-lg-9">
+        <strong>Action</strong>
+    </div>
+</div>
+@if (i.Count() <= 0)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <p>No History </p>
+        </div>
+    </div>
+}
+else
+{
+    foreach (var a in Model)
+    {
+
+        <div class="row">
+            <div class="col-lg-3">
+                <strong>@a.date_created</strong>
+            </div>
+            <div class="col-lg-9">
+                <p>@a.applicant_action </p>
+        </div>
+    </div>
+    }
+
+}

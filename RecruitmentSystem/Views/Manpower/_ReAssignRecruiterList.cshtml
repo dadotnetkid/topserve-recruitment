@@ -1,0 +1,36 @@
+﻿@model RecruitmentSystem.Models.ManpowerViewModel
+@using RecruitmentSystem.Recruitment.Data
+@{
+    Layout = null;
+    var a = 0;
+}
+
+@foreach (var i in Model.RecruiterList())
+{
+
+    <tr>
+        <td>
+            @if (a == 0)
+            {
+                <input name="radio" type="radio" id="@i.user_id" checked="checked" value="@i.user_id" />
+                <script>
+                    $('#reassignrecruiter #RecruiterId').val('@i.user_id');
+                </script>
+            }
+            else
+            {
+                <input name="radio" type="radio" id="@i.user_id" value="@i.user_id" />
+            }
+            <script>
+                $('#@i.user_id').click(function () {
+                    $('#reassignrecruiter #RecruiterId').val($('#@i.user_id').val());
+                })
+            </script>
+        </td>
+        <td>@i.fullname</td>
+        <td>@i.branch_name</td>
+        <td>@i.branch_address</td>
+
+    </tr>
+    @(a = 1);
+}
