@@ -9,6 +9,9 @@ using RecruitmentSystem.Recruitment.Data;
 using RecruitmentSystem.Models;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using UnitOfWorkExtension;
+using System.Threading.Tasks;
+
 namespace RecruitmentSystem.Controllers
 {
     public class ApplicantController : Controller
@@ -171,14 +174,14 @@ namespace RecruitmentSystem.Controllers
         [HttpPost]
         public ActionResult UpdateApplicantInformation(ApplicantDetailViewModel i, string applicantid, string mrfid)
         {
-            db.sp_update_applicant_detail(applicantid,i.Fname,i.Mname,i.Lname, i.address, i.position, i.birthday, i.religion, i.gender, i.contactnumber, i.emailaddress, i.EducationAttainment, i.Certification,i.Skill,i.HowDidYouKnowTopserve,i.referredby);
+            db.sp_update_applicant_detail(applicantid, i.Fname, i.Mname, i.Lname, i.address, i.position, i.birthday, i.religion, i.gender, i.contactnumber, i.emailaddress, i.EducationAttainment, i.Certification, i.Skill, i.HowDidYouKnowTopserve, i.referredby);
             db.sp_applicant_requirement(applicantid, i.nbi, i.birthcertificate, i.diploma, i.marriage, i.certificateofemployment, false, i.basic5, i.basic7, i.basic3, i.drugtest, i.dependantsbirthcertificate, i.resume, i.sss, i.philhealth, i.pagibig, i.tin);
             return RedirectToAction("ApplicantDetail", "Applicant", new { mrfid = mrfid, applicantid = applicantid });
         }
         [Authorize(Roles = "Admin")]
-        public ActionResult DeleteApplicant(string applicant_id = "")
+        public async Task<ActionResult> DeleteApplicant(string applicant_id = "")
         {
-            db.ExecuteCommand("delete from tbl_applicant where applicant_id={0}", applicant_id);
+            await Extensions<tbl_applicant>.DeleteAsync(m => m.applicant_id == applicant_id);
             return RedirectToAction("ApplicantList");
         }
         [HttpGet]

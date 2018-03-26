@@ -15,7 +15,8 @@ namespace RecruitmentSystem.Controllers
     public class RecruitmentProcessController : Controller
     {
         DatabaseModelDataContext db = new DatabaseModelDataContext();
-        public ActionResult Dashboard(RecruitmentManpowerProcessViewModel i,int tab=1)
+        private UnitOfWork unitOfWork = new UnitOfWork();
+        public ActionResult Dashboard(RecruitmentManpowerProcessViewModel i, int tab = 1)
         {
             ViewBag.mrfid = i.mrfid;
             i.tab = tab;
@@ -72,6 +73,8 @@ namespace RecruitmentSystem.Controllers
         public ActionResult InvitedApplicantList(string mrfid)
         {
             ViewBag.mrfid = mrfid;
+            if (unitOfWork.ManpowerRepo.Find(filter: m => m.mrfid == mrfid).date_completed != null)
+                return View(new List<sp_invited_applicant_listResult>());
             var list = db.sp_invited_applicant_list(mrfid).ToList();
             return View(list);
         }
@@ -79,18 +82,24 @@ namespace RecruitmentSystem.Controllers
         public ActionResult ConfirmedApplicantList(string mrfid)
         {
             ViewBag.mrfid = mrfid;
+            if (unitOfWork.ManpowerRepo.Find(filter: m => m.mrfid == mrfid).date_completed != null)
+                return View(new List<sp_confirmed_applicant_listResult>());
             var list = db.sp_confirmed_applicant_list(mrfid).ToList();
             return View(list);
         }
         public ActionResult ShorlistApplicantList(string mrfid)
         {
             ViewBag.mrfid = mrfid;
+            if (unitOfWork.ManpowerRepo.Find(filter: m => m.mrfid == mrfid).date_completed != null)
+                return View(new List<sp_shorlist_applicant_listResult>());
             var list = db.sp_shorlist_applicant_list(mrfid).ToList();
             return View(list);
         }
         public ActionResult ForRequirementApplicantList(string mrfid)
         {
             ViewBag.mrfid = mrfid;
+            if (unitOfWork.ManpowerRepo.Find(filter: m => m.mrfid == mrfid).date_completed != null)
+                return View(new List<sp_for_requirement_applicant_listResult>());
             var list = db.sp_for_requirement_applicant_list(mrfid).ToList();
             return View(list);
         }

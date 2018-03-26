@@ -1,0 +1,39 @@
+﻿@model RecruitmentSystem.Models.RecruitmentManpowerProcessViewModel
+<div class="modal fade" id="cancel-manpower">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cancel Manpower</h4>
+            </div>
+            <form id="cancel-manpower-modal" action="@Url.Action("CancelManpower", "manpower", new { mrfid=Model.mrfid})" method="post">
+
+                <div class="modal-body">
+                    <label>Cancel Reason</label>
+                    <select class="input-sm form-control " id="select-reason" name="">
+                        <option value="Client Canceled">Client Canceled</option>
+                        <option value="Internal Canceled">Internal Canceled</option>
+                        <option value="others">Others</option>
+                    </select>
+                    <input type="hidden" placeholder="Cancel Reason" class="form-control input-sm margin-top-10" name="reason" id="reason"  required="" value="Internal Canceled"/>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default btn-default-red" type="button" onclick="FormSubmit('#cancel-manpower-modal')">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $('#select-reason').click(function (e) {
+      
+        if ($(this).val() == 'others') {
+            $('#reason').val('');
+            $('#reason').attr('type', 'text');
+         
+        } else {
+            $('#reason').attr('type', 'hidden');
+            $('#reason').val($(this).val());
+        }
+    })
+</script>

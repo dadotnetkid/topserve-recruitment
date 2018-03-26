@@ -1,0 +1,21 @@
+﻿@model RecruitmentSystem.Models.RecruitmentManpowerProcessViewModel
+<div class="modal fade" tabindex="-1" role="dialog" id="pass-on">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Import Pass On</h4>
+            </div>
+            <form enctype="multipart/form-data" id="import-form" action="@Url.Action("ImportPassOnApplicant", "ImportRecruitmentProcess", new {mrfid=Model.mrfid})">
+                <div class="modal-body">
+                    <input type="file" id="file-browse" onchange="onchangeimportfilebrowse(this, '#text-file')" class=" file-hidden" accept="application/vnd.ms-excel" />
+                    <input type="text" class="form-control" onclick="clickfilebrowse('#file-browse')" id="text-file" onkeypress="jQuery:return false" placeholder="Import Pass On" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default btn-default-red" onclick="ImportApplicant('#file-browse', '#import-form')">Import</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

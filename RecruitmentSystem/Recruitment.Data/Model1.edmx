@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TalentAcquisitionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_applicant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="applicant_id" Type="varchar(max)" />
+          <Property Name="surname" Type="varchar(max)" />
+          <Property Name="firstname" Type="varchar(max)" />
+          <Property Name="middleinitial" Type="varchar(max)" />
+          <Property Name="address" Type="varchar(max)" />
+          <Property Name="requiredposition" Type="varchar(max)" />
+          <Property Name="location" Type="varchar(max)" />
+          <Property Name="birthday" Type="datetime2" Precision="7" />
+          <Property Name="age" Type="int" />
+          <Property Name="gender" Type="varchar(max)" />
+          <Property Name="religion" Type="varchar(max)" />
+          <Property Name="sssnumber" Type="varchar(max)" />
+          <Property Name="philhealth" Type="varchar(max)" />
+          <Property Name="pagibignumber" Type="varchar(max)" />
+          <Property Name="tinnumber" Type="varchar(max)" />
+          <Property Name="contactnumber" Type="varchar(max)" />
+          <Property Name="emailaddress" Type="varchar(max)" />
+          <Property Name="educationattainment" Type="varchar(max)" />
+          <Property Name="schoolname" Type="varchar(max)" />
+          <Property Name="course" Type="varchar(max)" />
+          <Property Name="certification" Type="varchar(max)" />
+          <Property Name="skills" Type="varchar(max)" />
+          <Property Name="jobfair" Type="varchar(max)" />
+          <Property Name="howdidyouknowtopserve" Type="varchar(max)" />
+          <Property Name="referrals" Type="varchar(max)" />
+          <Property Name="relativesworkingintopserve" Type="varchar(max)" />
+          <Property Name="relativeworkingindirectcompetitionoftopserve" Type="varchar(max)" />
+          <Property Name="invited" Type="varchar(max)" />
+          <Property Name="dateinvited" Type="varchar(max)" />
+          <Property Name="oncall" Type="bit" />
+          <Property Name="reliever" Type="bit" />
+          <Property Name="date_time_imported" Type="datetime2" Precision="7" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TalentAcquisition.dbo.tbl_manpower_request' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tbl_manpower_request">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="WhotoLookfor" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mrfid" Type="varchar(max)" />
+          <Property Name="DateRequested" Type="datetime2" Precision="7" />
+          <Property Name="DateofDeployment" Type="datetime2" Precision="7" />
+          <Property Name="RequiredPosition" Type="varchar(max)" />
+          <Property Name="RequiredNumber" Type="int" />
+          <Property Name="cancel_number_requirement" Type="int" />
+          <Property Name="EducationalAttainment" Type="varchar(max)" />
+          <Property Name="Course" Type="varchar(max)" />
+          <Property Name="Gender" Type="varchar(max)" />
+          <Property Name="AgeRequirement" Type="varchar(max)" />
+          <Property Name="SkillType" Type="varchar(max)" />
+          <Property Name="SpecificSkill" Type="varchar(max)" />
+          <Property Name="Certification" Type="varchar(max)" />
+          <Property Name="CostCenter" Type="varchar(max)" />
+          <Property Name="Department" Type="varchar(max)" />
+          <Property Name="JobDescription" Type="varchar(max)" />
+          <Property Name="SalaryDetails" Type="varchar(max)" />
+          <Property Name="BasicPay" Type="money" />
+          <Property Name="Cola" Type="money" />
+          <Property Name="Skilled" Type="money" />
+          <Property Name="Meal" Type="money" />
+          <Property Name="Transportation" Type="money" />
+          <Property Name="Gas" Type="money" />
+          <Property Name="Communication" Type="money" />
+          <Property Name="Motorcycle" Type="money" />
+          <Property Name="Clothing" Type="money" />
+          <Property Name="Medical" Type="money" />
+          <Property Name="PayoutDate" Type="varchar(max)" />
+          <Property Name="WhotoLookfor" Type="varchar(max)" Nullable="false" />
+          <Property Name="Establishment" Type="varchar(max)" />
+          <Property Name="OfficeAddresstoReport" Type="varchar(max)" />
+          <Property Name="LocationofDeployment" Type="varchar(max)" />
+          <Property Name="BusinessUnit" Type="varchar(max)" />
+          <Property Name="Classification" Type="varchar(max)" />
+          <Property Name="ProjectName" Type="varchar(max)" />
+          <Property Name="CompanyRequested" Type="varchar(max)" />
+          <Property Name="Requestor" Type="varchar(max)" />
+          <Property Name="RequestorContactNumber" Type="varchar(max)" />
+          <Property Name="RequestorEmailAddress" Type="varchar(max)" />
+          <Property Name="coordinator_id" Type="varchar(max)" />
+          <Property Name="am_1_id" Type="varchar(max)" />
+          <Property Name="am_2_id" Type="varchar(max)" />
+          <Property Name="am_approved" Type="bit" />
+          <Property Name="am_date_approved" Type="datetime2" Precision="7" />
+          <Property Name="recruitment_supervisor_id" Type="varchar(max)" />
+          <Property Name="recruitment_supervisor_approved" Type="bit" />
+          <Property Name="oic_recruiter_id" Type="varchar(max)" />
+          <Property Name="oic_recruiter_approved" Type="bit" />
+          <Property Name="recruiter_id" Type="varchar(max)" />
+          <Property Name="status" Type="varchar(max)" />
+          <Property Name="Remarks" Type="varchar(max)" />
+          <Property Name="am_rejected" Type="bit" />
+          <Property Name="cancel_mrf" Type="bit" />
+          <Property Name="date_completed" Type="datetime2" Precision="7" />
+          <Property Name="rs_approved_date" Type="datetime2" Precision="7" />
+          <Property Name="EmploymentStatus" Type="varchar(max)" />
+          <Property Name="date_created" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityContainer Name="TalentAcquisitionModelStoreContainer">
+          <EntitySet Name="tbl_applicant" EntityType="Self.tbl_applicant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_manpower_request" EntityType="Self.tbl_manpower_request" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tbl_manpower_request].[id] AS [id], 
+    [tbl_manpower_request].[mrfid] AS [mrfid], 
+    [tbl_manpower_request].[DateRequested] AS [DateRequested], 
+    [tbl_manpower_request].[DateofDeployment] AS [DateofDeployment], 
+    [tbl_manpower_request].[RequiredPosition] AS [RequiredPosition], 
+    [tbl_manpower_request].[RequiredNumber] AS [RequiredNumber], 
+    [tbl_manpower_request].[cancel_number_requirement] AS [cancel_number_requirement], 
+    [tbl_manpower_request].[EducationalAttainment] AS [EducationalAttainment], 
+    [tbl_manpower_request].[Course] AS [Course], 
+    [tbl_manpower_request].[Gender] AS [Gender], 
+    [tbl_manpower_request].[AgeRequirement] AS [AgeRequirement], 
+    [tbl_manpower_request].[SkillType] AS [SkillType], 
+    [tbl_manpower_request].[SpecificSkill] AS [SpecificSkill], 
+    [tbl_manpower_request].[Certification] AS [Certification], 
+    [tbl_manpower_request].[CostCenter] AS [CostCenter], 
+    [tbl_manpower_request].[Department] AS [Department], 
+    [tbl_manpower_request].[JobDescription] AS [JobDescription], 
+    [tbl_manpower_request].[SalaryDetails] AS [SalaryDetails], 
+    [tbl_manpower_request].[BasicPay] AS [BasicPay], 
+    [tbl_manpower_request].[Cola] AS [Cola], 
+    [tbl_manpower_request].[Skilled] AS [Skilled], 
+    [tbl_manpower_request].[Meal] AS [Meal], 
+    [tbl_manpower_request].[Transportation] AS [Transportation], 
+    [tbl_manpower_request].[Gas] AS [Gas], 
+    [tbl_manpower_request].[Communication] AS [Communication], 
+    [tbl_manpower_request].[Motorcycle] AS [Motorcycle], 
+    [tbl_manpower_request].[Clothing] AS [Clothing], 
+    [tbl_manpower_request].[Medical] AS [Medical], 
+    [tbl_manpower_request].[PayoutDate] AS [PayoutDate], 
+    [tbl_manpower_request].[WhotoLookfor] AS [WhotoLookfor], 
+    [tbl_manpower_request].[Establishment] AS [Establishment], 
+    [tbl_manpower_request].[OfficeAddresstoReport] AS [OfficeAddresstoReport], 
+    [tbl_manpower_request].[LocationofDeployment] AS [LocationofDeployment], 
+    [tbl_manpower_request].[BusinessUnit] AS [BusinessUnit], 
+    [tbl_manpower_request].[Classification] AS [Classification], 
+    [tbl_manpower_request].[ProjectName] AS [ProjectName], 
+    [tbl_manpower_request].[CompanyRequested] AS [CompanyRequested], 
+    [tbl_manpower_request].[Requestor] AS [Requestor], 
+    [tbl_manpower_request].[RequestorContactNumber] AS [RequestorContactNumber], 
+    [tbl_manpower_request].[RequestorEmailAddress] AS [RequestorEmailAddress], 
+    [tbl_manpower_request].[coordinator_id] AS [coordinator_id], 
+    [tbl_manpower_request].[am_1_id] AS [am_1_id], 
+    [tbl_manpower_request].[am_2_id] AS [am_2_id], 
+    [tbl_manpower_request].[am_approved] AS [am_approved], 
+    [tbl_manpower_request].[am_date_approved] AS [am_date_approved], 
+    [tbl_manpower_request].[recruitment_supervisor_id] AS [recruitment_supervisor_id], 
+    [tbl_manpower_request].[recruitment_supervisor_approved] AS [recruitment_supervisor_approved], 
+    [tbl_manpower_request].[oic_recruiter_id] AS [oic_recruiter_id], 
+    [tbl_manpower_request].[oic_recruiter_approved] AS [oic_recruiter_approved], 
+    [tbl_manpower_request].[recruiter_id] AS [recruiter_id], 
+    [tbl_manpower_request].[status] AS [status], 
+    [tbl_manpower_request].[Remarks] AS [Remarks], 
+    [tbl_manpower_request].[am_rejected] AS [am_rejected], 
+    [tbl_manpower_request].[cancel_mrf] AS [cancel_mrf], 
+    [tbl_manpower_request].[date_completed] AS [date_completed], 
+    [tbl_manpower_request].[rs_approved_date] AS [rs_approved_date], 
+    [tbl_manpower_request].[EmploymentStatus] AS [EmploymentStatus], 
+    [tbl_manpower_request].[date_created] AS [date_created]
+    FROM [dbo].[tbl_manpower_request] AS [tbl_manpower_request]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TalentAcquisitionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_applicant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="applicant_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="middleinitial" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="requiredposition" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="birthday" Type="DateTime" Precision="7" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="religion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="sssnumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="philhealth" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="pagibignumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="tinnumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="contactnumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="emailaddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="educationattainment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="schoolname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="course" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="certification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="skills" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="jobfair" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="howdidyouknowtopserve" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="referrals" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="relativesworkingintopserve" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="relativeworkingindirectcompetitionoftopserve" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="invited" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="dateinvited" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="oncall" Type="Boolean" />
+          <Property Name="reliever" Type="Boolean" />
+          <Property Name="date_time_imported" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityContainer Name="TalentAcquisitionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_applicant" EntityType="Self.tbl_applicant" />
+          <EntitySet Name="tbl_manpower_request" EntityType="TalentAcquisitionModel.tbl_manpower_request" />
+        </EntityContainer>
+        <EntityType Name="tbl_manpower_request">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="WhotoLookfor" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mrfid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateRequested" Type="DateTime" Precision="7" />
+          <Property Name="DateofDeployment" Type="DateTime" Precision="7" />
+          <Property Name="RequiredPosition" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RequiredNumber" Type="Int32" />
+          <Property Name="cancel_number_requirement" Type="Int32" />
+          <Property Name="EducationalAttainment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Course" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AgeRequirement" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SkillType" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SpecificSkill" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Certification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CostCenter" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="JobDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SalaryDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BasicPay" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Cola" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Skilled" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Meal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Transportation" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Gas" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Communication" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Motorcycle" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Clothing" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Medical" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PayoutDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WhotoLookfor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Establishment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeAddresstoReport" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LocationofDeployment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BusinessUnit" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Classification" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProjectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyRequested" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Requestor" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorContactNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="RequestorEmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="coordinator_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="am_1_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="am_2_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="am_approved" Type="Boolean" />
+          <Property Name="am_date_approved" Type="DateTime" Precision="7" />
+          <Property Name="recruitment_supervisor_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="recruitment_supervisor_approved" Type="Boolean" />
+          <Property Name="oic_recruiter_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="oic_recruiter_approved" Type="Boolean" />
+          <Property Name="recruiter_id" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="am_rejected" Type="Boolean" />
+          <Property Name="cancel_mrf" Type="Boolean" />
+          <Property Name="date_completed" Type="DateTime" Precision="7" />
+          <Property Name="rs_approved_date" Type="DateTime" Precision="7" />
+          <Property Name="EmploymentStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date_created" Type="DateTime" Precision="7" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TalentAcquisitionModelStoreContainer" CdmEntityContainer="TalentAcquisitionEntities">
+          <EntitySetMapping Name="tbl_applicant">
+            <EntityTypeMapping TypeName="TalentAcquisitionModel.tbl_applicant">
+              <MappingFragment StoreEntitySet="tbl_applicant">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="applicant_id" ColumnName="applicant_id" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="middleinitial" ColumnName="middleinitial" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="requiredposition" ColumnName="requiredposition" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="religion" ColumnName="religion" />
+                <ScalarProperty Name="sssnumber" ColumnName="sssnumber" />
+                <ScalarProperty Name="philhealth" ColumnName="philhealth" />
+                <ScalarProperty Name="pagibignumber" ColumnName="pagibignumber" />
+                <ScalarProperty Name="tinnumber" ColumnName="tinnumber" />
+                <ScalarProperty Name="contactnumber" ColumnName="contactnumber" />
+                <ScalarProperty Name="emailaddress" ColumnName="emailaddress" />
+                <ScalarProperty Name="educationattainment" ColumnName="educationattainment" />
+                <ScalarProperty Name="schoolname" ColumnName="schoolname" />
+                <ScalarProperty Name="course" ColumnName="course" />
+                <ScalarProperty Name="certification" ColumnName="certification" />
+                <ScalarProperty Name="skills" ColumnName="skills" />
+                <ScalarProperty Name="jobfair" ColumnName="jobfair" />
+                <ScalarProperty Name="howdidyouknowtopserve" ColumnName="howdidyouknowtopserve" />
+                <ScalarProperty Name="referrals" ColumnName="referrals" />
+                <ScalarProperty Name="relativesworkingintopserve" ColumnName="relativesworkingintopserve" />
+                <ScalarProperty Name="relativeworkingindirectcompetitionoftopserve" ColumnName="relativeworkingindirectcompetitionoftopserve" />
+                <ScalarProperty Name="invited" ColumnName="invited" />
+                <ScalarProperty Name="dateinvited" ColumnName="dateinvited" />
+                <ScalarProperty Name="oncall" ColumnName="oncall" />
+                <ScalarProperty Name="reliever" ColumnName="reliever" />
+                <ScalarProperty Name="date_time_imported" ColumnName="date_time_imported" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_manpower_request">
+            <EntityTypeMapping TypeName="TalentAcquisitionModel.tbl_manpower_request">
+              <MappingFragment StoreEntitySet="tbl_manpower_request">
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
+                <ScalarProperty Name="rs_approved_date" ColumnName="rs_approved_date" />
+                <ScalarProperty Name="date_completed" ColumnName="date_completed" />
+                <ScalarProperty Name="cancel_mrf" ColumnName="cancel_mrf" />
+                <ScalarProperty Name="am_rejected" ColumnName="am_rejected" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="recruiter_id" ColumnName="recruiter_id" />
+                <ScalarProperty Name="oic_recruiter_approved" ColumnName="oic_recruiter_approved" />
+                <ScalarProperty Name="oic_recruiter_id" ColumnName="oic_recruiter_id" />
+                <ScalarProperty Name="recruitment_supervisor_approved" ColumnName="recruitment_supervisor_approved" />
+                <ScalarProperty Name="recruitment_supervisor_id" ColumnName="recruitment_supervisor_id" />
+                <ScalarProperty Name="am_date_approved" ColumnName="am_date_approved" />
+                <ScalarProperty Name="am_approved" ColumnName="am_approved" />
+                <ScalarProperty Name="am_2_id" ColumnName="am_2_id" />
+                <ScalarProperty Name="am_1_id" ColumnName="am_1_id" />
+                <ScalarProperty Name="coordinator_id" ColumnName="coordinator_id" />
+                <ScalarProperty Name="RequestorEmailAddress" ColumnName="RequestorEmailAddress" />
+                <ScalarProperty Name="RequestorContactNumber" ColumnName="RequestorContactNumber" />
+                <ScalarProperty Name="Requestor" ColumnName="Requestor" />
+                <ScalarProperty Name="CompanyRequested" ColumnName="CompanyRequested" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="Classification" ColumnName="Classification" />
+                <ScalarProperty Name="BusinessUnit" ColumnName="BusinessUnit" />
+                <ScalarProperty Name="LocationofDeployment" ColumnName="LocationofDeployment" />
+                <ScalarProperty Name="OfficeAddresstoReport" ColumnName="OfficeAddresstoReport" />
+                <ScalarProperty Name="Establishment" ColumnName="Establishment" />
+                <ScalarProperty Name="WhotoLookfor" ColumnName="WhotoLookfor" />
+                <ScalarProperty Name="PayoutDate" ColumnName="PayoutDate" />
+                <ScalarProperty Name="Medical" ColumnName="Medical" />
+                <ScalarProperty Name="Clothing" ColumnName="Clothing" />
+                <ScalarProperty Name="Motorcycle" ColumnName="Motorcycle" />
+                <ScalarProperty Name="Communication" ColumnName="Communication" />
+                <ScalarProperty Name="Gas" ColumnName="Gas" />
+                <ScalarProperty Name="Transportation" ColumnName="Transportation" />
+                <ScalarProperty Name="Meal" ColumnName="Meal" />
+                <ScalarProperty Name="Skilled" ColumnName="Skilled" />
+                <ScalarProperty Name="Cola" ColumnName="Cola" />
+                <ScalarProperty Name="BasicPay" ColumnName="BasicPay" />
+                <ScalarProperty Name="SalaryDetails" ColumnName="SalaryDetails" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="CostCenter" ColumnName="CostCenter" />
+                <ScalarProperty Name="Certification" ColumnName="Certification" />
+                <ScalarProperty Name="SpecificSkill" ColumnName="SpecificSkill" />
+                <ScalarProperty Name="SkillType" ColumnName="SkillType" />
+                <ScalarProperty Name="AgeRequirement" ColumnName="AgeRequirement" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="EducationalAttainment" ColumnName="EducationalAttainment" />
+                <ScalarProperty Name="cancel_number_requirement" ColumnName="cancel_number_requirement" />
+                <ScalarProperty Name="RequiredNumber" ColumnName="RequiredNumber" />
+                <ScalarProperty Name="RequiredPosition" ColumnName="RequiredPosition" />
+                <ScalarProperty Name="DateofDeployment" ColumnName="DateofDeployment" />
+                <ScalarProperty Name="DateRequested" ColumnName="DateRequested" />
+                <ScalarProperty Name="mrfid" ColumnName="mrfid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -163,7 +163,7 @@ namespace RecruitmentSystem.Controllers
         public async Task<IdentityResult> forgotpassword(string userid)
         {
             var token = await UserManager.GeneratePasswordResetTokenAsync(userid);
-            var password = new Tools().GeneratePassword();
+            var password =  Tools.GeneratePassword();
             var res = await UserManager.ResetPasswordAsync(userid, token, password);
             if (res.Succeeded)
             {

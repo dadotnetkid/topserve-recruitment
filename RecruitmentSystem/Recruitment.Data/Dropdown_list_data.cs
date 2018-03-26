@@ -57,7 +57,7 @@ namespace RecruitmentSystem.Recruitment.Data
         public static List<SelectListItem> HowDidYouKnowTopserve()
         {
             var list = new List<SelectListItem>();
-            foreach (var i in "News Paper,Brochures,Walk-in,Social Media".Split(','))
+            foreach (var i in "Online Advertising,News Paper,Brochures,Walk-in,Social Media".Split(','))
             {
                 list.Add(new SelectListItem { Text = i, Value = i });
             }

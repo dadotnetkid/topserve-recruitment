@@ -15,7 +15,7 @@ namespace RecruitmentSystem.Models
         ApplicationDbContext db = new ApplicationDbContext();
         public UserViewModel()
         {
-            password = new Tools().GeneratePassword();
+            password =  Tools.GeneratePassword();
         }
         public string Role { get; set; }
         public string userid { get; set; }

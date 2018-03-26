@@ -15,7 +15,7 @@ namespace RecruitmentSystem.Controllers
     public class ManpowerController : Controller
     {
         DatabaseModelDataContext db = new DatabaseModelDataContext();
-
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
         [HttpGet]
         public ActionResult CreateManpowerRequest()
@@ -111,7 +111,7 @@ namespace RecruitmentSystem.Controllers
                 DateDeployment = (DateTime)i.DateofDeployment,
                 position = i.RequiredPosition,
                 agerequirement = i.AgeRequirement,
-                numberofrequired = (int)i.RequiredNumber,
+                numberofrequired = i.RequiredNumber.ParseToInt(),
                 educationattainment = i.EducationalAttainment,
                 course = i.Course,
                 gender = i.Gender,
@@ -122,15 +122,15 @@ namespace RecruitmentSystem.Controllers
                 department = i.Department,
                 jobdescription = Tools.ToTitleCase(i.JobDescription),
                 salarydetails = i.SalaryDetails,
-                basicpay = (decimal)i.BasicPay,
-                cola = (decimal)i.Cola,
-                skilled = (decimal)i.Skilled,
-                meal = (decimal)i.Meal,
-                transportation = (decimal)i.Transportation,
-                gas = (decimal)i.Gas,
-                communication = (decimal)i.Communication,
-                clothing = (decimal)i.Clothing,
-                medical = (decimal)i.Medical,
+                basicpay = i.BasicPay.ParseToDecimal(),
+                cola = i.Cola.ParseToDecimal(),
+                skilled = i.Skilled.ParseToDecimal(),
+                meal = i.Meal.ParseToDecimal(),
+                transportation = i.Transportation.ParseToDecimal(),
+                gas = i.Gas.ParseToDecimal(),
+                communication = i.Communication.ParseToDecimal(),
+                clothing = i.Clothing.ParseToDecimal(),
+                medical = i.Medical.ParseToDecimal(),
                 payoutdate = i.PayoutDate,
                 whotolookfor = Tools.ToTitleCase(i.WhotoLookfor),
                 establishment = Tools.ToTitleCase(i.Establishment),
@@ -150,14 +150,15 @@ namespace RecruitmentSystem.Controllers
             return View(detail);
         }
         [HttpPost]
-        public ActionResult UpdateManpowerRequestDetail(UpdateManpowerViewModel i)
+        public ActionResult UpdateManpowerRequestDetail_(CreateManpowerViewModel i, string mrfid)
         {
-            db.sp_update_manpower_request(i.mrfid, i.DateDeployment, i.position, i.numberofrequired, i.educationattainment, i.course, i.gender, i.agerequirement, i.skilltype, i.skills, i.certification, i.costcenter, i.department, i.jobdescription, i.salarydetails, i.basicpay, i.cola, i.skilled, i.meal, i.transportation, i.gas, i.communication, i.motorcycle, i.clothing, i.medical, i.payoutdate, i.whotolookfor, i.establishment, i.officeaddresstoreport, i.location, i.classification, i.projectname, i.companyrequested, i.requestor, i.requestorcontactnumber, i.requestoremailaddress, "For AM Approval");
-            var user = db.sp_get_mrf_user_involved(i.mrfid).FirstOrDefault();
+            db.sp_update_manpower_request(mrfid, i.DateofDeployment, i.RequiredPosition, i.RequiredNumber, i.EducationalAttainment, i.Course, i.Gender, i.AgeRequirement, i.SkillType,
+                i.SpecificSkill, i.Certification, i.CostCenter, i.Department, i.JobDescription, i.SalaryDetails, i.BasicPay, i.Cola, i.Skilled, i.Meal, i.Transportation, i.Gas, i.Communication, i.Motorcycle, i.Clothing, i.Medical, i.PayoutDate, i.WhotoLookfor, i.Establishment, i.OfficeAddresstoReport, i.LocationofDeployment, i.Classification, i.ProjectName, i.CompanyRequested, i.Requestor, i.RequestorContactNumber, i.RequestorEmailAddress, "For AM Approval");
+            var user = db.sp_get_mrf_user_involved(mrfid).FirstOrDefault();
             var userid = User.Identity.GetUserId();
-            db.sp_add_notification(userid, user.am_1_id, Users.Fullname(userid) + " sent " + i.mrfid + " to " + Users.Fullname(user.am_1_id) + " for approval", i.mrfid);
-            db.sp_add_notification(userid, user.am_2_id, Users.Fullname(userid) + " sent " + i.mrfid + " to " + Users.Fullname(user.am_2_id) + " for approval", i.mrfid);
-            return RedirectToAction("dashboard", "recruitmentprocess", new { mrfid = i.mrfid });
+            db.sp_add_notification(userid, user.am_1_id, Users.Fullname(userid) + " sent " + mrfid + " to " + Users.Fullname(user.am_1_id) + " for approval", mrfid);
+            db.sp_add_notification(userid, user.am_2_id, Users.Fullname(userid) + " sent " + mrfid + " to " + Users.Fullname(user.am_2_id) + " for approval", mrfid);
+            return RedirectToAction("dashboard", "recruitmentprocess", new { mrfid = mrfid });
         }
         [HttpPost]
         public async Task<ActionResult> ApproveManpower(string mrfid, string Remarks, string oic_recruiter_id = "", string recruiter_id = "", string recruitment_supervisor_id = "")
@@ -254,13 +255,21 @@ namespace RecruitmentSystem.Controllers
             Manpower.AddAuditTrail(User.Identity.GetUserId(), Users.Fullname(User.Identity.GetUserId()) + " Update Number of Cancelled", mrfid);
             return RedirectToAction("dashboard", "recruitmentprocess", new { mrfid = mrfid });
         }
-        public async Task<ActionResult> CancelManpower(string mrfid)
+        public async Task<ActionResult> CancelManpower(string mrfid, string reason)
         {
             db.sp_cancel_manpower(mrfid);
             var user_involved = db.sp_get_mrf_user_involved(mrfid).FirstOrDefault();
             var user = User.Identity.GetUserId();
-            db.sp_add_notification(user, user_involved.coordinator_id, "Manpower is Cancelled", mrfid);
+            db.sp_add_notification(user, user_involved.coordinator_id, $"Manpower is Cancelled {Environment.NewLine + reason}", mrfid);
+            var manpower = await unitOfWork.ManpowerRepo.FindAsync(m => m.mrfid == mrfid);
+            if (manpower.Classification == ManpowerClassification.New ||
+                manpower.Classification == ManpowerClassification.Replacement)
+            {
+                manpower.RequiredNumber = 0;
+                await unitOfWork.SaveAsync();
+            }
             Manpower.AddAuditTrail(User.Identity.GetUserId(), Users.Fullname(User.Identity.GetUserId()) + " Cancelled Manpower", mrfid);
+
 
             await Task.Run(new Action(() =>
             {

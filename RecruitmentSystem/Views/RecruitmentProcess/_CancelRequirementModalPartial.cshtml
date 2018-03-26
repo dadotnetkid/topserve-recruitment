@@ -1,0 +1,20 @@
+﻿@model RecruitmentSystem.Models.RecruitmentManpowerProcessViewModel
+<div class="modal fade" id="cancel-requirement">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Cancel Required Number</h4>
+            </div>
+            <form id="cancel-requirement-modal" action="@Url.Action("CancelRequirement", "manpower", new { mrfid=Model.mrfid})" method="post">
+
+                <div class="modal-body">
+                    <input type="text" required class="form-control number-only" name="numbercancelrequirement" id="numbercancelrequirement" placeholder="Change Required Number" @*required="required"*@ />
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default btn-default-red" type="button" onclick="FormSubmit('#cancel-requirement-modal')">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

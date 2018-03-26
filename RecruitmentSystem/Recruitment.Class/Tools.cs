@@ -8,9 +8,9 @@ using System.Web.Mvc;
 
 namespace RecruitmentSystem.Recruitment.Class
 {
-    public class Tools
+    public static class Tools
     {
-        public string GeneratePassword()
+        public static string GeneratePassword()
         {
             string str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var password = "";
@@ -31,7 +31,7 @@ namespace RecruitmentSystem.Recruitment.Class
             catch (Exception)
             {
             }
-            return retval*100.0M;
+            return retval * 100.0M;
         }
 
         public static DateTime ToDateTime(object datetime)
@@ -236,6 +236,31 @@ namespace RecruitmentSystem.Recruitment.Class
 
                 return (obj == null) ? "" : obj.ToString();
             }
+        }
+        public static int ParseToInt(this object obj)
+        {
+            try
+            {
+                return Convert.ToInt32(obj);
+            }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+        }
+        public static decimal ParseToDecimal(this object obj)
+        {
+            try
+            {
+                return Convert.ToDecimal(obj);
+            }
+            catch (Exception)
+            {
+                return 0.0M;
+
+            }
+
         }
 
     }

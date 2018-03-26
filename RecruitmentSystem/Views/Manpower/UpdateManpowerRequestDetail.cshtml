@@ -4,7 +4,8 @@
     Layout = null;
     var i = Model;
 }
-<form id="update-mapower-form" action="@Url.Action("updatemanpowerrequestdetail", new { mrfid=i.mrfid})" method="post">
+<form id="update-mapower-form" action="@Url.Action("UpdateManpowerRequestDetail_","manpower")" method="post">
+    @Html.HiddenFor(m=>m.mrfid)
     <div class="well custom-panel">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong> Requirement / Qualification</strong>
         <div class="row">
@@ -381,11 +382,40 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <label class="custom-label">Who to Look For *</label>
+                        <label class="custom-label">Client Requested *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.companyrequested, Dropdown_list_data.CompanyList(), "Select Client", new { @class = "form-control input-sm", placeholder = "Office address to report" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Client Requestor *</label>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-lg-6">
                         <p class="detail-margin">
-                            @Html.TextBoxFor(m => m.whotolookfor, new { @class = "form-control input-sm", placeholder = "Who to Look For/Name of interviewer" })
+                            @Html.TextBoxFor(m => m.requestor, new { @class = "form-control input-sm", placeholder = "Client Requestor" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Client Requestor Contact Number *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.requestorcontactnumber, new { @class = "form-control input-sm", placeholder = "Requestor Contact Number" })
                         </p>
                     </div>
                 </div>
@@ -393,15 +423,31 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <label class="custom-label">Establishment *</label>
+                        <label class="custom-label">Client Requestor E-mail Address</label>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-lg-6">
                         <p class="detail-margin">
-                            @Html.TextBoxFor(m => m.establishment, new { @class = "form-control input-sm", placeholder = "Establishment" })
+                            @Html.TextBoxFor(m => m.requestoremailaddress, new { @class = "form-control input-sm", placeholder = "Requestor Email Address" })
                         </p>
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Contact Person for Endorsement Letter *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.whotolookfor, new { @class = "form-control input-sm", placeholder = "Contact Person" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -422,6 +468,18 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Client Department/Store Location Assignment *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p class="detail-margin">
+                            @Html.TextBoxFor(m => m.establishment, new { @class = "form-control input-sm", placeholder = "Client Department/Store Location Assignment" })
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
                         <label class="custom-label">Location of Deployment *</label>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-lg-6">
@@ -433,20 +491,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <label class="custom-label">Business Unit *</label>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <p>
-                        </p><div class="form-group">
-                            @Html.DropDownListFor(m => m.businessunit, Dropdown_list_data.BusinessUnitList(), "Select Business Unit", new { @class = "form-control input-sm", placeholder = "Office address to report" })
-                        </div>
-                        <p></p>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -466,6 +511,25 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <label class="custom-label">Business Unit *</label>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
+                        <p>
+                        </p><div class="form-group">
+                            @Html.DropDownListFor(m => m.businessunit, Dropdown_list_data.BusinessUnitList(), "Select Business Unit", new { @class = "form-control input-sm", placeholder = "Office address to report" })
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-lg-6">
                         <label class="custom-label">Employment Status *</label>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-lg-6">
@@ -477,62 +541,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <label class="custom-label">Client Requested *</label>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <p>
-                        </p><div class="form-group">
-                            @Html.DropDownListFor(m => m.companyrequested, Dropdown_list_data.CompanyList(), "Select Client", new { @class = "form-control input-sm", placeholder = "Office address to report" })
-                        </div>
-                        <p></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <label class="custom-label">Requestor *</label>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <p class="detail-margin">
-                            @Html.TextBoxFor(m => m.requestor, new { @class = "form-control input-sm", placeholder = "Requestor" })
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <label class="custom-label">Requestor Contact Number *</label>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <p class="detail-margin">
-                            @Html.TextBoxFor(m => m.requestorcontactnumber, new { @class = "form-control input-sm", placeholder = "Requestor Contact Number" })
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <label class="custom-label">Requestor E-mail Address</label>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-lg-6">
-                        <p class="detail-margin">
-                            @Html.TextBoxFor(m => m.requestoremailaddress, new { @class = "form-control input-sm", placeholder = "Requestor Email Address" })
-                        </p>
-                    </div>
-                </div>
-            </div>
-
         </div>
         <p class="empty-space-6"></p>
         <div class="row">
